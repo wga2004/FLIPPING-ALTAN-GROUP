@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversiones Inmobiliarias</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
+
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white; padding: 20px 30px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        header h1 { font-size: 1.8em; }
+
+        nav {
+            background: #283593; display: flex; flex-wrap: wrap;
+            padding: 0 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav button {
+            background: none; border: none; color: #90caf9;
+            padding: 15px 20px; cursor: pointer; font-size: 0.95em;
+            transition: all 0.3s; border-bottom: 3px solid transparent;
+        }
+        nav button:hover, nav button.active {
+            color: white; border-bottom-color: #42a5f5;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .card {
+            background: white; border-radius: 12px;
+            padding: 25px; margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .card h2 { color: #1a237e; margin-bottom: 20px; font-size: 1.3em;
+            border-bottom: 2px solid #e3f2fd; padding-bottom: 10px; }
+        .card h3 { color: #283593; margin: 15px 0 10px; font-size: 1.1em; }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 0.85em; font-weight: 600; color: #555;
+            text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 8px;
+            font-size: 0.95em; transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #42a5f5; }
+
+        /* BNA especial */
+        .bna-box {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            border: 2px solid #81c784; border-radius: 12px;
+            padding: 15px; margin: 12px 0;
+        }
+        .bna-box .bna-title {
+            font-weight: 700; color: #2e7d32; font-size: 0.9em;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        }
+        .bna-box .bna-fecha {
+            font-size: 0.82em; color: #388e3c; font-style: italic;
+        }
+        .bna-input-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .bna-input-row input {
+            flex: 1; min-width: 140px; padding: 10px 12px;
+            border: 2px solid #81c784; border-radius: 8px; font-size: 1em;
+            font-weight: 700; color: #1b5e20; background: white;
+        }
+        .bna-input-row input:focus { outline: none; border-color: #2e7d32; }
+        .bna-badge {
+            background: #2e7d32; color: white; padding: 6px 14px;
+            border-radius: 20px; font-size: 0.82em; font-weight: 600;
+            white-space: nowrap;
+        }
+        .bna-sugerencia {
+            font-size: 0.8em; color: #388e3c; margin-top: 6px;
+            padding: 6px 10px; background: white; border-radius: 6px;
+            border-left: 3px solid #66bb6a;
+        }
+
+        /* Historial cotizaciones */
+        .cotiz-historial {
+            background: #f8f9ff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 12px; margin-top: 8px; max-height: 150px; overflow-y: auto;
+        }
+        .cotiz-historial-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 5px 8px; border-radius: 6px; cursor: pointer;
+            font-size: 0.85em; transition: background 0.2s;
+        }
+        .cotiz-historial-item:hover { background: #e3f2fd; }
+        .cotiz-historial-item .cotiz-fecha { color: #666; }
+        .cotiz-historial-item .cotiz-valor { font-weight: 700; color: #1a237e; }
+
+        .btn {
+            padding: 10px 20px; border: none; border-radius: 8px;
+            cursor: pointer; font-size: 0.95em; font-weight: 600;
+            transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary { background: #1a237e; color: white; }
+        .btn-primary:hover { background: #283593; transform: translateY(-1px); }
+        .btn-success { background: #2e7d32; color: white; }
+        .btn-success:hover { background: #388e3c; }
+        .btn-danger  { background: #c62828; color: white; }
+        .btn-danger:hover  { background: #d32f2f; }
+        .btn-warning { background: #f57f17; color: white; }
+        .btn-warning:hover { background: #f9a825; }
+        .btn-info    { background: #0277bd; color: white; }
+        .btn-info:hover    { background: #0288d1; }
+        .btn-bna     { background: #2e7d32; color: white; }
+        .btn-bna:hover     { background: #388e3c; }
+        .btn-sm { padding: 6px 12px; font-size: 0.85em; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #e3f2fd; color: #1a237e; padding: 12px;
+            text-align: left; font-size: 0.85em; text-transform: uppercase; }
+        td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.9em; }
+        tr:hover td { background: #f8f9ff; }
+
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px;
+            font-size: 0.8em; font-weight: 600; }
+        .badge-blue    { background: #e3f2fd; color: #1565c0; }
+        .badge-green   { background: #e8f5e9; color: #2e7d32; }
+        .badge-orange  { background: #fff3e0; color: #e65100; }
+        .badge-red     { background: #ffebee; color: #c62828; }
+        .badge-purple  { background: #f3e5f5; color: #6a1b9a; }
+        .badge-gaston  { background: #e8f5e9; color: #1b5e20; }
+        .badge-hernan  { background: #e3f2fd; color: #0d47a1; }
+        .badge-santiago{ background: #f3e5f5; color: #4a148c; }
+        .badge-todos   { background: #fff8e1; color: #e65100; }
+        .badge-bna     { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px; margin-bottom: 20px; }
+        .stat-card {
+            color: white; padding: 20px; border-radius: 12px; text-align: center;
+            background: linear-gradient(135deg, #1a237e, #283593);
+        }
+        .stat-card.green   { background: linear-gradient(135deg, #2e7d32, #388e3c); }
+        .stat-card.orange  { background: linear-gradient(135deg, #e65100, #f57c00); }
+        .stat-card.red     { background: linear-gradient(135deg, #c62828, #d32f2f); }
+        .stat-card.purple  { background: linear-gradient(135deg, #6a1b9a, #7b1fa2); }
+        .stat-card.gaston  { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
+        .stat-card.hernan  { background: linear-gradient(135deg, #0d47a1, #1565c0); }
+        .stat-card.santiago{ background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .stat-card .value  { font-size: 1.6em; font-weight: 700; margin: 5px 0; }
+        .stat-card .label  { font-size: 0.82em; opacity: 0.9; }
+
+        .inversor-card { border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 5px solid; }
+        .inversor-card.gaston   { border-color: #2e7d32; background: #f1f8f1; }
+        .inversor-card.hernan   { border-color: #1565c0; background: #f0f4ff; }
+        .inversor-card.santiago { border-color: #6a1b9a; background: #f8f0ff; }
+
+        .gasto-row { display: flex; gap: 8px; align-items: flex-start;
+            margin-bottom: 10px; flex-wrap: wrap;
+            background: #fafafa; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
+        .gasto-row input, .gasto-row select {
+            flex: 1; min-width: 100px; padding: 8px 10px;
+            border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.88em;
+        }
+        .gasto-row input:focus, .gasto-row select:focus { outline: none; border-color: #42a5f5; }
+        .gasto-bna-row {
+            width: 100%; margin-top: 6px; padding: 8px 10px;
+            background: #e8f5e9; border-radius: 6px; border: 1px solid #a5d6a7;
+            font-size: 0.82em; color: #2e7d32; display: flex; align-items: center;
+            gap: 10px; flex-wrap: wrap;
+        }
+
+        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; }
+        .alert-info    { background: #e3f2fd; color: #1565c0; border-left: 4px solid #42a5f5; }
+        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #66bb6a; }
+        .alert-warning { background: #fff3e0; color: #e65100; border-left: 4px solid #ffa726; }
+        .alert-danger  { background: #ffebee; color: #c62828; border-left: 4px solid #ef5350; }
+        .alert-bna     { background: #e8f5e9; color: #1b5e20; border-left: 4px solid #2e7d32; }
+
+        .partes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+        .parte-box { padding: 12px; border-radius: 8px; text-align: center; font-size: 0.9em; font-weight: 600; }
+        .parte-box.gaston   { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
+        .parte-box.hernan   { background: #e3f2fd; color: #0d47a1; border: 2px solid #90caf9; }
+        .parte-box.santiago { background: #f3e5f5; color: #4a148c; border: 2px solid #ce93d8; }
+
+        #saldo-boleto-section {
+            border: 2px solid #ffa726; border-radius: 12px;
+            padding: 20px; background: #fff8f0; margin: 20px 0;
+        }
+        .saldo-check-row {
+            display: flex; align-items: center; gap: 12px; padding: 12px;
+            background: white; border-radius: 8px; border: 2px solid #ffe0b2;
+            margin-bottom: 12px; cursor: pointer;
+        }
+        .saldo-check-row input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: #e65100; }
+
+        .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn { padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 8px;
+            background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; }
+        .tab-btn.active { background: #1a237e; color: white; border-color: #1a237e; }
+
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+            width: 2px; background: #e0e0e0; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -24px; top: 5px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #42a5f5; border: 2px solid white; box-shadow: 0 0 0 2px #42a5f5; }
+
+        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+        .filter-bar input, .filter-bar select { padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.9em; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: 12px; padding: 30px;
+            max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .modal h3 { color: #1a237e; margin-bottom: 20px; }
+
+        .empty-state { text-align: center; padding: 40px; color: #999; }
+        .empty-state span { font-size: 3em; display: block; margin-bottom: 10px; }
+
+        /* Tabla cotizaciones BNA */
+        .cotiz-table { font-size: 0.85em; }
+        .cotiz-table th { background: #e8f5e9; color: #1b5e20; }
+        .cotiz-table td { border-bottom: 1px solid #f0f0f0; }
+
+        @media print {
+            nav, .btn, .filter-bar, .bna-input-row button { display: none !important; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <span>🏢</span>
+    <div>
+        <h1>Inversiones Inmobiliarias</h1>
+        <small style="opacity:0.8">Sistema de Gestión — Cotización BNA Vendedor Divisa (D-1)</small>
+    </div>
+</header>
+
+<nav>
+    <button class="active" onclick="showSection('propiedades',this)">🏗️ Propiedades</button>
+    <button onclick="showSection('compra',this)">💵 Compra</button>
+    <button onclick="showSection('refaccion',this)">🔨 Refacción</button>
+    <button onclick="showSection('venta',this)">💰 Venta</button>
+    <button onclick="showSection('resultados',this)">📊 Resultados</button>
+    <button onclick="showSection('inversores',this)">👥 Inversores</button>
+    <button onclick="showSection('cotizaciones',this)">🏦 Cotizaciones BNA</button>
+    <button onclick="showSection('auditoria',this)">🔍 Auditoría</button>
+</nav>
+
+<div class="container">
+
+<!-- ===== PROPIEDADES ===== -->
+<div id="sec-propiedades" class="section active">
+    <div class="card">
+        <h2>🏗️ Nueva Propiedad</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Dirección *</label>
+                <input type="text" id="p-direccion" placeholder="Av. Corrientes 1234, CABA">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Propiedad</label>
+                <select id="p-tipo">
+                    <option>Departamento</option><option>Casa</option>
+                    <option>Local Comercial</option><option>Oficina</option>
+                    <option>Terreno</option><option>PH</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Superficie (m²)</label>
+                <input type="number" id="p-superficie" placeholder="65">
+            </div>
+            <div class="form-group">
+                <label>Barrio / Zona</label>
+                <input type="text" id="p-barrio" placeholder="Palermo, CABA">
+            </div>
+            <div class="form-group">
+                <label>Notas</label>
+                <textarea id="p-notas" rows="3" placeholder="Observaciones..."></textarea>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary" onclick="agregarPropiedad()">➕ Agregar Propiedad</button>
+    </div>
+    <div class="card">
+        <h2>📋 Propiedades Registradas</h2>
+        <div id="lista-propiedades"><div class="empty-state"><span>🏠</span>Sin propiedades</div></div>
+    </div>
+</div>
+
+<!-- ===== COMPRA ===== -->
+<div id="sec-compra" class="section">
+    <div class="card">
+        <h2>💵 Registrar Compra</h2>
+
+        <div class="alert alert-bna">
+            🏦 <strong>Cotización BNA:</strong> Se usa la tasa <strong>vendedor divisa</strong>
+            del día <strong>anterior</strong> a la fecha de la erogación (al cierre del día hábil previo).
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="c-propiedad" onchange="cargarDatosCompra()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Inversor / Responsable *</label>
+                <select id="c-inversor" onchange="mostrarDivisionCompra()">
+                    <option value="Todos">👥 Todos (partes iguales)</option>
+                    <option value="Gaston">🟢 Gastón</option>
+                    <option value="Hernan">🔵 Hernán</option>
+                    <option value="Santiago">🟣 Santiago</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Modalidad de Compra</label>
+                <select id="c-modalidad" onchange="toggleModalidad()">
+                    <option value="directa">Compra Directa</option>
+                    <option value="boleto">Boleto de Compra/Venta</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha de Compra / Boleto *</label>
+                <input type="date" id="c-fecha" onchange="onFechaCompraChange()">
+            </div>
+            <div class="form-group">
+                <label>Moneda del Precio</label>
+                <select id="c-moneda" onchange="onMonedaCompraChange()">
+                    <option value="USD">USD — el precio ya está en dólares</option>
+                    <option value="ARS">ARS — requiere cotización BNA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Precio Total de Compra</label>
+                <input type="number" id="c-precio-total" placeholder="80000"
+                    oninput="calcularBoleto(); mostrarDivisionCompra();">
+            </div>
+        </div>
+
+        <!-- BNA Compra -->
+        <div id="bna-compra-section" style="display:none">
+            <div class="bna-box" id="bna-compra-box">
+                <div class="bna-title">
+                    🏦 Cotización BNA — Vendedor Divisa
+                    <span class="bna-badge" id="bna-compra-badge">Fecha D-1</span>
+                </div>
+                <div class="bna-fecha" id="bna-compra-fecha-label">
+                    Seleccioná la fecha de la erogación para ver qué cotización corresponde
+                </div>
+                <div class="bna-input-row" style="margin-top:8px">
+                    <input type="number" id="c-cotizacion" placeholder="Ej: 1.050,00"
+                        oninput="calcularBoleto(); mostrarDivisionCompra(); guardarCotizacionHistorial('c-fecha','c-cotizacion');">
+                    <button class="btn btn-bna btn-sm" onclick="buscarCotizacionHistorial('c-fecha','c-cotizacion')">
+                        📋 Usar del historial
+                    </button>
+                </div>
+                <div class="bna-sugerencia" id="bna-compra-sugerencia" style="display:none"></div>
+            </div>
+            <div id="bna-compra-historial" style="display:none" class="cotiz-historial"></div>
+        </div>
+
+        <!-- Boleto -->
+        <div id="boleto-section" style="display:none">
+            <br>
+            <div class="alert alert-info">📋 <strong>Boleto de Compra/Venta</strong></div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>% Pagado en Boleto</label>
+                    <input type="number" id="c-porcentaje" placeholder="30" min="0" max="100"
+                        oninput="calcularBoleto(); mostrarDivisionCompra();">
+                </div>
+                <div class="form-group">
+                    <label>Monto Pagado</label>
+                    <input type="text" id="c-monto-pagado" readonly style="background:#f5f5f5">
+                </div>
+                <div class="form-group">
+                    <label>Saldo Pendiente</label>
+                    <input type="text" id="c-saldo" readonly style="background:#fff3e0;color:#e65100;font-weight:600">
+                </div>
+                <div class="form-group">
+                    <label>Fecha Escritura / Pago Saldo</label>
+                    <input type="date" id="c-fecha-escritura">
+                </div>
+            </div>
+        </div>
+
+        <!-- División -->
+        <div id="division-compra-box" style="display:none; margin-top:15px;">
+            <div class="alert alert-info" id="division-compra-alert"></div>
+            <div class="partes-grid" id="division-compra-partes"></div>
+        </div>
+
+        <br>
+        <h3>💸 Gastos Asociados a la Compra</h3>
+        <div class="alert alert-bna" style="font-size:0.85em">
+            🏦 Cada gasto en ARS requiere la cotización BNA del día anterior a su fecha de pago
+        </div>
+        <div id="gastos-compra-list"></div>
+        <button class="btn btn-warning btn-sm" onclick="agregarGastoCompra()">➕ Agregar Gasto</button>
+        <br><br>
+        <button class="btn btn-primary" onclick="guardarCompra()">💾 Guardar Compra</button>
+    </div>
+    <div class="card">
+        <h2>📋 Compras Registradas</h2>
+        <div id="lista-compras"><div class="empty-state"><span>💵</span>Sin compras</div></div>
+    </div>
+</div>
+
+<!-- ===== REFACCIÓN ===== -->
+<div id="sec-refaccion" class="section">
+    <div class="card">
+        <h2>🔨 Registrar Gastos de Refacción</h2>
+        <div class="alert alert-bna">
+            🏦 Cada gasto en ARS usa la cotización BNA vendedor divisa del día anterior a la fecha del gasto
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="r-propiedad"><option value="">-- Seleccionar --</option></select>
+            </div>
+        </div>
+        <br>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchRefTab('obra',this)">🏗️ Obra</button>
+            <button class="tab-btn" onclick="switchRefTab('impuestos',this)">📋 Impuestos</button>
+            <button class="tab-btn" onclick="switchRefTab('profesionales',this)">👷 Profesionales</button>
+            <button class="tab-btn" onclick="switchRefTab('otros',this)">📦 Otros</button>
+        </div>
+        <div id="ref-obra" class="ref-tab">
+            <h3>🏗️ Gastos de Obra</h3>
+            <div id="gastos-obra-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('obra')">➕ Agregar</button>
+        </div>
+        <div id="ref-impuestos" class="ref-tab" style="display:none">
+            <h3>📋 Impuestos y Servicios</h3>
+            <div id="gastos-impuestos-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('impuestos')">➕ Agregar</button>
+        </div>
+        <div id="ref-profesionales" class="ref-tab" style="display:none">
+            <h3>👷 Profesionales</h3>
+            <div id="gastos-profesionales-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('profesionales')">➕ Agregar</button>
+        </div>
+        <div id="ref-otros" class="ref-tab" style="display:none">
+            <h3>📦 Otros Gastos</h3>
+            <div id="gastos-otros-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('otros')">➕ Agregar</button>
+        </div>
+        <br>
+        <button class="btn btn-primary" onclick="guardarRefaccion()">💾 Guardar Refacción</button>
+    </div>
+    <div class="card">
+        <h2>📋 Refacciones Registradas</h2>
+        <div id="lista-refacciones"><div class="empty-state"><span>🔨</span>Sin refacciones</div></div>
+    </div>
+</div>
+
+<!-- ===== VENTA ===== -->
+<div id="sec-venta" class="section">
+    <div class="card">
+        <h2>💰 Registrar Venta</h2>
+        <div class="alert alert-bna">
+            🏦 Los gastos de venta en ARS usan la cotización BNA vendedor divisa del día anterior a su fecha
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="v-propiedad" onchange="cargarSaldoBoleto()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Inversor / Responsable *</label>
+                <select id="v-inversor" onchange="mostrarDivisionVenta()">
+                    <option value="Todos">👥 Todos (partes iguales)</option>
+                    <option value="Gaston">🟢 Gastón</option>
+                    <option value="Hernan">🔵 Hernán</option>
+                    <option value="Santiago">🟣 Santiago</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha de Venta / Escritura</label>
+                <input type="date" id="v-fecha" onchange="onFechaVentaChange()">
+            </div>
+            <div class="form-group">
+                <label>Precio de Venta (USD)</label>
+                <input type="number" id="v-precio" placeholder="110000" oninput="mostrarDivisionVenta()">
+            </div>
+        </div>
+
+        <!-- División venta -->
+        <div id="division-venta-box" style="display:none; margin-top:10px;">
+            <div class="alert alert-success" id="division-venta-alert"></div>
+            <div class="partes-grid" id="division-venta-partes"></div>
+        </div>
+
+        <!-- Saldo boleto -->
+        <div id="saldo-boleto-section" style="display:none">
+            <h3>⚠️ Saldo Pendiente de Boleto</h3>
+            <div class="alert alert-warning" id="saldo-boleto-alert"></div>
+
+            <!-- BNA para saldo boleto (si es ARS) -->
+            <div id="bna-saldo-section" style="display:none">
+                <div class="bna-box">
+                    <div class="bna-title">
+                        🏦 Cotización BNA para saldo del boleto
+                        <span class="bna-badge" id="bna-saldo-badge">Fecha D-1</span>
+                    </div>
+                    <div class="bna-fecha" id="bna-saldo-fecha-label"></div>
+                    <div class="bna-input-row" style="margin-top:8px">
+                        <input type="number" id="v-cotizacion-saldo" placeholder="Cotización BNA D-1"
+                            oninput="recalcularSaldoBoleto(); guardarCotizacionHistorial('v-fecha','v-cotizacion-saldo');">
+                        <button class="btn btn-bna btn-sm" onclick="buscarCotizacionHistorial('v-fecha','v-cotizacion-saldo')">
+                            📋 Historial
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="saldo-check-row" onclick="toggleSaldoCheck()">
+                <input type="checkbox" id="v-salda-boleto" onchange="toggleSaldoDetalle()">
+                <label>✅ <strong>Se salda el pendiente en esta escritura</strong> — se suma a la inversión</label>
+            </div>
+            <div id="saldo-detalle-box" style="display:none; background:white; border-radius:8px; padding:15px; border:1px solid #ffe0b2;">
+                <table>
+                    <thead><tr><th>Concepto</th><th>%</th><th>Monto Original</th><th>USD equiv.</th><th>Cotización BNA</th></tr></thead>
+                    <tbody id="saldo-detalle-tbody"></tbody>
+                </table>
+                <div class="alert alert-warning" style="margin-top:10px" id="saldo-total-alert"></div>
+                <div id="division-saldo-box" style="margin-top:10px; display:none">
+                    <p style="font-weight:600; color:#e65100; margin-bottom:8px">📋 División del saldo:</p>
+                    <div class="partes-grid" id="division-saldo-partes"></div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h3>💸 Gastos de Venta</h3>
+        <div id="gastos-venta-list"></div>
+        <button class="btn btn-warning btn-sm" onclick="agregarGastoVenta()">➕ Agregar Gasto</button>
+        <br><br>
+        <button class="btn btn-primary" onclick="guardarVenta()">💾 Guardar Venta</button>
+    </div>
+    <div class="card">
+        <h2>📋 Ventas Registradas</h2>
+        <div id="lista-ventas"><div class="empty-state"><span>💰</span>Sin ventas</div></div>
+    </div>
+</div>
+
+<!-- ===== RESULTADOS ===== -->
+<div id="sec-resultados" class="section">
+    <div class="card">
+        <h2>📊 Análisis de Resultados</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Seleccionar Propiedad</label>
+                <select id="res-propiedad" onchange="calcularResultados()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="resultados-content">
+        <div class="empty-state card"><span>📊</span>Seleccioná una propiedad</div>
+    </div>
+</div>
+
+<!-- ===== INVERSORES ===== -->
+<div id="sec-inversores" class="section">
+    <div class="card">
+        <h2>👥 Panel de Inversores</h2>
+        <div class="alert alert-info">
+            💡 Cuando una erogación es de <strong>Todos</strong>, se divide en partes iguales (33.33% cada uno).
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="renderInversores()">🔄 Actualizar</button>
+        <br><br>
+        <div id="inversores-content"></div>
+    </div>
+</div>
+
+<!-- ===== COTIZACIONES BNA ===== -->
+<div id="sec-cotizaciones" class="section">
+    <div class="card">
+        <h2>🏦 Historial de Cotizaciones BNA</h2>
+        <div class="alert alert-bna">
+            🏦 <strong>Regla:</strong> La cotización a usar es la <strong>vendedor divisa del BNA</strong>
+            del día <strong>anterior</strong> a la fecha de la erogación.
+            <br>Ejemplo: Si el pago es el <strong>martes 15</strong>, se usa la cotización del cierre del <strong>lunes 14</strong>.
+            Si el pago es el <strong>lunes</strong>, se usa la del cierre del <strong>viernes</strong> anterior.
+        </div>
+
+        <div class="card" style="background:#f8f9ff">
+            <h3>➕ Registrar Cotización BNA</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Fecha del Cierre (día hábil)</label>
+                    <input type="date" id="bna-nueva-fecha">
+                </div>
+                <div class="form-group">
+                    <label>Cotización Vendedor Divisa (ARS por USD)</label>
+                    <input type="number" id="bna-nueva-valor" placeholder="1050.00" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Fuente / Referencia</label>
+                    <input type="text" id="bna-nueva-fuente" placeholder="BNA Web, Reuters, etc.">
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-bna" onclick="registrarCotizacionBNA()">💾 Guardar Cotización</button>
+        </div>
+
+        <h3>📋 Cotizaciones Registradas</h3>
+        <div id="lista-cotizaciones-bna">
+            <div class="empty-state"><span>🏦</span>Sin cotizaciones registradas</div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== AUDITORÍA ===== -->
+<div id="sec-auditoria" class="section">
+    <div class="card">
+        <h2>🔍 Auditoría y Trazabilidad</h2>
+        <div class="filter-bar">
+            <input type="text" id="audit-buscar" placeholder="🔍 Buscar..." oninput="filtrarAuditoria()">
+            <select id="audit-tipo" onchange="filtrarAuditoria()">
+                <option value="">Todos los tipos</option>
+                <option value="propiedad">Propiedad</option>
+                <option value="compra">Compra</option>
+                <option value="refaccion">Refacción</option>
+                <option value="venta">Venta</option>
+                <option value="cotizacion_bna">Cotización BNA</option>
+            </select>
+            <select id="audit-inversor" onchange="filtrarAuditoria()">
+                <option value="">Todos los inversores</option>
+                <option value="Gaston">Gastón</option>
+                <option value="Hernan">Hernán</option>
+                <option value="Santiago">Santiago</option>
+                <option value="Todos">Todos</option>
+            </select>
+            <button class="btn btn-info btn-sm" onclick="exportarAuditoria()">📥 CSV</button>
+            <button class="btn btn-warning btn-sm" onclick="window.print()">🖨️ Imprimir</button>
+        </div>
+        <div id="auditoria-content"></div>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+        <h3 id="modal-title">Confirmar</h3>
+        <p id="modal-msg"></p><br>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button class="btn btn-danger" onclick="confirmarEliminar()">🗑️ Eliminar</button>
+            <button class="btn" style="background:#eee" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+//  INVERSORES
+// ============================================================
+const INVERSORES_LISTA = ['Gaston','Hernan','Santiago'];
+const INVERSOR_LABELS  = {Gaston:'🟢 Gastón',Hernan:'🔵 Hernán',Santiago:'🟣 Santiago',Todos:'👥 Todos'};
+const INVERSOR_CLASS   = {Gaston:'gaston',Hernan:'hernan',Santiago:'santiago'};
+
+function calcularPartes(inversor, montoTotal) {
+    if (inversor === 'Todos') {
+        return INVERSORES_LISTA.map(n => ({ nombre:n, monto:montoTotal/3, porcentaje:33.33 }));
+    }
+    return [{ nombre:inversor, monto:montoTotal, porcentaje:100 }];
+}
+
+// ============================================================
+//  ESTADO
+// ============================================================
+let state = { propiedades:[], compras:[], refacciones:[], ventas:[], auditoria:[], cotizacionesBNA:[] };
+let pendingDelete = null;
+
+function saveState() { localStorage.setItem('inmobiliaria_v5', JSON.stringify(state)); }
+function loadState()  {
+    const s = localStorage.getItem('inmobiliaria_v5');
+    if (s) { state = JSON.parse(s); }
+    if (!state.cotizacionesBNA) state.cotizacionesBNA = [];
+}
+
+// ============================================================
+//  NAVEGACIÓN
+// ============================================================
+function showSection(name, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+    if (name==='compra')       actualizarSelectores('compra');
+    if (name==='refaccion')    actualizarSelectores('refaccion');
+    if (name==='venta')        { actualizarSelectores('venta'); resetVentaForm(); }
+    if (name==='resultados')   actualizarSelectores('resultados');
+    if (name==='inversores')   renderInversores();
+    if (name==='cotizaciones') renderCotizacionesBNA();
+    if (name==='auditoria')    renderAuditoria();
+}
+
+// ============================================================
+//  UTILIDADES
+// ============================================================
+function genId()       { return Date.now().toString(36)+Math.random().toString(36).substr(2); }
+function formatUSD(n)  { return '$ '+parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function formatARS(n)  { return 'ARS '+parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function fechaHoy()    { return new Date().toISOString().split('T')[0]; }
+function formatFecha(f){ if(!f)return'-'; const[y,m,d]=f.split('-'); return`${d}/${m}/${y}`; }
+
+function logAuditoria(tipo, propId, descripcion, datos, inversor) {
+    state.auditoria.push({
+        id:genId(), timestamp:new Date().toISOString(),
+        tipo, propId, descripcion, datos, inversor:inversor||'—'
+    });
+}
+
+function actualizarSelectores(seccion) {
+    const ids={compra:'c-propiedad',refaccion:'r-propiedad',venta:'v-propiedad',resultados:'res-propiedad'};
+    const sel=document.getElementById(ids[seccion]);
+    if(!sel) return;
+    const val=sel.value;
+    sel.innerHTML='<option value="">-- Seleccionar --</option>';
+    state.propiedades.forEach(p=>{
+        sel.innerHTML+=`<option value="${p.id}" ${p.id===val?'selected':''}>${p.direccion} (${p.tipo})</option>`;
+    });
+}
+
+// ============================================================
+//  COTIZACIONES BNA — CORE
+// ============================================================
+
+/**
+ * Dado una fecha de erogación (YYYY-MM-DD),
+ * devuelve la fecha del día hábil anterior (D-1)
+ */
+function getFechaBNA(fechaErogacion) {
+    if (!fechaErogacion) return null;
+    const d = new Date(fechaErogacion + 'T12:00:00');
+    // Retroceder 1 día
+    d.setDate(d.getDate() - 1);
+    // Si cae sábado (6) → viernes
+    if (d.getDay() === 6) d.setDate(d.getDate() - 1);
+    // Si cae domingo (0) → viernes
+    if (d.getDay() === 0) d.setDate(d.getDate() - 2);
+    return d.toISOString().split('T')[0];
+}
+
+/**
+ * Busca la cotización BNA registrada para una fecha D-1
+ * Devuelve el valor o null
+ */
+function getCotizacionBNA(fechaErogacion) {
+    const fechaBNA = getFechaBNA(fechaErogacion);
+    if (!fechaBNA) return null;
+    const reg = state.cotizacionesBNA.find(c => c.fecha === fechaBNA);
+    return reg ? reg.valor : null;
+}
+
+/**
+ * Formatea la descripción de la cotización BNA para mostrar en UI
+ */
+function getLabelBNA(fechaErogacion) {
+    const fechaBNA = getFechaBNA(fechaErogacion);
+    if (!fechaBNA) return 'Seleccioná la fecha de pago';
+    const cotiz = getCotizacionBNA(fechaErogacion);
+    const [y,m,d] = fechaBNA.split('-');
+    const label = `Cotización BNA vendedor divisa del ${d}/${m}/${y} (día anterior al pago)`;
+    return { fechaBNA, label, cotiz };
+}
+
+/**
+ * Actualiza el widget BNA de un campo de cotización
+ */
+function actualizarWidgetBNA(fechaInputId, cotizInputId, badgeId, labelId, sugerenciaId) {
+    const fecha = document.getElementById(fechaInputId)?.value;
+    const badge = document.getElementById(badgeId);
+    const label = document.getElementById(labelId);
+    const sug   = sugerenciaId ? document.getElementById(sugerenciaId) : null;
+    if (!fecha) return;
+
+    const info = getLabelBNA(fecha);
+    if (badge) badge.textContent = `D-1: ${formatFecha(info.fechaBNA)}`;
+    if (label) label.textContent = info.label;
+
+    if (info.cotiz) {
+        document.getElementById(cotizInputId).value = info.cotiz;
+        if (sug) {
+            sug.style.display = 'block';
+            sug.innerHTML = `✅ Cotización encontrada en historial: <strong>${formatARS(info.cotiz)}</strong> — cargada automáticamente`;
+        }
+    } else {
+        if (sug) {
+            sug.style.display = 'block';
+            sug.innerHTML = `⚠️ No hay cotización registrada para el ${formatFecha(info.fechaBNA)}. 
+                <a href="#" onclick="showSection('cotizaciones',null); return false;">→ Registrá la cotización BNA</a>`;
+        }
+    }
+}
+
+function guardarCotizacionHistorial(fechaInputId, cotizInputId) {
+    const fecha = document.getElementById(fechaInputId)?.value;
+    const valor = parseFloat(document.getElementById(cotizInputId)?.value);
+    if (!fecha || !valor) return;
+    const fechaBNA = getFechaBNA(fecha);
+    if (!fechaBNA) return;
+    // Solo guardar si no existe
+    if (!state.cotizacionesBNA.find(c => c.fecha === fechaBNA)) {
+        state.cotizacionesBNA.push({ id:genId(), fecha:fechaBNA, valor, fuente:'Manual desde formulario' });
+        saveState();
+    }
+}
+
+function buscarCotizacionHistorial(fechaInputId, cotizInputId) {
+    const fecha = document.getElementById(fechaInputId)?.value;
+    if (!fecha) { alert('⚠️ Primero seleccioná la fecha de la erogación'); return; }
+    const info = getLabelBNA(fecha);
+    if (info.cotiz) {
+        document.getElementById(cotizInputId).value = info.cotiz;
+        alert(`✅ Cotización BNA del ${formatFecha(info.fechaBNA)}: ${formatARS(info.cotiz)}`);
+    } else {
+        if (confirm(`⚠️ No hay cotización para el ${formatFecha(info.fechaBNA)}.\n¿Ir a registrarla ahora?`)) {
+            showSection('cotizaciones', null);
+            document.getElementById('bna-nueva-fecha').value = info.fechaBNA;
+        }
+    }
+}
+
+// ============================================================
+//  COTIZACIONES BNA — MÓDULO
+// ============================================================
+function registrarCotizacionBNA() {
+    const fecha  = document.getElementById('bna-nueva-fecha').value;
+    const valor  = parseFloat(document.getElementById('bna-nueva-valor').value);
+    const fuente = document.getElementById('bna-nueva-fuente').value || 'BNA';
+    if (!fecha) { alert('⚠️ Ingresá la fecha'); return; }
+    if (!valor) { alert('⚠️ Ingresá el valor'); return; }
+
+    // Verificar si ya existe
+    const idx = state.cotizacionesBNA.findIndex(c => c.fecha === fecha);
+    if (idx >= 0) {
+        if (!confirm(`Ya existe cotización para ${formatFecha(fecha)}: ${formatARS(state.cotizacionesBNA[idx].valor)}\n¿Sobreescribir?`)) return;
+        state.cotizacionesBNA[idx] = { ...state.cotizacionesBNA[idx], valor, fuente };
+    } else {
+        state.cotizacionesBNA.push({ id:genId(), fecha, valor, fuente });
+    }
+
+    logAuditoria('cotizacion_bna', null,
+        `Cotización BNA ${formatFecha(fecha)}: ${formatARS(valor)} (${fuente})`,
+        {fecha, valor, fuente});
+    saveState();
+    renderCotizacionesBNA();
+    document.getElementById('bna-nueva-fecha').value = '';
+    document.getElementById('bna-nueva-valor').value = '';
+    document.getElementById('bna-nueva-fuente').value = '';
+    alert('✅ Cotización guardada');
+}
+
+function renderCotizacionesBNA() {
+    const cont = document.getElementById('lista-cotizaciones-bna');
+    if (!state.cotizacionesBNA.length) {
+        cont.innerHTML = '<div class="empty-state"><span>🏦</span>Sin cotizaciones registradas</div>'; return;
+    }
+    const sorted = [...state.cotizacionesBNA].sort((a,b) => b.fecha.localeCompare(a.fecha));
+    let html = `<table class="cotiz-table">
+        <thead><tr><th>Fecha (cierre BNA)</th><th>Cotización Vendedor Divisa</th><th>Fuente</th><th>Erogaciones que la usan</th><th></th></tr></thead><tbody>`;
+    sorted.forEach(c => {
+        // Buscar erogaciones que usan esta cotización
+        const usos = contarUsosCotizacion(c.fecha);
+        html += `<tr>
+            <td><strong>${formatFecha(c.fecha)}</strong></td>
+            <td><span style="font-size:1.1em;font-weight:700;color:#1b5e20">${formatARS(c.valor)}</span></td>
+            <td><span class="badge badge-green">${c.fuente||'BNA'}</span></td>
+            <td>${usos>0?`<span class="badge badge-blue">${usos} uso(s)</span>`:'<span class="badge" style="background:#eee;color:#999">Sin usos</span>'}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarCotizacion('${c.id}')">🗑️</button></td>
+        </tr>`;
+    });
+    cont.innerHTML = html + '</tbody></table>';
+}
+
+function contarUsosCotizacion(fechaBNA) {
+    let count = 0;
+    // Compras
+    state.compras.forEach(c => {
+        if (c.moneda==='ARS' && getFechaBNA(c.fecha)===fechaBNA) count++;
+        (c.gastos||[]).forEach(g => { if (g.moneda==='ARS' && getFechaBNA(g.fecha||c.fecha)===fechaBNA) count++; });
+    });
+    // Refacciones
+    state.refacciones.forEach(r => {
+        const todos=[...(r.gastosObra||[]),...(r.gastosImpuestos||[]),...(r.gastosProfesionales||[]),...(r.gastosOtros||[])];
+        todos.forEach(g => { if (g.moneda==='ARS' && getFechaBNA(g.fecha)===fechaBNA) count++; });
+    });
+    return count;
+}
+
+function eliminarCotizacion(id) {
+    if (!confirm('¿Eliminar esta cotización?')) return;
+    state.cotizacionesBNA = state.cotizacionesBNA.filter(c => c.id !== id);
+    saveState(); renderCotizacionesBNA();
+}
+
+// ============================================================
+//  DIVISIÓN VISUAL
+// ============================================================
+function renderPartesGrid(containerId, partes) {
+    const box = document.getElementById(containerId);
+    if (!box) return;
+    box.innerHTML = partes.map(p => `
+        <div class="parte-box ${INVERSOR_CLASS[p.nombre]||''}">
+            ${INVERSOR_LABELS[p.nombre]||p.nombre}<br>
+            <span style="font-size:1.1em">${formatUSD(p.monto)}</span><br>
+            <small>${p.porcentaje.toFixed(1)}%</small>
+        </div>`).join('');
+}
+
+function mostrarDivisionCompra() {
+    const inversor  = document.getElementById('c-inversor').value;
+    const moneda    = document.getElementById('c-moneda').value;
+    const precio    = parseFloat(document.getElementById('c-precio-total').value)||0;
+    const cotiz     = parseFloat(document.getElementById('c-cotizacion')?.value)||1;
+    const precioUSD = moneda==='ARS' ? precio/cotiz : precio;
+    const modalidad = document.getElementById('c-modalidad').value;
+    const pct       = modalidad==='boleto' ? (parseFloat(document.getElementById('c-porcentaje').value)||0) : 100;
+    const pagadoUSD = precioUSD * pct / 100;
+    const box       = document.getElementById('division-compra-box');
+    if (!precio) { box.style.display='none'; return; }
+    const partes = calcularPartes(inversor, pagadoUSD);
+    box.style.display = 'block';
+    document.getElementById('division-compra-alert').innerHTML = inversor==='Todos'
+        ? `👥 <strong>Erogación compartida</strong> — ${formatUSD(pagadoUSD)} ÷ 3 = ${formatUSD(pagadoUSD/3)} c/u`
+        : `${INVERSOR_LABELS[inversor]} asume <strong>${formatUSD(pagadoUSD)}</strong>`;
+    renderPartesGrid('division-compra-partes', partes);
+}
+
+function mostrarDivisionVenta() {
+    const inversor = document.getElementById('v-inversor').value;
+    const precio   = parseFloat(document.getElementById('v-precio').value)||0;
+    const box      = document.getElementById('division-venta-box');
+    if (!precio) { box.style.display='none'; return; }
+    const partes = calcularPartes(inversor, precio);
+    box.style.display = 'block';
+    document.getElementById('division-venta-alert').innerHTML = inversor==='Todos'
+        ? `👥 <strong>Ingreso distribuido</strong> — ${formatUSD(precio)} ÷ 3 = ${formatUSD(precio/3)} c/u`
+        : `${INVERSOR_LABELS[inversor]} recibe <strong>${formatUSD(precio)}</strong>`;
+    renderPartesGrid('division-venta-partes', partes);
+}
+
+// ============================================================
+//  PROPIEDADES
+// ============================================================
+function agregarPropiedad() {
+    const dir = document.getElementById('p-direccion').value.trim();
+    if (!dir) { alert('⚠️ Ingresá la dirección'); return; }
+    const prop = {
+        id:genId(), direccion:dir,
+        tipo:document.getElementById('p-tipo').value,
+        superficie:document.getElementById('p-superficie').value,
+        barrio:document.getElementById('p-barrio').value,
+        notas:document.getElementById('p-notas').value,
+        fechaAlta:fechaHoy(), estado:'disponible'
+    };
+    state.propiedades.push(prop);
+    logAuditoria('propiedad', prop.id, `Alta: ${prop.direccion}`, prop);
+    saveState(); renderPropiedades();
+    ['p-direccion','p-superficie','p-barrio','p-notas'].forEach(id=>document.getElementById(id).value='');
+}
+
+function renderPropiedades() {
+    const cont = document.getElementById('lista-propiedades');
+    if (!state.propiedades.length) { cont.innerHTML='<div class="empty-state"><span>🏠</span>Sin propiedades</div>'; return; }
+    let html='<table><thead><tr><th>Dirección</th><th>Tipo</th><th>Superficie</th><th>Barrio</th><th>Estado</th><th>Alta</th><th></th></tr></thead><tbody>';
+    state.propiedades.forEach(p=>{
+        const bc=p.estado==='vendida'?'badge-green':p.estado==='en_refaccion'?'badge-orange':'badge-blue';
+        const el=p.estado==='vendida'?'✅ Vendida':p.estado==='en_refaccion'?'🔨 Refacción':'🏠 Disponible';
+        html+=`<tr>
+            <td><strong>${p.direccion}</strong></td><td>${p.tipo}</td>
+            <td>${p.superficie?p.superficie+' m²':'-'}</td><td>${p.barrio||'-'}</td>
+            <td><span class="badge ${bc}">${el}</span></td>
+            <td>${formatFecha(p.fechaAlta)}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarItem('propiedad','${p.id}')">🗑️</button></td>
+        </tr>`;
+    });
+    cont.innerHTML=html+'</tbody></table>';
+}
+
+// ============================================================
+//  COMPRA — BNA
+// ============================================================
+function onFechaCompraChange() {
+    const moneda = document.getElementById('c-moneda').value;
+    if (moneda === 'ARS') {
+        actualizarWidgetBNA('c-fecha','c-cotizacion','bna-compra-badge','bna-compra-fecha-label','bna-compra-sugerencia');
+    }
+}
+
+function onMonedaCompraChange() {
+    const moneda = document.getElementById('c-moneda').value;
+    document.getElementById('bna-compra-section').style.display = moneda==='ARS' ? 'block' : 'none';
+    if (moneda==='ARS') {
+        actualizarWidgetBNA('c-fecha','c-cotizacion','bna-compra-badge','bna-compra-fecha-label','bna-compra-sugerencia');
+    }
+    calcularBoleto(); mostrarDivisionCompra();
+}
+
+function toggleModalidad() {
+    document.getElementById('boleto-section').style.display =
+        document.getElementById('c-modalidad').value==='boleto' ? 'block' : 'none';
+    mostrarDivisionCompra();
+}
+
+function calcularBoleto() {
+    const moneda = document.getElementById('c-moneda').value;
+    const total  = parseFloat(document.getElementById('c-precio-total').value)||0;
+    const cotiz  = parseFloat(document.getElementById('c-cotizacion')?.value)||0;
+    const pct    = parseFloat(document.getElementById('c-porcentaje').value)||0;
+    const pagado = total * pct / 100;
+    document.getElementById('c-monto-pagado').value = moneda==='ARS'
+        ? `${formatARS(pagado)} ≈ ${cotiz>0?formatUSD(pagado/cotiz):'---'}`
+        : formatUSD(pagado);
+    document.getElementById('c-saldo').value = moneda==='ARS'
+        ? `${formatARS(total-pagado)} ≈ ${cotiz>0?formatUSD((total-pagado)/cotiz):'---'}`
+        : formatUSD(total-pagado);
+}
+
+function agregarGastoCompra() {
+    const cont = document.getElementById('gastos-compra-list');
+    const div  = document.createElement('div');
+    div.className = 'gasto-row';
+    div.innerHTML = `
+        <input type="text" placeholder="Descripción" style="flex:2" class="gc-desc">
+        <select class="inv-gasto-c">
+            <option value="Todos">👥 Todos</option>
+            <option value="Gaston">🟢 Gastón</option>
+            <option value="Hernan">🔵 Hernán</option>
+            <option value="Santiago">🟣 Santiago</option>
+        </select>
+        <select class="mon-c">
+            <option value="USD">USD</option>
+            <option value="ARS">ARS — requiere BNA D-1</option>
+        </select>
+        <input type="number" placeholder="Monto" style="flex:1" class="gc-monto">
+        <input type="date" class="gc-fecha" title="Fecha del pago (la cotización BNA D-1 se calcula automáticamente)">
+        <button class="btn btn-danger btn-sm" onclick="this.closest('.gasto-row').remove()">✕</button>
+        <div class="gasto-bna-row" style="display:none">
+            🏦 Cotización BNA D-1: <input type="number" placeholder="ARS por USD" class="gc-cotiz" style="width:120px;flex:none">
+            <span class="gc-bna-label" style="color:#388e3c"></span>
+            <button class="btn btn-bna btn-sm" onclick="autocompletarBNAGasto(this)">📋 Auto</button>
+        </div>`;
+    div.querySelector('.mon-c').addEventListener('change', function() {
+        const bnaRow = div.querySelector('.gasto-bna-row');
+        bnaRow.style.display = this.value==='ARS' ? 'flex' : 'none';
+    });
+    div.querySelector('.gc-fecha').addEventListener('change', function() {
+        if (div.querySelector('.mon-c').value === 'ARS') {
+            autocompletarBNAGastoByFecha(div, this.value);
+        }
+    });
+    cont.appendChild(div);
+}
+
+function autocompletarBNAGasto(btn) {
+    const row   = btn.closest('.gasto-row');
+    const fecha = row.querySelector('.gc-fecha').value;
+    if (!fecha) { alert('⚠️ Primero seleccioná la fecha del gasto'); return; }
+    autocompletarBNAGastoByFecha(row, fecha);
+}
+
+function autocompletarBNAGastoByFecha(row, fecha) {
+    const info    = getLabelBNA(fecha);
+    const label   = row.querySelector('.gc-bna-label');
+    const cotizIn = row.querySelector('.gc-cotiz');
+    label.textContent = `→ BNA del ${formatFecha(info.fechaBNA)}`;
+    if (info.cotiz) {
+        cotizIn.value = info.cotiz;
+        label.textContent += ` ✅ ${formatARS(info.cotiz)}`;
+    } else {
+        label.textContent += ` ⚠️ No registrada`;
+    }
+}
+
+function getGastosDeList(containerId, fechaDefault) {
+    const rows  = document.querySelectorAll(`#${containerId} .gasto-row`);
+    const gastos = [];
+    rows.forEach(row => {
+        const desc   = row.querySelector('.gc-desc')?.value?.trim()||'';
+        const inv    = row.querySelector('.inv-gasto-c')?.value||'Todos';
+        const moneda = row.querySelector('.mon-c')?.value||'USD';
+        const monto  = parseFloat(row.querySelector('.gc-monto')?.value)||0;
+        const fecha  = row.querySelector('.gc-fecha')?.value||fechaDefault||'';
+        const cotiz  = parseFloat(row.querySelector('.gc-cotiz')?.value)||0;
+        if (desc && monto) {
+            const fechaBNA  = getFechaBNA(fecha||fechaDefault);
+            const cotizUsada= cotiz || getCotizacionBNA(fecha||fechaDefault) || 0;
+            const montoUSD  = moneda==='ARS' ? (cotizUsada>0?monto/cotizUsada:0) : monto;
+            const partes    = calcularPartes(inv, montoUSD);
+            gastos.push({ desc, inversor:inv, moneda, monto, cotiz:cotizUsada, montoUSD, fecha, fechaBNA, partes });
+        }
+    });
+    return gastos;
+}
+
+function guardarCompra() {
+    const propId   = document.getElementById('c-propiedad').value;
+    const precio   = parseFloat(document.getElementById('c-precio-total').value);
+    const inversor = document.getElementById('c-inversor').value;
+    const fecha    = document.getElementById('c-fecha').value;
+    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
+    if (!precio) { alert('⚠️ Ingresá el precio'); return; }
+    if (!fecha)  { alert('⚠️ Ingresá la fecha de compra'); return; }
+
+    const modalidad  = document.getElementById('c-modalidad').value;
+    const moneda     = document.getElementById('c-moneda').value;
+    const cotizacion = parseFloat(document.getElementById('c-cotizacion')?.value)||0;
+    const fechaBNA   = getFechaBNA(fecha);
+
+    // Validar cotización si es ARS
+    if (moneda==='ARS' && !cotizacion) {
+        if (!confirm(`⚠️ No ingresaste la cotización BNA para el ${formatFecha(fechaBNA)}.\n¿Guardar de todas formas?`)) return;
+    }
+
+    const precioUSD  = moneda==='ARS' ? (cotizacion>0?precio/cotizacion:0) : precio;
+    const porcentaje = modalidad==='boleto' ? parseFloat(document.getElementById('c-porcentaje').value)||0 : 100;
+    const saldoPct   = 100 - porcentaje;
+    const montoPagadoUSD = precioUSD * porcentaje / 100;
+    const partesCompra   = calcularPartes(inversor, montoPagadoUSD);
+    const gastos         = getGastosDeList('gastos-compra-list', fecha);
+
+    const compra = {
+        id:genId(), propId, inversor, fecha, modalidad, moneda,
+        precioTotal:precio, precioTotalUSD:precioUSD, cotizacion, fechaBNA,
+        porcentaje, saldoPct,
+        saldoUSD:      precioUSD * saldoPct / 100,
+        saldoOriginal: precio    * saldoPct / 100,
+        fechaEscritura:document.getElementById('c-fecha-escritura').value,
+        gastos, saldoSaldado:false, partesCompra
+    };
+    compra.totalGastosUSD    = gastos.reduce((s,g)=>s+g.montoUSD,0);
+    compra.montoPagadoUSD    = montoPagadoUSD;
+    compra.inversionTotalUSD = montoPagadoUSD + compra.totalGastosUSD;
+
+    const prop = state.propiedades.find(p=>p.id===propId);
+    if (prop) prop.estado = 'comprada';
+
+    const idx = state.compras.findIndex(c=>c.propId===propId);
+    if (idx>=0) state.compras[idx]=compra; else state.compras.push(compra);
+
+    // Guardar cotización en historial si es ARS
+    if (moneda==='ARS' && cotizacion && fechaBNA) {
+        if (!state.cotizacionesBNA.find(c=>c.fecha===fechaBNA)) {
+            state.cotizacionesBNA.push({id:genId(),fecha:fechaBNA,valor:cotizacion,fuente:'Desde compra'});
+        }
+    }
+
+    logAuditoria('compra', propId,
+        `Compra: ${formatUSD(precioUSD)} — Inversor: ${inversor}${inversor==='Todos'?` (${formatUSD(montoPagadoUSD/3)} c/u)`:''}` +
+        (moneda==='ARS'?` — BNA D-1 (${formatFecha(fechaBNA)}): ${formatARS(cotizacion)}`:''),
+        compra, inversor);
+
+    saveState(); renderCompras(); renderPropiedades();
+    alert('✅ Compra guardada');
+}
+
+function renderCompras() {
+    const cont=document.getElementById('lista-compras');
+    if(!state.compras.length){cont.innerHTML='<div class="empty-state"><span>💵</span>Sin compras</div>';return;}
+    let html='<table><thead><tr><th>Propiedad</th><th>Inversor</th><th>Precio</th><th>Cotización BNA</th><th>Modalidad</th><th>Saldo</th><th>Fecha</th></tr></thead><tbody>';
+    state.compras.forEach(c=>{
+        const prop=state.propiedades.find(p=>p.id===c.propId);
+        const bnaInfo=c.moneda==='ARS'
+            ?`<span class="badge badge-bna">BNA ${formatFecha(c.fechaBNA)}: ${formatARS(c.cotizacion)}</span>`
+            :'<span class="badge badge-blue">USD directo</span>';
+        const saldoBadge=c.modalidad==='boleto'
+            ?(c.saldoSaldado?'<span class="badge badge-green">✅ Saldado</span>':`<span class="badge badge-orange">⏳ ${formatUSD(c.saldoUSD)}</span>`)
+            :'—';
+        html+=`<tr>
+            <td><strong>${prop?prop.direccion:'-'}</strong></td>
+            <td><span class="badge badge-${INVERSOR_CLASS[c.inversor]||'blue'}">${INVERSOR_LABELS[c.inversor]||c.inversor}</span>
+                ${c.inversor==='Todos'?`<br><small>${formatUSD(c.montoPagadoUSD/3)} c/u</small>`:''}
+            </td>
+            <td>${formatUSD(c.precioTotalUSD)}</td>
+            <td>${bnaInfo}</td>
+            <td><span class="badge ${c.modalidad==='boleto'?'badge-orange':'badge-blue'}">${c.modalidad==='boleto'?'📋 Boleto':'💵 Directa'}</span></td>
+            <td>${saldoBadge}</td>
+            <td>${formatFecha(c.fecha)}</td>
+        </tr>`;
+    });
+    cont.innerHTML=html+'</tbody></table>';
+}
+
+// ============================================================
+//  REFACCIÓN
+// ============================================================
+function switchRefTab(tab,btn){
+    document.querySelectorAll('.ref-tab').forEach(t=>t.style.display='none');
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('ref-'+tab).style.display='block';
+    btn.classList.add('active');
+}
+
+function agregarGastoRef(categoria) {
+    const cont=document.getElementById(`gastos-${categoria}-list`);
+    const div=document.createElement('div');
+    div.className='gasto-row';
+    const cats={
+        obra:['Albañilería','Pintura','Plomería','Electricidad','Carpintería','Cerrajería','Vidrios','Pisos','Demolición','Otros'],
+        impuestos:['ABL','AGIP','Agua','Luz','Gas','Expensas','Sellado','Otros'],
+        profesionales:['Arquitecto','Ingeniero','Maestro Mayor','Plomero','Electricista','Escribano','Abogado','Otros'],
+        otros:['Materiales','Herramientas','Transporte','Limpieza','Seguros','Otros']
+    };
+    const opts=(cats[categoria]||['Otros']).map(c=>`<option>${c}</option>`).join('');
+    div.innerHTML=`
+        <select style="flex:1">${opts}</select>
+        <input type="text" placeholder="Detalle" style="flex:2" class="gr-desc">
+        <select class="inv-ref">
+            <option value="Todos">👥 Todos</option>
+            <option value="Gaston">🟢 Gastón</option>
+            <option value="Hernan">🔵 Hernán</option>
+            <option value="Santiago">🟣 Santiago</option>
+        </select>
+        <select class="mon-ref">
+            <option value="ARS">ARS</option>
+            <option value="USD">USD</option>
+        </select>
+        <input type="number" placeholder="Monto" style="flex:1" class="gr-monto">
+        <input type="date" class="gr-fecha" title="Fecha del gasto — BNA D-1 se calcula automáticamente">
+        <button class="btn btn-danger btn-sm" onclick="this.closest('.gasto-row').remove()">✕</button>
+        <div class="gasto-bna-row">
+            🏦 BNA D-1: <input type="number" placeholder="ARS por USD" class="gr-cotiz" style="width:120px;flex:none">
+            <span class="gr-bna-label" style="color:#388e3c;font-size:0.8em"></span>
+            <button class="btn btn-bna btn-sm" onclick="autocompletarBNARef(this)">📋 Auto</button>
+        </div>`;
+    div.querySelector('.mon-ref').addEventListener('change',function(){
+        div.querySelector('.gasto-bna-row').style.display=this.value==='USD'?'none':'flex';
+    });
+    div.querySelector('.gr-fecha').addEventListener('change',function(){
+        autocompletarBNARefByFecha(div,this.value);
+    });
+    cont.appendChild(div);
+}
+
+function autocompletarBNARef(btn) {
+    const row  = btn.closest('.gasto-row');
+    const fecha= row.querySelector('.gr-fecha').value;
+    if (!fecha){alert('⚠️ Seleccioná la fecha del gasto');return;}
+    autocompletarBNARefByFecha(row,fecha);
+}
+function autocompletarBNARefByFecha(row,fecha) {
+    const info  = getLabelBNA(fecha);
+    const label = row.querySelector('.gr-bna-label');
+    const cotIn = row.querySelector('.gr-cotiz');
+    label.textContent=`→ BNA ${formatFecha(info.fechaBNA)}`;
+    if(info.cotiz){ cotIn.value=info.cotiz; label.textContent+=` ✅ ${formatARS(info.cotiz)}`; }
+    else { label.textContent+=` ⚠️ No registrada`; }
+}
+
+function getGastosRef(categoria) {
+    const rows=document.querySelectorAll(`#gastos-${categoria}-list .gasto-row`);
+    const gastos=[];
+    rows.forEach(row=>{
+        const selCat =row.querySelectorAll('select')[0];
+        const inv    =row.querySelector('.inv-ref')?.value||'Todos';
+        const moneda =row.querySelector('.mon-ref')?.value||'ARS';
+        const monto  =parseFloat(row.querySelector('.gr-monto')?.value)||0;
+        const fecha  =row.querySelector('.gr-fecha')?.value||'';
+        const cotiz  =parseFloat(row.querySelector('.gr-cotiz')?.value)||getCotizacionBNA(fecha)||0;
+        const detalle=row.querySelector('.gr-desc')?.value||'';
+        const cat    =selCat?selCat.value:'';
+        if(monto){
+            const fechaBNA=getFechaBNA(fecha);
+            const montoUSD=moneda==='ARS'?(cotiz>0?monto/cotiz:0):monto;
+            const partes  =calcularPartes(inv,montoUSD);
+            gastos.push({categoria,cat,detalle,inversor:inv,moneda,monto,cotiz,montoUSD,fecha,fechaBNA,partes});
+            // Guardar cotización en historial
+            if(moneda==='ARS'&&cotiz&&fechaBNA&&!state.cotizacionesBNA.find(c=>c.fecha===fechaBNA)){
+                state.cotizacionesBNA.push({id:genId(),fecha:fechaBNA,valor:cotiz,fuente:'Desde refacción'});
+            }
+        }
+    });
+    return gastos;
+}
+
+function guardarRefaccion(){
+    const propId=document.getElementById('r-propiedad').value;
+    if(!propId){alert('⚠️ Seleccioná una propiedad');return;}
+    const gastosObra         =getGastosRef('obra');
+    const gastosImpuestos    =getGastosRef('impuestos');
+    const gastosProfesionales=getGastosRef('profesionales');
+    const gastosOtros        =getGastosRef('otros');
+    const todosGastos=[...gastosObra,...gastosImpuestos,...gastosProfesionales,...gastosOtros];
+    const totalUSD=todosGastos.reduce((s,g)=>s+g.montoUSD,0);
+    const ref={id:genId(),propId,gastosObra,gastosImpuestos,gastosProfesionales,gastosOtros,totalUSD,fecha:fechaHoy()};
+    const prop=state.propiedades.find(p=>p.id===propId);
+    if(prop) prop.estado='en_refaccion';
+    const idx=state.refacciones.findIndex(r=>r.propId===propId);
+    if(idx>=0){
+        ['gastosObra','gastosImpuestos','gastosProfesionales','gastosOtros'].forEach(k=>{
+            state.refacciones[idx][k].push(...ref[k]);
+        });
+        state.refacciones[idx].totalUSD+=totalUSD;
+    } else state.refacciones.push(ref);
+    logAuditoria('refaccion',propId,`Refacción: ${formatUSD(totalUSD)} — ${todosGastos.length} ítems`,ref);
+    saveState(); renderRefacciones(); renderPropiedades();
+    ['obra','impuestos','profesionales','otros'].forEach(c=>document.getElementById(`gastos-${c}-list`).innerHTML='');
+    alert('✅ Refacción guardada');
+}
+
+function renderRefacciones(){
+    const cont=document.getElementById('lista-refacciones');
+    if(!state.refacciones.length){cont.innerHTML='<div class="empty-state"><span>🔨</span>Sin refacciones</div>';return;}
+    let html='';
+    state.refacciones.forEach(r=>{
+        const prop=state.propiedades.find(p=>p.id===r.propId);
+        const cats=[
+            {label:'🏗️ Obra',items:r.gastosObra},{label:'📋 Impuestos',items:r.gastosImpuestos},
+            {label:'👷 Profesionales',items:r.gastosProfesionales},{label:'📦 Otros',items:r.gastosOtros}
+        ].filter(c=>c.items&&c.items.length>0);
+        html+=`<div class="card" style="margin-bottom:10px"><h3>🔨 ${prop?prop.direccion:'-'} — Total: ${formatUSD(r.totalUSD)}</h3>`;
+        cats.forEach(cat=>{
+            html+=`<p style="margin:8px 0 4px"><strong>${cat.label}</strong></p>
+                <table><thead><tr><th>Cat.</th><th>Detalle</th><th>Inversor</th><th>Monto</th><th>Cotiz BNA</th><th>USD</th></tr></thead><tbody>`;
+            cat.items.forEach(g=>{
+                const bnaInfo=g.moneda==='ARS'
+                    ?`<span class="badge badge-bna" style="font-size:0.75em">BNA ${formatFecha(g.fechaBNA)}: ${formatARS(g.cotiz)}</span>`
+                    :'—';
+                html+=`<tr>
+                    <td>${g.cat}</td><td>${g.detalle||'-'}</td>
+                    <td><span class="badge badge-${INVERSOR_CLASS[g.inversor]||'blue'}">${INVERSOR_LABELS[g.inversor]||g.inversor}</span>
+                        ${g.inversor==='Todos'?`<br><small>${formatUSD(g.montoUSD/3)} c/u</small>`:''}
+                    </td>
+                    <td>${g.moneda==='ARS'?formatARS(g.monto):formatUSD(g.monto)}</td>
+                    <td>${bnaInfo}</td>
+                    <td>${formatUSD(g.montoUSD)}</td>
+                </tr>`;
+            });
+            html+='</tbody></table>';
+        });
+        html+='</div>';
+    });
+    cont.innerHTML=html;
+}
+
+// ============================================================
+//  VENTA
+// ============================================================
+function resetVentaForm(){
+    document.getElementById('saldo-boleto-section').style.display='none';
+    document.getElementById('saldo-detalle-box').style.display='none';
+    document.getElementById('division-venta-box').style.display='none';
+    const cb=document.getElementById('v-salda-boleto');
+    if(cb) cb.checked=false;
+}
+
+function onFechaVentaChange(){
+    const fecha=document.getElementById('v-fecha').value;
+    const info=getLabelBNA(fecha);
+    document.getElementById('bna-saldo-badge').textContent=`D-1: ${formatFecha(info.fechaBNA)}`;
+    document.getElementById('bna-saldo-fecha-label').textContent=info.label;
+    if(info.cotiz){
+        document.getElementById('v-cotizacion-saldo').value=info.cotiz;
+    }
+    recalcularSaldoBoleto();
+}
+
+function cargarSaldoBoleto(){
+    resetVentaForm();
+    const propId=document.getElementById('v-propiedad').value;
+    if(!propId) return;
+    const compra=state.compras.find(c=>c.propId===propId);
+    if(!compra||compra.modalidad!=='boleto'||compra.saldoPct<=0||compra.saldoSaldado) return;
+    document.getElementById('saldo-boleto-section').style.display='block';
+    // Mostrar BNA para saldo si el precio original era ARS
+    if(compra.moneda==='ARS'){
+        document.getElementById('bna-saldo-section').style.display='block';
+        onFechaVentaChange();
+    }
+    renderSaldoAlerta(compra, parseFloat(document.getElementById('v-cotizacion-saldo')?.value)||0);
+}
+
+function recalcularSaldoBoleto(){
+    const propId=document.getElementById('v-propiedad').value;
+    if(!propId) return;
+    const compra=state.compras.find(c=>c.propId===propId);
+    if(!compra||compra.modalidad!=='boleto'||compra.saldoPct<=0||compra.saldoSaldado) return;
+    const cotiz=parseFloat(document.getElementById('v-cotizacion-saldo')?.value)||0;
+    renderSaldoAlerta(compra,cotiz);
+    if(document.getElementById('v-salda-boleto').checked) renderSaldoDetalle(compra,cotiz);
+}
+
+function renderSaldoAlerta(compra,cotizVenta){
+    const fechaBNA=getFechaBNA(document.getElementById('v-fecha').value);
+    let html=`⚠️ Saldo pendiente: <strong>${compra.saldoPct}%</strong> → <strong>${formatUSD(compra.saldoUSD)}</strong>`;
+    if(compra.moneda==='ARS'){
+        html+=`<br>• Original: <strong>${formatARS(compra.saldoOriginal)}</strong>`;
+        if(cotizVenta>0) html+=` ÷ BNA ${formatFecha(fechaBNA)} (${formatARS(cotizVenta)}) = <strong>${formatUSD(compra.saldoOriginal/cotizVenta)}</strong>`;
+    }
+    html+=`<br>• Escritura pactada: <strong>${formatFecha(compra.fechaEscritura)||'No especificada'}</strong>`;
+    document.getElementById('saldo-boleto-alert').innerHTML=html;
+}
+
+function toggleSaldoCheck(){
+    const cb=document.getElementById('v-salda-boleto');
+    cb.checked=!cb.checked; toggleSaldoDetalle();
+}
+function toggleSaldoDetalle(){
+    const checked=document.getElementById('v-salda-boleto').checked;
+    document.getElementById('saldo-detalle-box').style.display=checked?'block':'none';
+    if(checked){
+        const propId=document.getElementById('v-propiedad').value;
+        const compra=state.compras.find(c=>c.propId===propId);
+        const cotiz=parseFloat(document.getElementById('v-cotizacion-saldo')?.value)||0;
+        if(compra) renderSaldoDetalle(compra,cotiz);
+    }
+}
+
+function renderSaldoDetalle(compra,cotizVenta){
+    const fechaBNA=getFechaBNA(document.getElementById('v-fecha').value);
+    let usdAlVenta=compra.saldoUSD;
+    if(compra.moneda==='ARS'&&cotizVenta>0) usdAlVenta=compra.saldoOriginal/cotizVenta;
+    const bnaInfo=compra.moneda==='ARS'
+        ?`BNA ${formatFecha(fechaBNA)}: ${formatARS(cotizVenta)}`
+        :'USD directo';
+    document.getElementById('saldo-detalle-tbody').innerHTML=`<tr>
+        <td>Saldo pendiente boleto (${compra.saldoPct}%)</td>
+        <td>${compra.saldoPct}%</td>
+        <td>${compra.moneda==='ARS'?formatARS(compra.saldoOriginal):formatUSD(compra.saldoOriginal)}</td>
+        <td><strong>${formatUSD(usdAlVenta)}</strong></td>
+        <td><span class="badge badge-bna">${bnaInfo}</span></td>
+    </tr>`;
+    document.getElementById('saldo-total-alert').innerHTML=
+        `💡 Se sumará <strong>${formatUSD(usdAlVenta)}</strong> a la inversión total`;
+    const partesSaldo=calcularPartes(compra.inversor||'Todos',usdAlVenta);
+    document.getElementById('division-saldo-box').style.display='block';
+    renderPartesGrid('division-saldo-partes',partesSaldo);
+}
+
+function agregarGastoVenta(){
+    const cont=document.getElementById('gastos-venta-list');
+    const div=document.createElement('div');
+    div.className='gasto-row';
+    div.innerHTML=`
+        <select style="flex:1" class="gv-cat">
+            <option>Comisión inmobiliaria</option><option>Escrituración</option>
+            <option>Honorarios escribano</option><option>Imp. Ganancias</option>
+            <option>ITI</option><option>Sellado</option><option>Otros</option>
+        </select>
+        <input type="text" placeholder="Detalle" style="flex:2" class="gv-desc">
+        <select class="inv-v">
+            <option value="Todos">👥 Todos</option>
+            <option value="Gaston">🟢 Gastón</option>
+            <option value="Hernan">🔵 Hernán</option>
+            <option value="Santiago">🟣 Santiago</option>
+        </select>
+        <select class="mon-v">
+            
