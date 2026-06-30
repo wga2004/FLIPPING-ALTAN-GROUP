@@ -39,61 +39,44 @@
             padding: 25px; margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-        .card h2 {
-            color: #1a237e; margin-bottom: 20px; font-size: 1.3em;
-            border-bottom: 2px solid #e3f2fd; padding-bottom: 10px;
-        }
+        .card h2 { color: #1a237e; margin-bottom: 20px; font-size: 1.3em; border-bottom: 2px solid #e3f2fd; padding-bottom: 10px; }
         .card h3 { color: #283593; margin: 15px 0 10px; font-size: 1.1em; }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .form-group { display: flex; flex-direction: column; gap: 5px; }
-        .form-group label {
-            font-size: 0.82em; font-weight: 600; color: #555;
-            text-transform: uppercase; letter-spacing: 0.5px;
+        .form-group label { font-size: 0.85em; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 8px;
+            font-size: 0.95em; transition: border-color 0.3s;
         }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 10px 12px; border: 2px solid #e0e0e0;
-            border-radius: 8px; font-size: 0.95em;
-            transition: border-color 0.3s; width: 100%;
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: #42a5f5;
         }
-        .form-group input:focus,
-        .form-group select:focus { outline: none; border-color: #42a5f5; }
-        .form-group input[readonly] { background: #f5f5f5; cursor: default; }
+        .form-group input[readonly] { background: #f5f5f5; color: #666; }
 
         .btn {
             padding: 10px 20px; border: none; border-radius: 8px;
             cursor: pointer; font-size: 0.95em; font-weight: 600;
-            transition: all 0.3s; display: inline-flex;
-            align-items: center; gap: 8px;
+            transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
-        .btn:hover { transform: translateY(-1px); opacity: 0.92; }
-        .btn-primary  { background: #1a237e; color: white; }
-        .btn-success  { background: #2e7d32; color: white; }
-        .btn-danger   { background: #c62828; color: white; }
-        .btn-warning  { background: #f57f17; color: white; }
-        .btn-info     { background: #0277bd; color: white; }
-        .btn-secondary{ background: #546e7a; color: white; }
-        .btn-sm { padding: 6px 12px; font-size: 0.82em; }
+        .btn-primary { background: #1a237e; color: white; }
+        .btn-primary:hover { background: #283593; transform: translateY(-1px); }
+        .btn-success { background: #2e7d32; color: white; }
+        .btn-success:hover { background: #388e3c; }
+        .btn-danger  { background: #c62828; color: white; }
+        .btn-danger:hover  { background: #d32f2f; }
+        .btn-warning { background: #f57f17; color: white; }
+        .btn-warning:hover { background: #f9a825; }
+        .btn-info    { background: #0277bd; color: white; }
+        .btn-info:hover    { background: #0288d1; }
+        .btn-sm { padding: 6px 12px; font-size: 0.85em; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th {
-            background: #e3f2fd; color: #1a237e;
-            padding: 10px 12px; text-align: left;
-            font-size: 0.82em; text-transform: uppercase;
-        }
-        td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.88em; }
+        th { background: #e3f2fd; color: #1a237e; padding: 12px; text-align: left; font-size: 0.85em; text-transform: uppercase; }
+        td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.9em; }
         tr:hover td { background: #f8f9ff; }
 
-        .badge {
-            display: inline-block; padding: 3px 10px;
-            border-radius: 20px; font-size: 0.78em; font-weight: 600;
-        }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600; }
         .badge-blue    { background: #e3f2fd; color: #1565c0; }
         .badge-green   { background: #e8f5e9; color: #2e7d32; }
         .badge-orange  { background: #fff3e0; color: #e65100; }
@@ -104,14 +87,9 @@
         .badge-santiago{ background: #f3e5f5; color: #4a148c; }
         .badge-todos   { background: #fff8e1; color: #e65100; }
 
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 15px; margin-bottom: 20px;
-        }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .stat-card {
-            color: white; padding: 18px; border-radius: 12px;
-            text-align: center;
+            color: white; padding: 20px; border-radius: 12px; text-align: center;
             background: linear-gradient(135deg, #1a237e, #283593);
         }
         .stat-card.green   { background: linear-gradient(135deg, #2e7d32, #388e3c); }
@@ -121,135 +99,115 @@
         .stat-card.gaston  { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
         .stat-card.hernan  { background: linear-gradient(135deg, #0d47a1, #1565c0); }
         .stat-card.santiago{ background: linear-gradient(135deg, #4a148c, #6a1b9a); }
-        .stat-card .value  { font-size: 1.5em; font-weight: 700; margin: 6px 0; }
-        .stat-card .label  { font-size: 0.8em; opacity: 0.9; }
+        .stat-card .value  { font-size: 1.6em; font-weight: 700; margin: 5px 0; }
+        .stat-card .label  { font-size: 0.82em; opacity: 0.9; }
 
-        .cotiz-banner {
-            background: linear-gradient(135deg, #0d47a1, #1565c0);
-            color: white; padding: 12px 20px; border-radius: 10px;
-            margin-bottom: 20px; display: flex;
-            align-items: center; gap: 15px; flex-wrap: wrap;
+        /* ── TASA HISTÓRICA ── */
+        .tasa-card {
+            border-left: 5px solid #42a5f5;
+            border-radius: 12px; padding: 20px; margin-bottom: 12px;
+            background: #f8fbff;
+            display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: center;
         }
-        .cotiz-banner .tipo {
-            background: rgba(255,255,255,0.15);
-            padding: 6px 14px; border-radius: 20px;
-            font-size: 0.9em;
+        .tasa-card:hover { background: #eef4ff; }
+        .tasa-valor { font-size: 1.4em; font-weight: 700; color: #1a237e; }
+        .tasa-tipo  { font-size: 0.82em; color: #666; }
+        .tasa-fecha { font-size: 0.9em; color: #444; }
+        .tasa-nota  { font-size: 0.85em; color: #888; font-style: italic; }
+
+        .tasa-chart-bar {
+            height: 18px; border-radius: 4px; background: linear-gradient(90deg,#42a5f5,#1a237e);
+            transition: width 0.4s; min-width: 4px;
         }
-        .cotiz-banner .tipo strong { font-size: 1.1em; }
 
         .inversor-card {
-            border-radius: 12px; padding: 20px;
-            margin-bottom: 15px; border-left: 5px solid;
+            border-radius: 12px; padding: 20px; margin-bottom: 15px;
+            border-left: 5px solid;
         }
-        .inversor-card.gaston  { border-color: #2e7d32; background: #f1f8f1; }
-        .inversor-card.hernan  { border-color: #1565c0; background: #f0f4ff; }
-        .inversor-card.santiago{ border-color: #6a1b9a; background: #f8f0ff; }
+        .inversor-card.gaston   { border-color: #2e7d32; background: #f1f8f1; }
+        .inversor-card.hernan   { border-color: #1565c0; background: #f0f4ff; }
+        .inversor-card.santiago { border-color: #6a1b9a; background: #f8f0ff; }
 
-        .gasto-row {
-            display: flex; gap: 8px; align-items: center;
-            margin-bottom: 8px; flex-wrap: wrap;
-            padding: 8px; background: #fafafa;
-            border-radius: 8px; border: 1px solid #eee;
+        .gasto-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+        .gasto-row input, .gasto-row select {
+            flex: 1; min-width: 100px; padding: 8px 10px;
+            border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.9em;
         }
-        .gasto-row input,
-        .gasto-row select {
-            padding: 7px 10px; border: 2px solid #e0e0e0;
-            border-radius: 6px; font-size: 0.88em;
-        }
-        .gasto-row input:focus,
-        .gasto-row select:focus { outline: none; border-color: #42a5f5; }
+        .gasto-row input:focus, .gasto-row select:focus { outline: none; border-color: #42a5f5; }
 
-        .alert {
-            padding: 12px 15px; border-radius: 8px;
-            margin-bottom: 12px; font-size: 0.9em;
-        }
+        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; }
         .alert-info    { background: #e3f2fd; color: #1565c0; border-left: 4px solid #42a5f5; }
         .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #66bb6a; }
         .alert-warning { background: #fff3e0; color: #e65100; border-left: 4px solid #ffa726; }
         .alert-danger  { background: #ffebee; color: #c62828; border-left: 4px solid #ef5350; }
 
         .partes-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 10px; margin: 8px 0;
+            display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 10px 0;
         }
         .parte-box {
-            padding: 12px; border-radius: 8px;
-            text-align: center; font-size: 0.88em; font-weight: 600;
+            padding: 12px; border-radius: 8px; text-align: center;
+            font-size: 0.9em; font-weight: 600;
         }
-        .parte-box.gaston  { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
-        .parte-box.hernan  { background: #e3f2fd; color: #0d47a1; border: 2px solid #90caf9; }
-        .parte-box.santiago{ background: #f3e5f5; color: #4a148c; border: 2px solid #ce93d8; }
+        .parte-box.gaston   { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
+        .parte-box.hernan   { background: #e3f2fd; color: #0d47a1; border: 2px solid #90caf9; }
+        .parte-box.santiago { background: #f3e5f5; color: #4a148c; border: 2px solid #ce93d8; }
 
-        .saldo-boleto-box {
+        #saldo-boleto-section {
             border: 2px solid #ffa726; border-radius: 12px;
-            padding: 20px; background: #fff8f0; margin: 15px 0;
+            padding: 20px; background: #fff8f0; margin: 20px 0;
         }
-        .saldo-boleto-box h3 { color: #e65100; margin-bottom: 12px; }
-
+        #saldo-boleto-section h3 { color: #e65100; margin-bottom: 15px; }
         .saldo-check-row {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px; background: white; border-radius: 8px;
-            border: 2px solid #ffe0b2; margin-bottom: 12px; cursor: pointer;
+            display: flex; align-items: center; gap: 12px; padding: 12px;
+            background: white; border-radius: 8px; border: 2px solid #ffe0b2;
+            margin-bottom: 12px; cursor: pointer;
         }
-        .saldo-check-row input[type="checkbox"] {
-            width: 20px; height: 20px;
-            cursor: pointer; accent-color: #e65100;
-        }
+        .saldo-check-row input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: #e65100; }
 
         .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn {
-            padding: 8px 16px; border: 2px solid #e0e0e0;
-            border-radius: 8px; background: white;
-            cursor: pointer; font-size: 0.88em; transition: all 0.3s;
+            padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 8px;
+            background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s;
         }
         .tab-btn.active { background: #1a237e; color: white; border-color: #1a237e; }
 
         .timeline { position: relative; padding-left: 30px; }
-        .timeline::before {
-            content: ''; position: absolute; left: 10px;
-            top: 0; bottom: 0; width: 2px; background: #e0e0e0;
-        }
+        .timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:#e0e0e0; }
         .timeline-item { position: relative; margin-bottom: 20px; }
         .timeline-item::before {
-            content: ''; position: absolute; left: -24px; top: 5px;
-            width: 12px; height: 12px; border-radius: 50%;
-            background: #42a5f5; border: 2px solid white;
-            box-shadow: 0 0 0 2px #42a5f5;
+            content:''; position:absolute; left:-24px; top:5px;
+            width:12px; height:12px; border-radius:50%;
+            background:#42a5f5; border:2px solid white; box-shadow:0 0 0 2px #42a5f5;
         }
 
-        .filter-bar {
-            display: flex; gap: 10px; flex-wrap: wrap;
-            align-items: center; margin-bottom: 20px;
-        }
-        .filter-bar input,
-        .filter-bar select {
-            padding: 8px 12px; border: 2px solid #e0e0e0;
-            border-radius: 8px; font-size: 0.9em;
+        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+        .filter-bar input, .filter-bar select {
+            padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.9em;
         }
 
         .modal-overlay {
-            display: none; position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); z-index: 1000;
-            align-items: center; justify-content: center;
+            display: none; position: fixed; top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;
         }
-        .modal-overlay.open { display: flex; }
+        .modal-overlay.active { display: flex; }
         .modal {
-            background: white; border-radius: 12px;
-            padding: 30px; max-width: 500px; width: 90%;
+            background: white; border-radius: 12px; padding: 30px;
+            max-width: 500px; width: 90%;
         }
-        .modal h3 { color: #1a237e; margin-bottom: 15px; }
+        .modal h3 { color: #1a237e; margin-bottom: 20px; }
 
-        .empty-state { text-align: center; padding: 40px; color: #aaa; }
+        .empty-state { text-align: center; padding: 40px; color: #999; }
         .empty-state span { font-size: 3em; display: block; margin-bottom: 10px; }
 
+        .sep { height: 1px; background: #e0e0e0; margin: 20px 0; }
+
         @media (max-width: 600px) {
+            .tasa-card { grid-template-columns: 1fr 1fr; }
             .partes-grid { grid-template-columns: 1fr; }
-            .form-grid   { grid-template-columns: 1fr; }
         }
         @media print {
-            nav, .btn, .filter-bar, header { display: none !important; }
-            .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+            nav, .btn, .filter-bar { display: none !important; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
         }
     </style>
 </head>
@@ -263,1445 +221,1304 @@
     </div>
 </header>
 
-<nav id="main-nav">
+<nav>
     <button class="active" onclick="showSection('propiedades',this)">🏗️ Propiedades</button>
     <button onclick="showSection('compra',this)">💵 Compra</button>
     <button onclick="showSection('refaccion',this)">🔨 Refacción</button>
     <button onclick="showSection('venta',this)">💰 Venta</button>
     <button onclick="showSection('resultados',this)">📊 Resultados</button>
     <button onclick="showSection('inversores',this)">👥 Inversores</button>
+    <button onclick="showSection('tasas',this)">📈 Tasas Históricas</button>
     <button onclick="showSection('auditoria',this)">🔍 Auditoría</button>
 </nav>
 
 <div class="container">
 
-    <!-- Cotización Banner -->
-    <div class="cotiz-banner" id="cotiz-banner">
-        <span>💱</span>
-        <span id="cotiz-loading">Cargando cotizaciones...</span>
-    </div>
-
-    <!-- ===== PROPIEDADES ===== -->
-    <div id="sec-propiedades" class="section active">
-        <div class="card">
-            <h2>🏗️ Nueva Propiedad</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Dirección *</label>
-                    <input type="text" id="p-direccion" placeholder="Av. Corrientes 1234, CABA">
-                </div>
-                <div class="form-group">
-                    <label>Tipo de Propiedad</label>
-                    <select id="p-tipo">
-                        <option>Departamento</option><option>Casa</option>
-                        <option>Local Comercial</option><option>Oficina</option>
-                        <option>Terreno</option><option>PH</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Superficie (m²)</label>
-                    <input type="number" id="p-superficie" placeholder="65">
-                </div>
-                <div class="form-group">
-                    <label>Barrio / Zona</label>
-                    <input type="text" id="p-barrio" placeholder="Palermo, CABA">
-                </div>
-                <div class="form-group" style="grid-column: span 2">
-                    <label>Notas</label>
-                    <textarea id="p-notas" rows="2" placeholder="Observaciones..."></textarea>
-                </div>
+<!-- ══════════════════════════════════════════════════════
+     PROPIEDADES
+══════════════════════════════════════════════════════ -->
+<div id="sec-propiedades" class="section active">
+    <div class="card">
+        <h2>🏗️ Nueva Propiedad</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Dirección *</label>
+                <input type="text" id="p-direccion" placeholder="Av. Corrientes 1234, CABA">
             </div>
-            <br>
-            <button class="btn btn-primary" onclick="agregarPropiedad()">➕ Agregar Propiedad</button>
-        </div>
-        <div class="card">
-            <h2>📋 Propiedades Registradas</h2>
-            <div id="lista-propiedades">
-                <div class="empty-state"><span>🏠</span>No hay propiedades registradas</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== COMPRA ===== -->
-    <div id="sec-compra" class="section">
-        <div class="card">
-            <h2>💵 Registrar Compra</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="c-propiedad">
-                        <option value="">-- Seleccionar --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Inversor / Responsable *</label>
-                    <select id="c-inversor" onchange="actualizarDivisionCompra()">
-                        <option value="Todos">👥 Todos (partes iguales)</option>
-                        <option value="Gaston">🟢 Gastón</option>
-                        <option value="Hernan">🔵 Hernán</option>
-                        <option value="Santiago">🟣 Santiago</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Modalidad</label>
-                    <select id="c-modalidad" onchange="toggleBoleto()">
-                        <option value="directa">Compra Directa</option>
-                        <option value="boleto">Boleto de Compra/Venta</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Fecha Compra / Boleto</label>
-                    <input type="date" id="c-fecha">
-                </div>
-                <div class="form-group">
-                    <label>Moneda</label>
-                    <select id="c-moneda" onchange="toggleCotizCompra()">
-                        <option value="USD">USD – Dólares</option>
-                        <option value="ARS">ARS – Pesos</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Precio Total</label>
-                    <input type="number" id="c-precio-total" placeholder="80000"
-                           oninput="calcularBoleto(); actualizarDivisionCompra()">
-                </div>
-                <div class="form-group" id="grp-cotiz-compra" style="display:none">
-                    <label>Cotización USD/ARS</label>
-                    <input type="number" id="c-cotizacion" placeholder="1200"
-                           oninput="calcularBoleto(); actualizarDivisionCompra()">
-                </div>
-            </div>
-
-            <!-- División compra -->
-            <div id="div-compra-box" style="display:none; margin-top:12px">
-                <div class="alert alert-info" id="div-compra-msg"></div>
-                <div class="partes-grid" id="div-compra-partes"></div>
-            </div>
-
-            <!-- Boleto -->
-            <div id="boleto-section" style="display:none; margin-top:15px">
-                <div class="alert alert-warning">
-                    📋 <strong>Boleto de Compra/Venta</strong> — completá el porcentaje ya abonado
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>% Pagado en Boleto</label>
-                        <input type="number" id="c-porcentaje" placeholder="30" min="1" max="99"
-                               oninput="calcularBoleto(); actualizarDivisionCompra()">
-                    </div>
-                    <div class="form-group">
-                        <label>Monto Pagado</label>
-                        <input type="text" id="c-monto-pagado" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Saldo Pendiente (escritura)</label>
-                        <input type="text" id="c-saldo" readonly
-                               style="background:#fff3e0;color:#e65100;font-weight:600">
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha Escritura estimada</label>
-                        <input type="date" id="c-fecha-escritura">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gastos compra -->
-            <br>
-            <h3>💸 Gastos Asociados a la Compra</h3>
-            <div id="gastos-compra-list"></div>
-            <button class="btn btn-warning btn-sm" onclick="agregarGastoCompra()">➕ Agregar Gasto</button>
-            <br><br>
-            <button class="btn btn-primary" onclick="guardarCompra()">💾 Guardar Compra</button>
-        </div>
-
-        <div class="card">
-            <h2>📋 Compras Registradas</h2>
-            <div id="lista-compras">
-                <div class="empty-state"><span>💵</span>No hay compras registradas</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== REFACCIÓN ===== -->
-    <div id="sec-refaccion" class="section">
-        <div class="card">
-            <h2>🔨 Registrar Refacción</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="r-propiedad">
-                        <option value="">-- Seleccionar --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Cotización USD/ARS de referencia</label>
-                    <input type="number" id="r-cotizacion" placeholder="1200" value="1200">
-                </div>
-            </div>
-            <br>
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchRefTab('obra',this)">🏗️ Obra</button>
-                <button class="tab-btn" onclick="switchRefTab('impuestos',this)">📋 Impuestos</button>
-                <button class="tab-btn" onclick="switchRefTab('profesionales',this)">👷 Profesionales</button>
-                <button class="tab-btn" onclick="switchRefTab('otros',this)">📦 Otros</button>
-            </div>
-            <div id="ref-obra">
-                <div id="gastos-obra-list"></div>
-                <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('obra')">➕ Agregar</button>
-            </div>
-            <div id="ref-impuestos" style="display:none">
-                <div id="gastos-impuestos-list"></div>
-                <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('impuestos')">➕ Agregar</button>
-            </div>
-            <div id="ref-profesionales" style="display:none">
-                <div id="gastos-profesionales-list"></div>
-                <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('profesionales')">➕ Agregar</button>
-            </div>
-            <div id="ref-otros" style="display:none">
-                <div id="gastos-otros-list"></div>
-                <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('otros')">➕ Agregar</button>
-            </div>
-            <br>
-            <button class="btn btn-primary" onclick="guardarRefaccion()">💾 Guardar Refacción</button>
-        </div>
-        <div class="card">
-            <h2>📋 Refacciones Registradas</h2>
-            <div id="lista-refacciones">
-                <div class="empty-state"><span>🔨</span>No hay refacciones registradas</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== VENTA ===== -->
-    <div id="sec-venta" class="section">
-        <div class="card">
-            <h2>💰 Registrar Venta</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="v-propiedad" onchange="onCambioVentaPropiedad()">
-                        <option value="">-- Seleccionar --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Inversor / Responsable *</label>
-                    <select id="v-inversor" onchange="actualizarDivisionVenta()">
-                        <option value="Todos">👥 Todos (partes iguales)</option>
-                        <option value="Gaston">🟢 Gastón</option>
-                        <option value="Hernan">🔵 Hernán</option>
-                        <option value="Santiago">🟣 Santiago</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Fecha Venta / Escritura</label>
-                    <input type="date" id="v-fecha">
-                </div>
-                <div class="form-group">
-                    <label>Precio de Venta (USD)</label>
-                    <input type="number" id="v-precio" placeholder="120000"
-                           oninput="actualizarDivisionVenta()">
-                </div>
-                <div class="form-group">
-                    <label>Cotización USD/ARS al momento de venta</label>
-                    <input type="number" id="v-cotizacion" placeholder="1200"
-                           oninput="onCambioVentaCotiz()">
-                </div>
-            </div>
-
-            <!-- División venta -->
-            <div id="div-venta-box" style="display:none; margin-top:12px">
-                <div class="alert alert-success" id="div-venta-msg"></div>
-                <div class="partes-grid" id="div-venta-partes"></div>
-            </div>
-
-            <!-- Saldo boleto -->
-            <div id="saldo-boleto-box" class="saldo-boleto-box" style="display:none">
-                <h3>⚠️ Saldo Pendiente de Boleto</h3>
-                <div class="alert alert-warning" id="saldo-boleto-msg"></div>
-                <label class="saldo-check-row">
-                    <input type="checkbox" id="v-salda-boleto" onchange="onToggleSaldoBoleto()">
-                    <span>✅ <strong>Se salda el porcentaje pendiente en esta escritura</strong>
-                        — el monto se sumará a la inversión total</span>
-                </label>
-                <div id="saldo-detalle-box" style="display:none">
-                    <table>
-                        <thead>
-                            <tr><th>Concepto</th><th>%</th><th>Monto original</th><th>USD equiv.</th></tr>
-                        </thead>
-                        <tbody id="saldo-detalle-tbody"></tbody>
-                    </table>
-                    <div class="alert alert-warning" id="saldo-total-msg" style="margin-top:10px"></div>
-                    <div id="div-saldo-partes" style="display:none; margin-top:8px">
-                        <p style="font-weight:600;color:#e65100;margin-bottom:6px">
-                            📋 División del saldo entre inversores:
-                        </p>
-                        <div class="partes-grid" id="div-saldo-grid"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gastos venta -->
-            <br>
-            <h3>💸 Gastos de Venta</h3>
-            <div id="gastos-venta-list"></div>
-            <button class="btn btn-warning btn-sm" onclick="agregarGastoVenta()">➕ Agregar Gasto</button>
-            <br><br>
-            <button class="btn btn-primary" onclick="guardarVenta()">💾 Guardar Venta</button>
-        </div>
-
-        <div class="card">
-            <h2>📋 Ventas Registradas</h2>
-            <div id="lista-ventas">
-                <div class="empty-state"><span>💰</span>No hay ventas registradas</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== RESULTADOS ===== -->
-    <div id="sec-resultados" class="section">
-        <div class="card">
-            <h2>📊 Análisis de Resultados</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Seleccionar Propiedad</label>
-                    <select id="res-propiedad" onchange="calcularResultados()">
-                        <option value="">-- Seleccionar --</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div id="resultados-content">
-            <div class="empty-state card">
-                <span>📊</span>Seleccioná una propiedad para ver los resultados
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== INVERSORES ===== -->
-    <div id="sec-inversores" class="section">
-        <div class="card">
-            <h2>👥 Panel de Inversores</h2>
-            <div class="alert alert-info">
-                💡 Cuando una erogación es de <strong>Todos</strong>,
-                se divide en partes iguales (33.33% c/u).
-            </div>
-            <button class="btn btn-primary btn-sm" onclick="renderInversores()">🔄 Actualizar</button>
-            &nbsp;
-            <button class="btn btn-info btn-sm" onclick="window.print()">🖨️ Imprimir</button>
-            <br><br>
-            <div id="inversores-content"></div>
-        </div>
-    </div>
-
-    <!-- ===== AUDITORÍA ===== -->
-    <div id="sec-auditoria" class="section">
-        <div class="card">
-            <h2>🔍 Auditoría y Trazabilidad</h2>
-            <div class="filter-bar">
-                <input type="text" id="audit-buscar" placeholder="🔍 Buscar..."
-                       oninput="renderAuditoria()">
-                <select id="audit-tipo" onchange="renderAuditoria()">
-                    <option value="">Todos los tipos</option>
-                    <option value="propiedad">Propiedad</option>
-                    <option value="compra">Compra</option>
-                    <option value="refaccion">Refacción</option>
-                    <option value="venta">Venta</option>
+            <div class="form-group">
+                <label>Tipo</label>
+                <select id="p-tipo">
+                    <option>Departamento</option><option>Casa</option>
+                    <option>Local Comercial</option><option>Oficina</option>
+                    <option>Terreno</option><option>PH</option>
                 </select>
-                <select id="audit-inversor" onchange="renderAuditoria()">
-                    <option value="">Todos los inversores</option>
-                    <option value="Gaston">Gastón</option>
-                    <option value="Hernan">Hernán</option>
-                    <option value="Santiago">Santiago</option>
-                    <option value="Todos">Todos</option>
-                </select>
-                <button class="btn btn-info btn-sm" onclick="exportarCSV()">📥 CSV</button>
-                <button class="btn btn-warning btn-sm" onclick="window.print()">🖨️ Imprimir</button>
             </div>
-            <div id="auditoria-content"></div>
+            <div class="form-group">
+                <label>Superficie (m²)</label>
+                <input type="number" id="p-superficie" placeholder="65">
+            </div>
+            <div class="form-group">
+                <label>Barrio / Zona</label>
+                <input type="text" id="p-barrio" placeholder="Palermo, CABA">
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+                <label>Notas</label>
+                <textarea id="p-notas" rows="2" placeholder="Observaciones..."></textarea>
+            </div>
         </div>
+        <br>
+        <button class="btn btn-primary" onclick="agregarPropiedad()">➕ Agregar Propiedad</button>
+    </div>
+    <div class="card">
+        <h2>📋 Propiedades Registradas</h2>
+        <div id="lista-propiedades"><div class="empty-state"><span>🏠</span>Sin propiedades</div></div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     COMPRA
+══════════════════════════════════════════════════════ -->
+<div id="sec-compra" class="section">
+    <div class="card">
+        <h2>💵 Registrar Compra</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="c-propiedad" onchange="cargarDatosCompra()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Inversor / Responsable *</label>
+                <select id="c-inversor" onchange="mostrarDivisionCompra()">
+                    <option value="Todos">👥 Todos (partes iguales)</option>
+                    <option value="Gaston">🟢 Gastón</option>
+                    <option value="Hernan">🔵 Hernán</option>
+                    <option value="Santiago">🟣 Santiago</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Modalidad</label>
+                <select id="c-modalidad" onchange="toggleModalidad()">
+                    <option value="directa">Compra Directa</option>
+                    <option value="boleto">Boleto de Compra/Venta</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" id="c-fecha">
+            </div>
+            <div class="form-group">
+                <label>Moneda</label>
+                <select id="c-moneda" onchange="toggleCotizacionCompra()">
+                    <option value="USD">USD</option>
+                    <option value="ARS">ARS</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Precio Total</label>
+                <input type="number" id="c-precio-total" placeholder="80000"
+                       oninput="calcularBoleto(); mostrarDivisionCompra();">
+            </div>
+            <div class="form-group" id="grp-cotizacion-compra" style="display:none">
+                <label>Cotización USD</label>
+                <input type="number" id="c-cotizacion" placeholder="1050"
+                       oninput="calcularBoleto(); mostrarDivisionCompra();">
+            </div>
+        </div>
+
+        <div id="division-compra-box" style="display:none; margin-top:15px;">
+            <div class="alert alert-info" id="division-compra-alert"></div>
+            <div class="partes-grid" id="division-compra-partes"></div>
+        </div>
+
+        <div id="boleto-section" style="display:none">
+            <br>
+            <div class="alert alert-info">📋 <strong>Boleto</strong> — Porcentaje ya abonado</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>% Pagado en Boleto</label>
+                    <input type="number" id="c-porcentaje" placeholder="30" min="0" max="100"
+                           oninput="calcularBoleto(); mostrarDivisionCompra();">
+                </div>
+                <div class="form-group">
+                    <label>Monto Pagado</label>
+                    <input type="text" id="c-monto-pagado" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Saldo Pendiente</label>
+                    <input type="text" id="c-saldo" readonly
+                           style="background:#fff3e0;color:#e65100;font-weight:600">
+                </div>
+                <div class="form-group">
+                    <label>Fecha Escritura</label>
+                    <input type="date" id="c-fecha-escritura">
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h3>💸 Gastos de Compra</h3>
+        <div id="gastos-compra-list"></div>
+        <button class="btn btn-warning btn-sm" onclick="agregarGastoCompra()">➕ Agregar Gasto</button>
+        <br><br>
+        <button class="btn btn-primary" onclick="guardarCompra()">💾 Guardar Compra</button>
+    </div>
+    <div class="card">
+        <h2>📋 Compras Registradas</h2>
+        <div id="lista-compras"><div class="empty-state"><span>💵</span>Sin compras</div></div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     REFACCIÓN
+══════════════════════════════════════════════════════ -->
+<div id="sec-refaccion" class="section">
+    <div class="card">
+        <h2>🔨 Gastos de Refacción</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="r-propiedad">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Cotización USD/ARS referencia</label>
+                <input type="number" id="r-cotizacion" placeholder="1050" value="1050">
+            </div>
+        </div>
+        <br>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchRefTab('obra',this)">🏗️ Obra</button>
+            <button class="tab-btn" onclick="switchRefTab('impuestos',this)">📋 Impuestos</button>
+            <button class="tab-btn" onclick="switchRefTab('profesionales',this)">👷 Profesionales</button>
+            <button class="tab-btn" onclick="switchRefTab('otros',this)">📦 Otros</button>
+        </div>
+        <div id="ref-obra" class="ref-tab">
+            <h3>🏗️ Obra</h3>
+            <div id="gastos-obra-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('obra')">➕ Agregar</button>
+        </div>
+        <div id="ref-impuestos" class="ref-tab" style="display:none">
+            <h3>📋 Impuestos</h3>
+            <div id="gastos-impuestos-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('impuestos')">➕ Agregar</button>
+        </div>
+        <div id="ref-profesionales" class="ref-tab" style="display:none">
+            <h3>👷 Profesionales</h3>
+            <div id="gastos-profesionales-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('profesionales')">➕ Agregar</button>
+        </div>
+        <div id="ref-otros" class="ref-tab" style="display:none">
+            <h3>📦 Otros</h3>
+            <div id="gastos-otros-list"></div>
+            <button class="btn btn-warning btn-sm" onclick="agregarGastoRef('otros')">➕ Agregar</button>
+        </div>
+        <br>
+        <button class="btn btn-primary" onclick="guardarRefaccion()">💾 Guardar Refacción</button>
+    </div>
+    <div class="card">
+        <h2>📋 Refacciones Registradas</h2>
+        <div id="lista-refacciones"><div class="empty-state"><span>🔨</span>Sin refacciones</div></div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     VENTA
+══════════════════════════════════════════════════════ -->
+<div id="sec-venta" class="section">
+    <div class="card">
+        <h2>💰 Registrar Venta</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad *</label>
+                <select id="v-propiedad" onchange="cargarSaldoBoleto()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Inversor / Responsable *</label>
+                <select id="v-inversor" onchange="mostrarDivisionVenta()">
+                    <option value="Todos">👥 Todos (partes iguales)</option>
+                    <option value="Gaston">🟢 Gastón</option>
+                    <option value="Hernan">🔵 Hernán</option>
+                    <option value="Santiago">🟣 Santiago</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha Venta / Escritura</label>
+                <input type="date" id="v-fecha">
+            </div>
+            <div class="form-group">
+                <label>Precio de Venta (USD)</label>
+                <input type="number" id="v-precio" placeholder="110000"
+                       oninput="mostrarDivisionVenta()">
+            </div>
+            <div class="form-group">
+                <label>Cotización USD al momento de venta</label>
+                <input type="number" id="v-cotizacion" placeholder="1050"
+                       oninput="recalcularSaldoBoleto(); mostrarDivisionVenta();">
+            </div>
+        </div>
+
+        <div id="division-venta-box" style="display:none; margin-top:10px;">
+            <div class="alert alert-success" id="division-venta-alert"></div>
+            <div class="partes-grid" id="division-venta-partes"></div>
+        </div>
+
+        <div id="saldo-boleto-section" style="display:none">
+            <h3>⚠️ Saldo Pendiente de Boleto</h3>
+            <div class="alert alert-warning" id="saldo-boleto-alert"></div>
+            <div class="saldo-check-row" onclick="toggleSaldoCheck()">
+                <input type="checkbox" id="v-salda-boleto" onchange="toggleSaldoDetalle()">
+                <label>✅ <strong>Se salda el pendiente en esta escritura</strong> — se suma a la inversión total</label>
+            </div>
+            <div id="saldo-detalle-box" style="display:none; background:white; border-radius:8px; padding:15px; border:1px solid #ffe0b2;">
+                <table>
+                    <thead><tr><th>Concepto</th><th>%</th><th>Monto Original</th><th>USD equiv.</th></tr></thead>
+                    <tbody id="saldo-detalle-tbody"></tbody>
+                </table>
+                <div class="alert alert-warning" style="margin-top:10px" id="saldo-total-alert"></div>
+                <div id="division-saldo-box" style="margin-top:10px; display:none">
+                    <p style="font-weight:600;color:#e65100;margin-bottom:8px">📋 División del saldo:</p>
+                    <div class="partes-grid" id="division-saldo-partes"></div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h3>💸 Gastos de Venta</h3>
+        <div id="gastos-venta-list"></div>
+        <button class="btn btn-warning btn-sm" onclick="agregarGastoVenta()">➕ Agregar Gasto</button>
+        <br><br>
+        <button class="btn btn-primary" onclick="guardarVenta()">💾 Guardar Venta</button>
+    </div>
+    <div class="card">
+        <h2>📋 Ventas Registradas</h2>
+        <div id="lista-ventas"><div class="empty-state"><span>💰</span>Sin ventas</div></div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     RESULTADOS
+══════════════════════════════════════════════════════ -->
+<div id="sec-resultados" class="section">
+    <div class="card">
+        <h2>📊 Análisis de Resultados</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Propiedad</label>
+                <select id="res-propiedad" onchange="calcularResultados()">
+                    <option value="">-- Seleccionar --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="resultados-content">
+        <div class="empty-state card"><span>📊</span>Seleccioná una propiedad</div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     INVERSORES
+══════════════════════════════════════════════════════ -->
+<div id="sec-inversores" class="section">
+    <div class="card">
+        <h2>👥 Panel de Inversores</h2>
+        <div class="alert alert-info">
+            💡 Cuando una erogación es <strong>Todos</strong>, se divide en partes iguales (33.33% cada uno).
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="renderInversores()">🔄 Actualizar</button>
+        &nbsp;
+        <button class="btn btn-info btn-sm" onclick="window.print()">🖨️ Imprimir</button>
+        <br><br>
+        <div id="inversores-content"></div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TASAS HISTÓRICAS
+══════════════════════════════════════════════════════ -->
+<div id="sec-tasas" class="section">
+
+    <div class="card">
+        <h2>📈 Registrar Tasa Histórica</h2>
+        <div class="alert alert-info">
+            📌 Este módulo es solo de <strong>referencia histórica</strong>. Los datos aquí ingresados
+            <strong>no afectan ningún cálculo</strong> de la aplicación. Sirven para consulta y análisis comparativo.
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Tipo de Tasa *</label>
+                <select id="t-tipo">
+                    <option value="USD_BNA">💵 USD Oficial (BNA)</option>
+                    <option value="USD_Blue">💵 USD Blue / Informal</option>
+                    <option value="USD_MEP">💵 USD MEP / Bolsa</option>
+                    <option value="USD_CCL">💵 USD CCL</option>
+                    <option value="Plazo_Fijo">🏦 Plazo Fijo (TNA %)</option>
+                    <option value="Inflacion">📉 Inflación Mensual (%)</option>
+                    <option value="Inflacion_Anual">📉 Inflación Anual (%)</option>
+                    <option value="Badlar">🏦 Tasa BADLAR (%)</option>
+                    <option value="Otro">📋 Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Valor *</label>
+                <input type="number" id="t-valor" placeholder="1050" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Unidad</label>
+                <select id="t-unidad">
+                    <option value="ARS/USD">ARS por USD</option>
+                    <option value="%_mensual">% mensual</option>
+                    <option value="%_anual">% anual</option>
+                    <option value="%_TNA">% TNA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha *</label>
+                <input type="date" id="t-fecha">
+            </div>
+            <div class="form-group">
+                <label>Fuente</label>
+                <input type="text" id="t-fuente" placeholder="BCRA, Ámbito, Cronista...">
+            </div>
+            <div class="form-group">
+                <label>Notas</label>
+                <input type="text" id="t-notas" placeholder="Observación opcional">
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary" onclick="guardarTasa()">💾 Guardar Tasa</button>
+    </div>
+
+    <div class="card">
+        <h2>📋 Historial de Tasas</h2>
+        <div class="filter-bar">
+            <select id="tf-tipo" onchange="renderTasas()">
+                <option value="">Todos los tipos</option>
+                <option value="USD_BNA">USD Oficial</option>
+                <option value="USD_Blue">USD Blue</option>
+                <option value="USD_MEP">USD MEP</option>
+                <option value="USD_CCL">USD CCL</option>
+                <option value="Plazo_Fijo">Plazo Fijo</option>
+                <option value="Inflacion">Inflación Mensual</option>
+                <option value="Inflacion_Anual">Inflación Anual</option>
+                <option value="Badlar">BADLAR</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <input type="month" id="tf-mes" onchange="renderTasas()">
+            <button class="btn btn-info btn-sm" onclick="exportarTasas()">📥 Exportar CSV</button>
+            <button class="btn btn-warning btn-sm" onclick="limpiarFiltrosTasas()">🔄 Limpiar filtros</button>
+        </div>
+
+        <!-- Resumen estadístico -->
+        <div id="tasas-stats" style="margin-bottom:20px"></div>
+
+        <!-- Tabla -->
+        <div id="lista-tasas"><div class="empty-state"><span>📈</span>Sin tasas registradas</div></div>
     </div>
 
 </div>
 
-<!-- Modal confirmación -->
+<!-- ══════════════════════════════════════════════════════
+     AUDITORÍA
+══════════════════════════════════════════════════════ -->
+<div id="sec-auditoria" class="section">
+    <div class="card">
+        <h2>🔍 Auditoría y Trazabilidad</h2>
+        <div class="filter-bar">
+            <input type="text" id="audit-buscar" placeholder="🔍 Buscar..." oninput="filtrarAuditoria()">
+            <select id="audit-tipo" onchange="filtrarAuditoria()">
+                <option value="">Todos los tipos</option>
+                <option value="propiedad">Propiedad</option>
+                <option value="compra">Compra</option>
+                <option value="refaccion">Refacción</option>
+                <option value="venta">Venta</option>
+                <option value="tasa">Tasa</option>
+            </select>
+            <select id="audit-inversor" onchange="filtrarAuditoria()">
+                <option value="">Todos los inversores</option>
+                <option value="Gaston">Gastón</option>
+                <option value="Hernan">Hernán</option>
+                <option value="Santiago">Santiago</option>
+                <option value="Todos">Todos</option>
+            </select>
+            <button class="btn btn-info btn-sm" onclick="exportarAuditoria()">📥 Exportar CSV</button>
+            <button class="btn btn-warning btn-sm" onclick="window.print()">🖨️ Imprimir</button>
+        </div>
+        <div id="auditoria-content"></div>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- Modal -->
 <div class="modal-overlay" id="modal-overlay">
     <div class="modal">
-        <h3>⚠️ Confirmar eliminación</h3>
-        <p>¿Estás seguro? Esta acción no se puede deshacer.</p>
-        <br>
+        <h3 id="modal-title">Confirmar</h3>
+        <p id="modal-msg"></p><br>
         <div style="display:flex;gap:10px;justify-content:flex-end">
             <button class="btn btn-danger" onclick="confirmarEliminar()">🗑️ Eliminar</button>
-            <button class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+            <button class="btn" style="background:#eee" onclick="cerrarModal()">Cancelar</button>
         </div>
     </div>
 </div>
 
 <script>
-'use strict';
+// ════════════════════════════════════════════════════════════
+//  CONSTANTES INVERSORES
+// ════════════════════════════════════════════════════════════
+const INVERSORES_LISTA = ['Gaston','Hernan','Santiago'];
+const INVERSOR_LABELS  = { Gaston:'🟢 Gastón', Hernan:'🔵 Hernán', Santiago:'🟣 Santiago', Todos:'👥 Todos' };
+const INVERSOR_CLASS   = { Gaston:'gaston', Hernan:'hernan', Santiago:'santiago' };
 
-// ─────────────────────────────────────────────
-//  CONSTANTES GLOBALES
-// ─────────────────────────────────────────────
-const INV_LISTA  = ['Gaston','Hernan','Santiago'];
-const INV_LABEL  = { Gaston:'🟢 Gastón', Hernan:'🔵 Hernán', Santiago:'🟣 Santiago', Todos:'👥 Todos' };
-const INV_CLASS  = { Gaston:'gaston', Hernan:'hernan', Santiago:'santiago', Todos:'todos' };
+const TASA_LABELS = {
+    USD_BNA:'💵 USD Oficial (BNA)', USD_Blue:'💵 USD Blue',
+    USD_MEP:'💵 USD MEP', USD_CCL:'💵 USD CCL',
+    Plazo_Fijo:'🏦 Plazo Fijo', Inflacion:'📉 Inflación Mensual',
+    Inflacion_Anual:'📉 Inflación Anual', Badlar:'🏦 BADLAR', Otro:'📋 Otro'
+};
 
-// ─────────────────────────────────────────────
-//  ESTADO
-// ─────────────────────────────────────────────
-let DB = { propiedades:[], compras:[], refacciones:[], ventas:[], auditoria:[] };
-let pendingDelete = null;
-let cotizaciones  = {};   // { oficial, blue, crypto, tarjeta }
-
-function save() { localStorage.setItem('inmob_v5', JSON.stringify(DB)); }
-function load() {
-    try {
-        const s = localStorage.getItem('inmob_v5');
-        if (s) DB = JSON.parse(s);
-    } catch(e) { console.error('Error cargando estado:', e); }
-}
-
-// ─────────────────────────────────────────────
-//  COTIZACIONES — dolarapi.com
-// ─────────────────────────────────────────────
-async function cargarCotizaciones() {
-    const banner = document.getElementById('cotiz-banner');
-    const tipos = [
-        { key:'oficial',  url:'https://dolarapi.com/v1/dolares/oficial',   label:'Oficial' },
-        { key:'blue',     url:'https://dolarapi.com/v1/dolares/blue',      label:'Blue' },
-        { key:'bolsa',    url:'https://dolarapi.com/v1/dolares/bolsa',     label:'MEP/Bolsa' },
-        { key:'cripto',   url:'https://dolarapi.com/v1/dolares/cripto',    label:'Cripto' },
-        { key:'tarjeta',  url:'https://dolarapi.com/v1/dolares/tarjeta',   label:'Tarjeta' },
-    ];
-
-    const resultados = await Promise.allSettled(
-        tipos.map(t => fetch(t.url).then(r => r.json()).then(d => ({ ...t, venta: d.venta, compra: d.compra, fecha: d.fechaActualizacion })))
-    );
-
-    let html = '<span style="font-size:1.1em">💱 Cotizaciones USD/ARS</span>';
-    resultados.forEach(r => {
-        if (r.status === 'fulfilled' && r.value.venta) {
-            const d = r.value;
-            cotizaciones[d.key] = d.venta;
-            html += `<span class="tipo">
-                ${d.label}: <strong>$${Number(d.venta).toLocaleString('es-AR')}</strong>
-                <small style="opacity:0.7"> (compra $${Number(d.compra).toLocaleString('es-AR')})</small>
-            </span>`;
-        }
-    });
-
-    // Fallback si todo falla
-    if (!cotizaciones.blue) {
-        cotizaciones.blue = 1200;
-        html = '<span>⚠️ No se pudo obtener cotización en tiempo real — usando valor manual</span>';
-    }
-
-    html += `<button onclick="cargarCotizaciones()" style="
-        margin-left:auto; background:rgba(255,255,255,0.2); border:none;
-        color:white; padding:5px 12px; border-radius:20px; cursor:pointer; font-size:0.85em
-    ">🔄 Actualizar</button>`;
-
-    banner.innerHTML = html;
-
-    // Prellenar campos de cotización con el dólar blue
-    const blue = cotizaciones.blue || 1200;
-    ['c-cotizacion','r-cotizacion','v-cotizacion'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el && !el.value) el.value = blue;
-    });
-}
-
-// ─────────────────────────────────────────────
-//  HELPERS
-// ─────────────────────────────────────────────
-function genId()       { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
-function fUSD(n)       { return '$ ' + parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function fARS(n)       { return 'ARS ' + parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0}); }
-function hoy()         { return new Date().toISOString().split('T')[0]; }
-function fFecha(f)     { if(!f) return '—'; const [y,m,d]=f.split('-'); return `${d}/${m}/${y}`; }
-function val(id)       { const e=document.getElementById(id); return e ? e.value : ''; }
-function fval(id)      { return parseFloat(val(id))||0; }
-function setVal(id,v)  { const e=document.getElementById(id); if(e) e.value=v; }
-function show(id)      { const e=document.getElementById(id); if(e) e.style.display=''; }
-function hide(id)      { const e=document.getElementById(id); if(e) e.style.display='none'; }
-function showB(id,vis) { const e=document.getElementById(id); if(e) e.style.display=vis?'':'none'; }
-
-function log(tipo, propId, desc, datos, inversor) {
-    DB.auditoria.push({
-        id: genId(),
-        ts: new Date().toISOString(),
-        tipo, propId, desc,
-        datos: datos || {},
-        inversor: inversor || '—'
-    });
-}
-
-// ─────────────────────────────────────────────
-//  INVERSORES — lógica de partes
-// ─────────────────────────────────────────────
-function calcPartes(inversor, total) {
+function calcularPartes(inversor, montoTotal) {
     if (inversor === 'Todos') {
-        return INV_LISTA.map(n => ({ nombre:n, monto:total/3, pct:33.33 }));
+        return INVERSORES_LISTA.map(n => ({ nombre:n, monto:montoTotal/3, porcentaje:33.33 }));
     }
-    return [{ nombre:inversor, monto:total, pct:100 }];
+    return [{ nombre:inversor, monto:montoTotal, porcentaje:100 }];
 }
 
-function renderPartes(gridId, partes) {
-    const el = document.getElementById(gridId);
-    if (!el) return;
-    el.innerHTML = partes.map(p => `
-        <div class="parte-box ${INV_CLASS[p.nombre]||''}">
-            ${INV_LABEL[p.nombre]||p.nombre}<br>
-            <span style="font-size:1.05em">${fUSD(p.monto)}</span><br>
-            <small>${p.pct.toFixed(1)}%</small>
-        </div>`).join('');
+// ════════════════════════════════════════════════════════════
+//  ESTADO
+// ════════════════════════════════════════════════════════════
+let state = { propiedades:[], compras:[], refacciones:[], ventas:[], tasas:[], auditoria:[] };
+let pendingDelete = null;
+
+function saveState() { localStorage.setItem('inmobiliaria_v5', JSON.stringify(state)); }
+function loadState()  {
+    const s = localStorage.getItem('inmobiliaria_v5');
+    if (s) state = JSON.parse(s);
 }
 
-// ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
 //  NAVEGACIÓN
-// ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
 function showSection(name, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('#main-nav button').forEach(b => b.classList.remove('active'));
-    const sec = document.getElementById('sec-' + name);
-    if (sec) sec.classList.add('active');
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
     if (btn) btn.classList.add('active');
-
-    if (name === 'compra')     fillSelect('c-propiedad');
-    if (name === 'refaccion')  fillSelect('r-propiedad');
-    if (name === 'venta')      { fillSelect('v-propiedad'); resetVentaUI(); }
-    if (name === 'resultados') fillSelect('res-propiedad');
+    if (name === 'compra')     actualizarSelectores('compra');
+    if (name === 'refaccion')  actualizarSelectores('refaccion');
+    if (name === 'venta')      { actualizarSelectores('venta'); resetVentaForm(); }
+    if (name === 'resultados') actualizarSelectores('resultados');
     if (name === 'inversores') renderInversores();
+    if (name === 'tasas')      renderTasas();
     if (name === 'auditoria')  renderAuditoria();
 }
 
-function fillSelect(selectId) {
-    const sel = document.getElementById(selectId);
-    if (!sel) return;
-    const prev = sel.value;
-    sel.innerHTML = '<option value="">-- Seleccionar --</option>';
-    DB.propiedades.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = `${p.direccion} (${p.tipo})`;
-        if (p.id === prev) opt.selected = true;
-        sel.appendChild(opt);
+// ════════════════════════════════════════════════════════════
+//  UTILS
+// ════════════════════════════════════════════════════════════
+function genId()      { return Date.now().toString(36) + Math.random().toString(36).substr(2); }
+function formatUSD(n) { return '$ ' + parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function formatARS(n) { return 'ARS ' + parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function fechaHoy()   { return new Date().toISOString().split('T')[0]; }
+function formatFecha(f){ if(!f) return '-'; const [y,m,d]=f.split('-'); return `${d}/${m}/${y}`; }
+
+function logAuditoria(tipo, propId, descripcion, datos, inversor) {
+    state.auditoria.push({
+        id: genId(), timestamp: new Date().toISOString(),
+        tipo, propId, descripcion, datos, inversor: inversor||'—'
     });
 }
 
-// ─────────────────────────────────────────────
+function actualizarSelectores(seccion) {
+    const ids = { compra:'c-propiedad', refaccion:'r-propiedad', venta:'v-propiedad', resultados:'res-propiedad' };
+    const sel = document.getElementById(ids[seccion]);
+    if (!sel) return;
+    const val = sel.value;
+    sel.innerHTML = '<option value="">-- Seleccionar --</option>';
+    state.propiedades.forEach(p => {
+        sel.innerHTML += `<option value="${p.id}" ${p.id===val?'selected':''}>${p.direccion} (${p.tipo})</option>`;
+    });
+}
+
+function renderPartesGrid(containerId, partes) {
+    const box = document.getElementById(containerId);
+    if (!box) return;
+    box.innerHTML = partes.map(p => `
+        <div class="parte-box ${INVERSOR_CLASS[p.nombre]||''}">
+            ${INVERSOR_LABELS[p.nombre]||p.nombre}<br>
+            <span style="font-size:1.1em">${formatUSD(p.monto)}</span><br>
+            <small>${p.porcentaje.toFixed(1)}%</small>
+        </div>`).join('');
+}
+
+// ════════════════════════════════════════════════════════════
 //  PROPIEDADES
-// ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
 function agregarPropiedad() {
     const dir = document.getElementById('p-direccion').value.trim();
     if (!dir) { alert('⚠️ Ingresá la dirección'); return; }
-
     const prop = {
-        id:         genId(),
-        direccion:  dir,
-        tipo:       val('p-tipo'),
-        superficie: val('p-superficie'),
-        barrio:     val('p-barrio'),
-        notas:      val('p-notas'),
-        fechaAlta:  hoy(),
-        estado:     'disponible'
+        id: genId(), direccion: dir,
+        tipo:       document.getElementById('p-tipo').value,
+        superficie: document.getElementById('p-superficie').value,
+        barrio:     document.getElementById('p-barrio').value,
+        notas:      document.getElementById('p-notas').value,
+        fechaAlta:  fechaHoy(), estado: 'disponible'
     };
-    DB.propiedades.push(prop);
-    log('propiedad', prop.id, `Alta: ${prop.direccion}`, prop);
-    save();
-    renderPropiedades();
-    ['p-direccion','p-superficie','p-barrio','p-notas'].forEach(id => setVal(id,''));
+    state.propiedades.push(prop);
+    logAuditoria('propiedad', prop.id, `Alta de propiedad: ${prop.direccion}`, prop);
+    saveState(); renderPropiedades();
+    ['p-direccion','p-superficie','p-barrio','p-notas'].forEach(id => document.getElementById(id).value='');
 }
 
 function renderPropiedades() {
     const cont = document.getElementById('lista-propiedades');
-    if (!DB.propiedades.length) {
-        cont.innerHTML = '<div class="empty-state"><span>🏠</span>No hay propiedades</div>';
-        return;
+    if (!state.propiedades.length) {
+        cont.innerHTML='<div class="empty-state"><span>🏠</span>Sin propiedades</div>'; return;
     }
-    const estadoInfo = {
-        disponible:   { badge:'badge-blue',   label:'🏠 Disponible' },
-        comprada:     { badge:'badge-orange',  label:'💵 Comprada' },
-        en_refaccion: { badge:'badge-orange',  label:'🔨 Refacción' },
-        vendida:      { badge:'badge-green',   label:'✅ Vendida' }
-    };
-    let html = `<table><thead><tr>
-        <th>Dirección</th><th>Tipo</th><th>m²</th><th>Barrio</th>
-        <th>Estado</th><th>Alta</th><th></th>
-    </tr></thead><tbody>`;
-    DB.propiedades.forEach(p => {
-        const ei = estadoInfo[p.estado] || estadoInfo.disponible;
-        html += `<tr>
+    let html='<table><thead><tr><th>Dirección</th><th>Tipo</th><th>Superficie</th><th>Barrio</th><th>Estado</th><th>Alta</th><th></th></tr></thead><tbody>';
+    state.propiedades.forEach(p => {
+        const badgeColor = p.estado==='vendida'?'badge-green':p.estado==='en_refaccion'?'badge-orange':'badge-blue';
+        const estadoLabel= p.estado==='vendida'?'✅ Vendida':p.estado==='en_refaccion'?'🔨 Refacción':'🏠 Disponible';
+        html+=`<tr>
             <td><strong>${p.direccion}</strong></td>
             <td>${p.tipo}</td>
-            <td>${p.superficie||'—'}</td>
-            <td>${p.barrio||'—'}</td>
-            <td><span class="badge ${ei.badge}">${ei.label}</span></td>
-            <td>${fFecha(p.fechaAlta)}</td>
-            <td>
-                <button class="btn btn-danger btn-sm"
-                    onclick="pedirEliminar('propiedad','${p.id}')">🗑️</button>
-            </td>
+            <td>${p.superficie?p.superficie+' m²':'-'}</td>
+            <td>${p.barrio||'-'}</td>
+            <td><span class="badge ${badgeColor}">${estadoLabel}</span></td>
+            <td>${formatFecha(p.fechaAlta)}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarItem('propiedad','${p.id}')">🗑️</button></td>
         </tr>`;
     });
-    cont.innerHTML = html + '</tbody></table>';
+    cont.innerHTML = html+'</tbody></table>';
 }
 
-// ─────────────────────────────────────────────
-//  COMPRA — UI helpers
-// ─────────────────────────────────────────────
-function toggleBoleto() {
-    showB('boleto-section', val('c-modalidad') === 'boleto');
-    actualizarDivisionCompra();
-}
+// ════════════════════════════════════════════════════════════
+//  COMPRA
+// ════════════════════════════════════════════════════════════
+function cargarDatosCompra() {}
 
-function toggleCotizCompra() {
-    showB('grp-cotiz-compra', val('c-moneda') === 'ARS');
-    actualizarDivisionCompra();
+function toggleModalidad() {
+    document.getElementById('boleto-section').style.display =
+        document.getElementById('c-modalidad').value==='boleto' ? 'block' : 'none';
+    mostrarDivisionCompra();
+}
+function toggleCotizacionCompra() {
+    document.getElementById('grp-cotizacion-compra').style.display =
+        document.getElementById('c-moneda').value==='ARS' ? 'block' : 'none';
 }
 
 function calcularBoleto() {
-    const total = fval('c-precio-total');
-    const pct   = fval('c-porcentaje');
-    if (!total) return;
+    const total  = parseFloat(document.getElementById('c-precio-total').value)||0;
+    const pct    = parseFloat(document.getElementById('c-porcentaje').value)||0;
     const pagado = total * pct / 100;
-    setVal('c-monto-pagado', fUSD(pagado));
-    setVal('c-saldo',        fUSD(total - pagado));
+    document.getElementById('c-monto-pagado').value = formatUSD(pagado);
+    document.getElementById('c-saldo').value        = formatUSD(total - pagado);
 }
 
-function precioCompraUSD() {
-    const precio = fval('c-precio-total');
-    const moneda = val('c-moneda');
-    const cotiz  = fval('c-cotizacion');
-    if (moneda === 'ARS') return cotiz > 0 ? precio / cotiz : 0;
-    return precio;
+function mostrarDivisionCompra() {
+    const inversor  = document.getElementById('c-inversor').value;
+    const moneda    = document.getElementById('c-moneda').value;
+    const precio    = parseFloat(document.getElementById('c-precio-total').value)||0;
+    const cotiz     = parseFloat(document.getElementById('c-cotizacion').value)||1;
+    const precioUSD = moneda==='ARS' ? precio/cotiz : precio;
+    const modalidad = document.getElementById('c-modalidad').value;
+    const pct       = modalidad==='boleto' ? (parseFloat(document.getElementById('c-porcentaje').value)||0) : 100;
+    const pagadoUSD = precioUSD * pct / 100;
+    const box       = document.getElementById('division-compra-box');
+    if (!precio) { box.style.display='none'; return; }
+    const partes = calcularPartes(inversor, pagadoUSD);
+    box.style.display='block';
+    document.getElementById('division-compra-alert').innerHTML = inversor==='Todos'
+        ? `👥 <strong>Erogación compartida</strong> — ${formatUSD(pagadoUSD)} ÷ 3 = ${formatUSD(pagadoUSD/3)} c/u`
+        : `${INVERSOR_LABELS[inversor]} asume <strong>${formatUSD(pagadoUSD)}</strong>`;
+    renderPartesGrid('division-compra-partes', partes);
 }
 
-function actualizarDivisionCompra() {
-    calcularBoleto();
-    const precioUSD  = precioCompraUSD();
-    const modalidad  = val('c-modalidad');
-    const pct        = modalidad === 'boleto' ? fval('c-porcentaje') : 100;
-    const pagadoUSD  = precioUSD * pct / 100;
-    const inversor   = val('c-inversor');
-    const box        = document.getElementById('div-compra-box');
-
-    if (!precioUSD) { if(box) box.style.display='none'; return; }
-
-    const partes = calcPartes(inversor, pagadoUSD);
-    if(box) box.style.display = '';
-
-    const msg = document.getElementById('div-compra-msg');
-    if (msg) msg.innerHTML = inversor === 'Todos'
-        ? `👥 <strong>Erogación compartida:</strong> ${fUSD(pagadoUSD)} ÷ 3 = <strong>${fUSD(pagadoUSD/3)}</strong> c/u`
-        : `${INV_LABEL[inversor]} asume la totalidad: <strong>${fUSD(pagadoUSD)}</strong>`;
-
-    renderPartes('div-compra-partes', partes);
-}
-
-// ─────────────────────────────────────────────
-//  COMPRA — gastos
-// ─────────────────────────────────────────────
 function agregarGastoCompra() {
     const cont = document.getElementById('gastos-compra-list');
     const div  = document.createElement('div');
-    div.className = 'gasto-row';
-    div.innerHTML = `
-        <input type="text"   placeholder="Descripción" class="g-desc" style="flex:2;min-width:120px">
-        <select class="g-inv" style="min-width:130px">
+    div.className='gasto-row';
+    div.innerHTML=`
+        <input type="text" placeholder="Descripción" style="flex:2">
+        <select class="inv-gasto-c">
             <option value="Todos">👥 Todos</option>
             <option value="Gaston">🟢 Gastón</option>
             <option value="Hernan">🔵 Hernán</option>
             <option value="Santiago">🟣 Santiago</option>
         </select>
-        <select class="g-mon" style="min-width:80px">
+        <select class="mon-c">
             <option value="USD">USD</option>
             <option value="ARS">ARS</option>
         </select>
-        <input type="number" placeholder="Monto"  class="g-monto" style="flex:1;min-width:100px">
-        <input type="number" placeholder="Cotiz"  class="g-cotiz" style="flex:1;min-width:90px;display:none">
-        <button class="btn btn-danger btn-sm" onclick="this.closest('.gasto-row').remove()">✕</button>`;
-    div.querySelector('.g-mon').addEventListener('change', function() {
-        div.querySelector('.g-cotiz').style.display = this.value === 'ARS' ? '' : 'none';
+        <input type="number" placeholder="Monto" style="flex:1">
+        <input type="number" placeholder="Cotiz" style="flex:1;display:none" class="cotiz-c">
+        <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+    div.querySelector('.mon-c').addEventListener('change',function(){
+        div.querySelector('.cotiz-c').style.display=this.value==='ARS'?'block':'none';
     });
     cont.appendChild(div);
 }
 
-function leerGastos(containerId) {
-    const gastos = [];
-    document.querySelectorAll(`#${containerId} .gasto-row`).forEach(row => {
-        const desc   = row.querySelector('.g-desc')  ? row.querySelector('.g-desc').value.trim()  : '';
-        const inv    = row.querySelector('.g-inv')   ? row.querySelector('.g-inv').value           : 'Todos';
-        const moneda = row.querySelector('.g-mon')   ? row.querySelector('.g-mon').value           : 'USD';
-        const monto  = parseFloat(row.querySelector('.g-monto') ? row.querySelector('.g-monto').value : 0) || 0;
-        const cotiz  = parseFloat(row.querySelector('.g-cotiz') ? row.querySelector('.g-cotiz').value : 0) || 0;
-        if (!monto) return;
-        const montoUSD = moneda === 'ARS' ? (cotiz > 0 ? monto / cotiz : 0) : monto;
-        gastos.push({ desc, inv, moneda, monto, cotiz, montoUSD, partes: calcPartes(inv, montoUSD) });
+function getGastosDeList(containerId) {
+    const rows  = document.querySelectorAll(`#${containerId} .gasto-row`);
+    const gastos= [];
+    rows.forEach(row=>{
+        const inputs = row.querySelectorAll('input');
+        const selInv = row.querySelector('.inv-gasto-c');
+        const selMon = row.querySelector('.mon-c');
+        const desc   = inputs[0].value.trim();
+        const inv    = selInv ? selInv.value : 'Todos';
+        const moneda = selMon ? selMon.value : 'USD';
+        const monto  = parseFloat(inputs[1]?inputs[1].value:0)||0;
+        const cotiz  = parseFloat(inputs[2]?inputs[2].value:0)||0;
+        if (desc && monto) {
+            const montoUSD = moneda==='ARS'?(cotiz>0?monto/cotiz:0):monto;
+            gastos.push({ desc, inversor:inv, moneda, monto, cotiz, montoUSD, partes:calcularPartes(inv,montoUSD) });
+        }
     });
     return gastos;
 }
 
-// ─────────────────────────────────────────────
-//  COMPRA — guardar
-// ─────────────────────────────────────────────
 function guardarCompra() {
-    const propId   = val('c-propiedad');
-    const inversor = val('c-inversor');
-    const precio   = fval('c-precio-total');
-
+    const propId   = document.getElementById('c-propiedad').value;
+    const precio   = parseFloat(document.getElementById('c-precio-total').value);
+    const inversor = document.getElementById('c-inversor').value;
     if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-    if (!precio) { alert('⚠️ Ingresá el precio de compra'); return; }
+    if (!precio)  { alert('⚠️ Ingresá el precio');        return; }
 
-    const modalidad   = val('c-modalidad');
-    const moneda      = val('c-moneda');
-    const cotizacion  = fval('c-cotizacion');
-    const precioUSD   = moneda === 'ARS' ? (cotizacion > 0 ? precio / cotizacion : 0) : precio;
-    const porcentaje  = modalidad === 'boleto' ? fval('c-porcentaje') : 100;
+    const modalidad   = document.getElementById('c-modalidad').value;
+    const moneda      = document.getElementById('c-moneda').value;
+    const cotizacion  = parseFloat(document.getElementById('c-cotizacion').value)||0;
+    const precioUSD   = moneda==='ARS'?(cotizacion>0?precio/cotizacion:0):precio;
+    const porcentaje  = modalidad==='boleto'?parseFloat(document.getElementById('c-porcentaje').value)||0:100;
     const saldoPct    = 100 - porcentaje;
-    const pagadoUSD   = precioUSD * porcentaje / 100;
-    const saldoUSD    = precioUSD * saldoPct / 100;
-    const saldoOrig   = precio    * saldoPct / 100;
-    const gastos      = leerGastos('gastos-compra-list');
-    const gastosUSD   = gastos.reduce((s,g) => s + g.montoUSD, 0);
+    const montoPagadoUSD = precioUSD * porcentaje / 100;
 
     const compra = {
-        id: genId(), propId, inversor,
-        fecha:          val('c-fecha'),
-        modalidad, moneda,
-        precioTotal:    precio,
-        precioTotalUSD: precioUSD,
-        cotizacion,
-        porcentaje,     saldoPct,
-        pagadoUSD,      saldoUSD,
-        saldoOrig,
-        fechaEscritura: val('c-fecha-escritura'),
-        gastos,         gastosUSD,
-        inversionUSD:   pagadoUSD + gastosUSD,
-        saldoSaldado:   false,
-        partesCompra:   calcPartes(inversor, pagadoUSD)
+        id:genId(), propId, inversor,
+        fecha:          document.getElementById('c-fecha').value,
+        modalidad, moneda, precioTotal:precio, precioTotalUSD:precioUSD, cotizacion,
+        porcentaje, saldoPct,
+        saldoUSD:        precioUSD * saldoPct / 100,
+        saldoOriginal:   precio    * saldoPct / 100,
+        fechaEscritura:  document.getElementById('c-fecha-escritura').value,
+        gastos:          getGastosDeList('gastos-compra-list'),
+        saldoSaldado:    false,
+        partesCompra:    calcularPartes(inversor, montoPagadoUSD)
     };
+    compra.totalGastosUSD    = compra.gastos.reduce((s,g)=>s+g.montoUSD,0);
+    compra.montoPagadoUSD    = montoPagadoUSD;
+    compra.inversionTotalUSD = montoPagadoUSD + compra.totalGastosUSD;
 
-    // Actualizar o insertar
-    const idx = DB.compras.findIndex(c => c.propId === propId);
-    if (idx >= 0) DB.compras[idx] = compra; else DB.compras.push(compra);
+    const prop = state.propiedades.find(p=>p.id===propId);
+    if (prop) prop.estado='comprada';
 
-    const prop = DB.propiedades.find(p => p.id === propId);
-    if (prop) prop.estado = 'comprada';
+    const idx = state.compras.findIndex(c=>c.propId===propId);
+    if (idx>=0) state.compras[idx]=compra; else state.compras.push(compra);
 
-    log('compra', propId,
-        `Compra ${fUSD(precioUSD)} — ${INV_LABEL[inversor]}${inversor==='Todos'?' ('+fUSD(pagadoUSD/3)+' c/u)':''}`,
+    logAuditoria('compra', propId,
+        `Compra ${formatUSD(precioUSD)} — ${inversor}${inversor==='Todos'?` (${formatUSD(montoPagadoUSD/3)} c/u)`:''}`,
         compra, inversor);
-
-    save();
-    renderCompras();
-    renderPropiedades();
-    // Limpiar form
-    ['c-precio-total','c-cotizacion','c-porcentaje','c-monto-pagado','c-saldo'].forEach(id => setVal(id,''));
-    document.getElementById('gastos-compra-list').innerHTML = '';
-    hide('boleto-section');
-    hide('div-compra-box');
+    saveState(); renderCompras(); renderPropiedades();
     alert('✅ Compra guardada');
 }
 
 function renderCompras() {
     const cont = document.getElementById('lista-compras');
-    if (!DB.compras.length) {
-        cont.innerHTML = '<div class="empty-state"><span>💵</span>Sin compras</div>'; return;
-    }
-    let html = `<table><thead><tr>
-        <th>Propiedad</th><th>Inversor</th><th>Modalidad</th>
-        <th>Precio USD</th><th>Pagado</th><th>Saldo</th><th>Fecha</th>
-    </tr></thead><tbody>`;
-    DB.compras.forEach(c => {
-        const prop = DB.propiedades.find(p => p.id === c.propId);
-        const saldoBadge = c.modalidad === 'boleto'
-            ? (c.saldoSaldado
-                ? '<span class="badge badge-green">✅ Saldado</span>'
-                : `<span class="badge badge-orange">⏳ ${fUSD(c.saldoUSD)}</span>`)
-            : '<span class="badge badge-blue">N/A</span>';
-        html += `<tr>
-            <td><strong>${prop ? prop.direccion : '—'}</strong></td>
-            <td>
-                <span class="badge badge-${INV_CLASS[c.inversor]}">${INV_LABEL[c.inversor]||c.inversor}</span>
-                ${c.inversor==='Todos'?`<br><small>${fUSD(c.pagadoUSD/3)} c/u</small>`:''}
+    if (!state.compras.length) { cont.innerHTML='<div class="empty-state"><span>💵</span>Sin compras</div>'; return; }
+    let html='<table><thead><tr><th>Propiedad</th><th>Inversor</th><th>Modalidad</th><th>Precio Total</th><th>Pagado</th><th>Saldo</th><th>Fecha</th></tr></thead><tbody>';
+    state.compras.forEach(c=>{
+        const prop=state.propiedades.find(p=>p.id===c.propId);
+        const saldoBadge=c.modalidad==='boleto'
+            ?(c.saldoSaldado?'<span class="badge badge-green">✅ Saldado</span>':`<span class="badge badge-orange">⏳ ${formatUSD(c.saldoUSD)}</span>`)
+            :'<span class="badge badge-blue">N/A</span>';
+        html+=`<tr>
+            <td><strong>${prop?prop.direccion:'-'}</strong></td>
+            <td><span class="badge badge-${INVERSOR_CLASS[c.inversor]||'blue'}">${INVERSOR_LABELS[c.inversor]||c.inversor}</span>
+                ${c.inversor==='Todos'?`<br><small>${formatUSD(c.montoPagadoUSD/3)} c/u</small>`:''}
             </td>
-            <td><span class="badge ${c.modalidad==='boleto'?'badge-orange':'badge-blue'}">
-                ${c.modalidad==='boleto'?'📋 Boleto':'💵 Directa'}</span></td>
-            <td>${fUSD(c.precioTotalUSD)}</td>
-            <td>${fUSD(c.pagadoUSD)} (${c.porcentaje}%)</td>
+            <td><span class="badge ${c.modalidad==='boleto'?'badge-orange':'badge-blue'}">${c.modalidad==='boleto'?'📋 Boleto':'💵 Directa'}</span></td>
+            <td>${formatUSD(c.precioTotalUSD)}</td>
+            <td>${formatUSD(c.montoPagadoUSD)} (${c.porcentaje}%)</td>
             <td>${saldoBadge}</td>
-            <td>${fFecha(c.fecha)}</td>
+            <td>${formatFecha(c.fecha)}</td>
         </tr>`;
     });
-    cont.innerHTML = html + '</tbody></table>';
+    cont.innerHTML=html+'</tbody></table>';
 }
 
-// ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
 //  REFACCIÓN
-// ─────────────────────────────────────────────
-function switchRefTab(tab, btn) {
-    ['obra','impuestos','profesionales','otros'].forEach(t => {
-        const el = document.getElementById('ref-' + t);
-        if (el) el.style.display = t === tab ? '' : 'none';
-    });
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+// ════════════════════════════════════════════════════════════
+function switchRefTab(tab,btn) {
+    document.querySelectorAll('.ref-tab').forEach(t=>t.style.display='none');
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('ref-'+tab).style.display='block';
+    btn.classList.add('active');
 }
 
 function agregarGastoRef(categoria) {
-    const cont = document.getElementById(`gastos-${categoria}-list`);
-    const cats = {
-        obra:          ['Albañilería','Pintura','Plomería','Electricidad','Carpintería','Cerrajería','Pisos','Demolición','Otros'],
-        impuestos:     ['ABL','AGIP','Agua','Luz','Gas','Expensas','Sellado','Otros'],
-        profesionales: ['Arquitecto','Ingeniero','Maestro Mayor','Plomero','Electricista','Escribano','Abogado','Otros'],
-        otros:         ['Materiales','Herramientas','Transporte','Limpieza','Seguros','Otros']
+    const cont=document.getElementById(`gastos-${categoria}-list`);
+    const div=document.createElement('div');
+    div.className='gasto-row';
+    const cats={
+        obra:['Albañilería','Pintura','Plomería','Electricidad','Carpintería','Cerrajería','Vidrios','Pisos','Demolición','Otros'],
+        impuestos:['ABL','AGIP','Agua','Luz','Gas','Expensas','Sellado','Otros'],
+        profesionales:['Arquitecto','Ingeniero','Maestro Mayor','Plomero','Electricista','Escribano','Abogado','Otros'],
+        otros:['Materiales','Herramientas','Transporte','Limpieza','Seguros','Otros']
     };
-    const opts = (cats[categoria]||['Otros']).map(c=>`<option>${c}</option>`).join('');
-    const div = document.createElement('div');
-    div.className = 'gasto-row';
-    div.innerHTML = `
-        <select class="g-cat" style="min-width:130px">${opts}</select>
-        <input  type="text"   class="g-desc"  placeholder="Detalle"  style="flex:2;min-width:100px">
-        <select class="g-inv" style="min-width:130px">
+    const opts=(cats[categoria]||['Otros']).map(c=>`<option>${c}</option>`).join('');
+    div.innerHTML=`
+        <select style="flex:1">${opts}</select>
+        <input type="text" placeholder="Detalle" style="flex:2">
+        <select class="inv-ref">
             <option value="Todos">👥 Todos</option>
             <option value="Gaston">🟢 Gastón</option>
             <option value="Hernan">🔵 Hernán</option>
             <option value="Santiago">🟣 Santiago</option>
         </select>
-        <select class="g-mon" style="min-width:80px">
+        <select class="mon-ref">
             <option value="ARS">ARS</option>
             <option value="USD">USD</option>
         </select>
-        <input type="number" class="g-monto" placeholder="Monto" style="flex:1;min-width:100px">
-        <input type="number" class="g-cotiz" placeholder="Cotiz" style="flex:1;min-width:90px">
-        <input type="date"   class="g-fecha" style="min-width:130px">
-        <button class="btn btn-danger btn-sm" onclick="this.closest('.gasto-row').remove()">✕</button>`;
-    div.querySelector('.g-mon').addEventListener('change', function() {
-        div.querySelector('.g-cotiz').style.display = this.value === 'USD' ? 'none' : '';
+        <input type="number" placeholder="Monto" style="flex:1">
+        <input type="number" placeholder="Cotiz" style="flex:1" class="cotiz-ref">
+        <input type="date" style="flex:1">
+        <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+    div.querySelector('.mon-ref').addEventListener('change',function(){
+        div.querySelector('.cotiz-ref').style.display=this.value==='USD'?'none':'block';
     });
     cont.appendChild(div);
 }
 
-function leerGastosRef(categoria) {
-    const gastos = [];
-    document.querySelectorAll(`#gastos-${categoria}-list .gasto-row`).forEach(row => {
-        const cat    = row.querySelector('.g-cat')   ? row.querySelector('.g-cat').value   : '';
-        const desc   = row.querySelector('.g-desc')  ? row.querySelector('.g-desc').value  : '';
-        const inv    = row.querySelector('.g-inv')   ? row.querySelector('.g-inv').value   : 'Todos';
-        const moneda = row.querySelector('.g-mon')   ? row.querySelector('.g-mon').value   : 'ARS';
-        const monto  = parseFloat(row.querySelector('.g-monto') ? row.querySelector('.g-monto').value : 0) || 0;
-        const cotiz  = parseFloat(row.querySelector('.g-cotiz') ? row.querySelector('.g-cotiz').value : 0)
-                       || fval('r-cotizacion') || 1200;
-        const fecha  = row.querySelector('.g-fecha') ? row.querySelector('.g-fecha').value : '';
-        if (!monto) return;
-        const montoUSD = moneda === 'ARS' ? monto / cotiz : monto;
-        gastos.push({ categoria, cat, desc, inv, moneda, monto, cotiz, montoUSD, fecha,
-                      partes: calcPartes(inv, montoUSD) });
+function getGastosRef(categoria) {
+    const rows=document.querySelectorAll(`#gastos-${categoria}-list .gasto-row`);
+    const gastos=[];
+    rows.forEach(row=>{
+        const selCat =row.querySelectorAll('select')[0];
+        const inputs =row.querySelectorAll('input');
+        const selInv =row.querySelector('.inv-ref');
+        const selMon =row.querySelector('.mon-ref');
+        const cat    =selCat?selCat.value:'';
+        const detalle=inputs[0]?inputs[0].value:'';
+        const inv    =selInv?selInv.value:'Todos';
+        const moneda =selMon?selMon.value:'ARS';
+        const monto  =parseFloat(inputs[1]?inputs[1].value:0)||0;
+        const cotiz  =parseFloat(inputs[2]?inputs[2].value:0)||parseFloat(document.getElementById('r-cotizacion').value)||1050;
+        const fecha  =inputs[3]?inputs[3].value:'';
+        if (monto) {
+            const montoUSD=moneda==='ARS'?monto/cotiz:monto;
+            gastos.push({categoria,cat,detalle,inversor:inv,moneda,monto,cotiz,montoUSD,fecha,partes:calcularPartes(inv,montoUSD)});
+        }
     });
     return gastos;
 }
 
 function guardarRefaccion() {
-    const propId = val('r-propiedad');
-    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-
-    const cotiz   = fval('r-cotizacion') || 1200;
-    const gObra   = leerGastosRef('obra');
-    const gImp    = leerGastosRef('impuestos');
-    const gProf   = leerGastosRef('profesionales');
-    const gOtros  = leerGastosRef('otros');
-    const todos   = [...gObra, ...gImp, ...gProf, ...gOtros];
-    const total   = todos.reduce((s,g) => s + g.montoUSD, 0);
-
-    if (!todos.length) { alert('⚠️ Agregá al menos un gasto'); return; }
-
-    const ref = { id:genId(), propId, cotiz, gObra, gImp, gProf, gOtros, total, fecha:hoy() };
-
-    const idx = DB.refacciones.findIndex(r => r.propId === propId);
-    if (idx >= 0) {
-        DB.refacciones[idx].gObra.push(...gObra);
-        DB.refacciones[idx].gImp.push(...gImp);
-        DB.refacciones[idx].gProf.push(...gProf);
-        DB.refacciones[idx].gOtros.push(...gOtros);
-        DB.refacciones[idx].total += total;
-    } else {
-        DB.refacciones.push(ref);
-    }
-
-    const prop = DB.propiedades.find(p => p.id === propId);
-    if (prop && prop.estado !== 'vendida') prop.estado = 'en_refaccion';
-
-    log('refaccion', propId, `Refacción ${fUSD(total)} — ${todos.length} ítems`, ref);
-    save();
-    renderRefacciones();
-    renderPropiedades();
-    ['obra','impuestos','profesionales','otros'].forEach(c =>
-        document.getElementById(`gastos-${c}-list`).innerHTML = '');
+    const propId=document.getElementById('r-propiedad').value;
+    if (!propId){alert('⚠️ Seleccioná una propiedad');return;}
+    const cotizacion=parseFloat(document.getElementById('r-cotizacion').value)||1050;
+    const gastosObra         =getGastosRef('obra');
+    const gastosImpuestos    =getGastosRef('impuestos');
+    const gastosProfesionales=getGastosRef('profesionales');
+    const gastosOtros        =getGastosRef('otros');
+    const todosGastos=[...gastosObra,...gastosImpuestos,...gastosProfesionales,...gastosOtros];
+    const totalUSD=todosGastos.reduce((s,g)=>s+g.montoUSD,0);
+    const ref={id:genId(),propId,cotizacion,gastosObra,gastosImpuestos,gastosProfesionales,gastosOtros,totalUSD,fecha:fechaHoy()};
+    const prop=state.propiedades.find(p=>p.id===propId);
+    if (prop) prop.estado='en_refaccion';
+    const idx=state.refacciones.findIndex(r=>r.propId===propId);
+    if (idx>=0){
+        ['gastosObra','gastosImpuestos','gastosProfesionales','gastosOtros'].forEach(k=>{
+            state.refacciones[idx][k].push(...ref[k]);
+        });
+        state.refacciones[idx].totalUSD+=totalUSD;
+    } else state.refacciones.push(ref);
+    logAuditoria('refaccion',propId,`Refacción ${formatUSD(totalUSD)} USD — ${todosGastos.length} ítems`,ref);
+    saveState(); renderRefacciones(); renderPropiedades();
+    ['obra','impuestos','profesionales','otros'].forEach(c=>document.getElementById(`gastos-${c}-list`).innerHTML='');
     alert('✅ Refacción guardada');
 }
 
 function renderRefacciones() {
-    const cont = document.getElementById('lista-refacciones');
-    if (!DB.refacciones.length) {
-        cont.innerHTML = '<div class="empty-state"><span>🔨</span>Sin refacciones</div>'; return;
-    }
-    let html = '';
-    DB.refacciones.forEach(r => {
-        const prop = DB.propiedades.find(p => p.id === r.propId);
-        const secciones = [
-            { label:'🏗️ Obra',          items: r.gObra  },
-            { label:'📋 Impuestos',      items: r.gImp   },
-            { label:'👷 Profesionales',  items: r.gProf  },
-            { label:'📦 Otros',          items: r.gOtros }
-        ].filter(s => s.items && s.items.length);
-
-        html += `<div class="card" style="margin-bottom:10px">
-            <h3>🔨 ${prop ? prop.direccion : '—'} — Total: ${fUSD(r.total)}</h3>`;
-        secciones.forEach(sec => {
-            html += `<p style="margin:10px 0 4px"><strong>${sec.label}</strong></p>
-                <table><thead><tr>
-                    <th>Cat.</th><th>Detalle</th><th>Inversor</th><th>Monto</th><th>USD</th>
-                </tr></thead><tbody>`;
-            sec.items.forEach(g => {
-                html += `<tr>
-                    <td>${g.cat}</td><td>${g.desc||'—'}</td>
-                    <td><span class="badge badge-${INV_CLASS[g.inv]}">${INV_LABEL[g.inv]||g.inv}</span>
-                        ${g.inv==='Todos'?`<br><small>${fUSD(g.montoUSD/3)} c/u</small>`:''}
+    const cont=document.getElementById('lista-refacciones');
+    if (!state.refacciones.length){cont.innerHTML='<div class="empty-state"><span>🔨</span>Sin refacciones</div>';return;}
+    let html='';
+    state.refacciones.forEach(r=>{
+        const prop=state.propiedades.find(p=>p.id===r.propId);
+        const cats=[
+            {label:'🏗️ Obra',items:r.gastosObra},
+            {label:'📋 Impuestos',items:r.gastosImpuestos},
+            {label:'👷 Profesionales',items:r.gastosProfesionales},
+            {label:'📦 Otros',items:r.gastosOtros}
+        ].filter(c=>c.items&&c.items.length>0);
+        html+=`<div class="card" style="margin-bottom:10px"><h3>🔨 ${prop?prop.direccion:'-'} — Total: ${formatUSD(r.totalUSD)}</h3>`;
+        cats.forEach(cat=>{
+            html+=`<p style="margin:8px 0 4px"><strong>${cat.label}</strong></p>
+                <table><thead><tr><th>Cat.</th><th>Detalle</th><th>Inversor</th><th>Monto</th><th>USD</th></tr></thead><tbody>`;
+            cat.items.forEach(g=>{
+                html+=`<tr>
+                    <td>${g.cat}</td><td>${g.detalle||'-'}</td>
+                    <td><span class="badge badge-${INVERSOR_CLASS[g.inversor]||'blue'}">${INVERSOR_LABELS[g.inversor]||g.inversor}</span>
+                        ${g.inversor==='Todos'?`<br><small>${formatUSD(g.montoUSD/3)} c/u</small>`:''}
                     </td>
-                    <td>${g.moneda==='ARS' ? fARS(g.monto) : fUSD(g.monto)}</td>
-                    <td>${fUSD(g.montoUSD)}</td>
+                    <td>${g.moneda==='ARS'?formatARS(g.monto):formatUSD(g.monto)}</td>
+                    <td>${formatUSD(g.montoUSD)}</td>
                 </tr>`;
             });
-            html += '</tbody></table>';
+            html+='</tbody></table>';
         });
-        html += '</div>';
+        html+='</div>';
     });
-    cont.innerHTML = html;
+    cont.innerHTML=html;
 }
 
-// ─────────────────────────────────────────────
-//  VENTA — UI helpers
-// ─────────────────────────────────────────────
-function resetVentaUI() {
-    hide('saldo-boleto-box');
-    hide('saldo-detalle-box');
-    hide('div-venta-box');
-    hide('div-saldo-partes');
-    const cb = document.getElementById('v-salda-boleto');
-    if (cb) cb.checked = false;
-    document.getElementById('gastos-venta-list').innerHTML = '';
+// ════════════════════════════════════════════════════════════
+//  VENTA
+// ════════════════════════════════════════════════════════════
+function resetVentaForm(){
+    document.getElementById('saldo-boleto-section').style.display='none';
+    document.getElementById('saldo-detalle-box').style.display='none';
+    document.getElementById('division-venta-box').style.display='none';
+    const cb=document.getElementById('v-salda-boleto');
+    if(cb) cb.checked=false;
 }
 
-function onCambioVentaPropiedad() {
-    resetVentaUI();
-    verificarSaldoBoleto();
+function cargarSaldoBoleto(){
+    resetVentaForm();
+    const propId=document.getElementById('v-propiedad').value;
+    if(!propId) return;
+    const compra=state.compras.find(c=>c.propId===propId);
+    if(!compra||compra.modalidad!=='boleto'||compra.saldoPct<=0||compra.saldoSaldado) return;
+    document.getElementById('saldo-boleto-section').style.display='block';
+    renderSaldoAlerta(compra, parseFloat(document.getElementById('v-cotizacion').value)||0);
 }
 
-function onCambioVentaCotiz() {
-    actualizarDivisionVenta();
-    verificarSaldoBoleto();
-    if (document.getElementById('v-salda-boleto').checked) renderSaldoDetalle();
+function recalcularSaldoBoleto(){
+    const propId=document.getElementById('v-propiedad').value;
+    if(!propId) return;
+    const compra=state.compras.find(c=>c.propId===propId);
+    if(!compra||compra.modalidad!=='boleto'||compra.saldoPct<=0||compra.saldoSaldado) return;
+    const cotiz=parseFloat(document.getElementById('v-cotizacion').value)||0;
+    renderSaldoAlerta(compra,cotiz);
+    if(document.getElementById('v-salda-boleto').checked) renderSaldoDetalle(compra,cotiz);
 }
 
-function verificarSaldoBoleto() {
-    const propId = val('v-propiedad');
-    if (!propId) return;
-    const compra = DB.compras.find(c => c.propId === propId);
-    if (!compra || compra.modalidad !== 'boleto' || compra.saldoPct <= 0 || compra.saldoSaldado) return;
+function renderSaldoAlerta(compra,cotizVenta){
+    let html=`⚠️ Saldo pendiente: <strong>${compra.saldoPct}%</strong> → <strong>${formatUSD(compra.saldoUSD)}</strong>`;
+    if(compra.moneda==='ARS'&&cotizVenta>0)
+        html+=`<br>• En ARS al tipo actual: ${formatARS(compra.saldoOriginal)}`;
+    html+=`<br>• Escritura pactada: <strong>${formatFecha(compra.fechaEscritura)||'No especificada'}</strong>`;
+    document.getElementById('saldo-boleto-alert').innerHTML=html;
+}
 
-    show('saldo-boleto-box');
-    const cotiz = fval('v-cotizacion');
-    let html = `⚠️ Saldo pendiente: <strong>${compra.saldoPct}%</strong> → <strong>${fUSD(compra.saldoUSD)}</strong>`;
-    if (compra.moneda === 'ARS' && cotiz > 0) {
-        const usdRecalc = compra.saldoOrig / cotiz;
-        html += `<br>• Al cambio actual: <strong>${fARS(compra.saldoOrig)}</strong> = <strong>${fUSD(usdRecalc)}</strong>`;
+function toggleSaldoCheck(){
+    const cb=document.getElementById('v-salda-boleto');
+    cb.checked=!cb.checked; toggleSaldoDetalle();
+}
+function toggleSaldoDetalle(){
+    const checked=document.getElementById('v-salda-boleto').checked;
+    document.getElementById('saldo-detalle-box').style.display=checked?'block':'none';
+    if(checked){
+        const propId=document.getElementById('v-propiedad').value;
+        const compra=state.compras.find(c=>c.propId===propId);
+        const cotiz=parseFloat(document.getElementById('v-cotizacion').value)||0;
+        if(compra) renderSaldoDetalle(compra,cotiz);
     }
-    html += `<br>• Escritura pactada: <strong>${fFecha(compra.fechaEscritura)||'No especificada'}</strong>`;
-    const msg = document.getElementById('saldo-boleto-msg');
-    if (msg) msg.innerHTML = html;
+}
+function renderSaldoDetalle(compra,cotizVenta){
+    const saldoUSD=compra.saldoUSD;
+    const saldoOrig=compra.saldoOriginal;
+    const moneda=compra.moneda;
+    let usdAlVenta=saldoUSD;
+    if(moneda==='ARS'&&cotizVenta>0) usdAlVenta=saldoOrig/cotizVenta;
+    document.getElementById('saldo-detalle-tbody').innerHTML=`
+        <tr>
+            <td>Saldo pendiente de boleto (${compra.saldoPct}%)</td>
+            <td>${compra.saldoPct}%</td>
+            <td>${moneda==='ARS'?formatARS(saldoOrig):formatUSD(saldoOrig)}</td>
+            <td><strong>${formatUSD(usdAlVenta)}</strong></td>
+        </tr>`;
+    document.getElementById('saldo-total-alert').innerHTML=
+        `💡 Se sumará <strong>${formatUSD(usdAlVenta)}</strong> a la inversión total`;
+    const partesSaldo=calcularPartes(compra.inversor||'Todos',usdAlVenta);
+    document.getElementById('division-saldo-box').style.display='block';
+    renderPartesGrid('division-saldo-partes',partesSaldo);
 }
 
-function onToggleSaldoBoleto() {
-    const checked = document.getElementById('v-salda-boleto').checked;
-    showB('saldo-detalle-box', checked);
-    if (checked) renderSaldoDetalle();
+function mostrarDivisionVenta(){
+    const inversor=document.getElementById('v-inversor').value;
+    const precio=parseFloat(document.getElementById('v-precio').value)||0;
+    const box=document.getElementById('division-venta-box');
+    if(!precio){box.style.display='none';return;}
+    const partes=calcularPartes(inversor,precio);
+    box.style.display='block';
+    document.getElementById('division-venta-alert').innerHTML=inversor==='Todos'
+        ?`👥 <strong>Ingreso distribuido</strong> — ${formatUSD(precio)} ÷ 3 = ${formatUSD(precio/3)} c/u`
+        :`${INVERSOR_LABELS[inversor]} recibe <strong>${formatUSD(precio)}</strong>`;
+    renderPartesGrid('division-venta-partes',partes);
 }
 
-function renderSaldoDetalle() {
-    const propId = val('v-propiedad');
-    const compra = DB.compras.find(c => c.propId === propId);
-    if (!compra) return;
-
-    const cotiz    = fval('v-cotizacion');
-    const saldoUSD = compra.moneda === 'ARS' && cotiz > 0
-        ? compra.saldoOrig / cotiz
-        : compra.saldoUSD;
-
-    const tbody = document.getElementById('saldo-detalle-tbody');
-    if (tbody) tbody.innerHTML = `<tr>
-        <td>Saldo pendiente de boleto (${compra.saldoPct}%)</td>
-        <td>${compra.saldoPct}%</td>
-        <td>${compra.moneda==='ARS' ? fARS(compra.saldoOrig) : fUSD(compra.saldoOrig)}</td>
-        <td><strong>${fUSD(saldoUSD)}</strong></td>
-    </tr>`;
-
-    const msgEl = document.getElementById('saldo-total-msg');
-    if (msgEl) msgEl.innerHTML = `💡 Se sumará <strong>${fUSD(saldoUSD)}</strong> a la inversión total`;
-
-    // División del saldo
-    const partesSaldo = calcPartes(compra.inversor || 'Todos', saldoUSD);
-    show('div-saldo-partes');
-    renderPartes('div-saldo-grid', partesSaldo);
-}
-
-function actualizarDivisionVenta() {
-    const precio   = fval('v-precio');
-    const inversor = val('v-inversor');
-    const box      = document.getElementById('div-venta-box');
-    if (!precio) { if(box) box.style.display='none'; return; }
-
-    const partes = calcPartes(inversor, precio);
-    if(box) box.style.display = '';
-
-    const msg = document.getElementById('div-venta-msg');
-    if (msg) msg.innerHTML = inversor === 'Todos'
-        ? `👥 <strong>Ingreso distribuido:</strong> ${fUSD(precio)} ÷ 3 = <strong>${fUSD(precio/3)}</strong> c/u`
-        : `${INV_LABEL[inversor]} recibe la totalidad: <strong>${fUSD(precio)}</strong>`;
-
-    renderPartes('div-venta-partes', partes);
-}
-
-// ─────────────────────────────────────────────
-//  VENTA — gastos
-// ─────────────────────────────────────────────
-function agregarGastoVenta() {
-    const cont = document.getElementById('gastos-venta-list');
-    const div  = document.createElement('div');
-    div.className = 'gasto-row';
-    div.innerHTML = `
-        <select class="g-cat" style="min-width:160px">
+function agregarGastoVenta(){
+    const cont=document.getElementById('gastos-venta-list');
+    const div=document.createElement('div');
+    div.className='gasto-row';
+    div.innerHTML=`
+        <select style="flex:1">
             <option>Comisión inmobiliaria</option><option>Escrituración</option>
             <option>Honorarios escribano</option><option>Ganancias</option>
             <option>ITI</option><option>Sellado</option><option>Otros</option>
         </select>
-        <input type="text"   class="g-desc"  placeholder="Detalle" style="flex:2;min-width:100px">
-        <select class="g-inv" style="min-width:130px">
+        <input type="text" placeholder="Detalle" style="flex:2">
+        <select class="inv-v">
             <option value="Todos">👥 Todos</option>
             <option value="Gaston">🟢 Gastón</option>
             <option value="Hernan">🔵 Hernán</option>
             <option value="Santiago">🟣 Santiago</option>
         </select>
-        <select class="g-mon" style="min-width:80px">
+        <select class="mon-v">
             <option value="USD">USD</option>
             <option value="ARS">ARS</option>
         </select>
-        <input type="number" class="g-monto" placeholder="Monto" style="flex:1;min-width:100px">
-        <input type="number" class="g-cotiz" placeholder="Cotiz" style="flex:1;min-width:90px;display:none">
-        <button class="btn btn-danger btn-sm" onclick="this.closest('.gasto-row').remove()">✕</button>`;
-    div.querySelector('.g-mon').addEventListener('change', function() {
-        div.querySelector('.g-cotiz').style.display = this.value === 'ARS' ? '' : 'none';
+        <input type="number" placeholder="Monto" style="flex:1">
+        <input type="number" placeholder="Cotiz" style="flex:1;display:none" class="cotiz-v">
+        <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+    div.querySelector('.mon-v').addEventListener('change',function(){
+        div.querySelector('.cotiz-v').style.display=this.value==='ARS'?'block':'none';
     });
     cont.appendChild(div);
 }
 
-function leerGastosVenta() {
-    const gastos = [];
-    document.querySelectorAll('#gastos-venta-list .gasto-row').forEach(row => {
-        const cat    = row.querySelector('.g-cat')   ? row.querySelector('.g-cat').value   : '';
-        const desc   = row.querySelector('.g-desc')  ? row.querySelector('.g-desc').value  : '';
-        const inv    = row.querySelector('.g-inv')   ? row.querySelector('.g-inv').value   : 'Todos';
-        const moneda = row.querySelector('.g-mon')   ? row.querySelector('.g-mon').value   : 'USD';
-        const monto  = parseFloat(row.querySelector('.g-monto') ? row.querySelector('.g-monto').value : 0) || 0;
-        const cotiz  = parseFloat(row.querySelector('.g-cotiz') ? row.querySelector('.g-cotiz').value : 0)
-                       || fval('v-cotizacion') || 1200;
-        if (!monto) return;
-        const montoUSD = moneda === 'ARS' ? monto / cotiz : monto;
-        gastos.push({ cat, desc, inv, moneda, monto, cotiz, montoUSD, partes: calcPartes(inv, montoUSD) });
+function getGastosVenta(){
+    const rows=document.querySelectorAll('#gastos-venta-list .gasto-row');
+    const gastos=[];
+    rows.forEach(row=>{
+        const selCat=row.querySelectorAll('select')[0];
+        const inputs=row.querySelectorAll('input');
+        const selInv=row.querySelector('.inv-v');
+        const selMon=row.querySelector('.mon-v');
+        const cat   =selCat?selCat.value:'';
+        const detalle=inputs[0]?inputs[0].value:'';
+        const inv   =selInv?selInv.value:'Todos';
+        const moneda=selMon?selMon.value:'USD';
+        const monto =parseFloat(inputs[1]?inputs[1].value:0)||0;
+        const cotiz =parseFloat(inputs[2]?inputs[2].value:0)||parseFloat(document.getElementById('v-cotizacion').value)||1050;
+        if(monto){
+            const montoUSD=moneda==='ARS'?monto/cotiz:monto;
+            gastos.push({cat,detalle,inversor:inv,moneda,monto,cotiz,montoUSD,partes:calcularPartes(inv,montoUSD)});
+        }
     });
     return gastos;
 }
 
-// ─────────────────────────────────────────────
-//  VENTA — guardar
-// ─────────────────────────────────────────────
-function guardarVenta() {
-    const propId   = val('v-propiedad');
-    const precio   = fval('v-precio');
-    const inversor = val('v-inversor');
-
-    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-    if (!precio) { alert('⚠️ Ingresá el precio de venta'); return; }
-
-    const cotiz        = fval('v-cotizacion');
-    const gastos       = leerGastosVenta();
-    const gastosUSD    = gastos.reduce((s,g) => s + g.montoUSD, 0);
-    const saldaBoleto  = document.getElementById('v-salda-boleto').checked;
-    const compra       = DB.compras.find(c => c.propId === propId);
-    let   saldoUSDPago = 0;
-
-    if (saldaBoleto && compra && compra.modalidad === 'boleto' && !compra.saldoSaldado) {
-        saldoUSDPago = compra.moneda === 'ARS' && cotiz > 0
-            ? compra.saldoOrig / cotiz
-            : compra.saldoUSD;
-        compra.saldoSaldado   = true;
-        compra.saldoFechaPago = val('v-fecha');
-        compra.saldoCotiz     = cotiz;
-        compra.saldoUSDPago   = saldoUSDPago;
+function guardarVenta(){
+    const propId  =document.getElementById('v-propiedad').value;
+    const precio  =parseFloat(document.getElementById('v-precio').value);
+    const inversor=document.getElementById('v-inversor').value;
+    if(!propId){alert('⚠️ Seleccioná una propiedad');return;}
+    if(!precio) {alert('⚠️ Ingresá el precio de venta');return;}
+    const cotizVenta=parseFloat(document.getElementById('v-cotizacion').value)||0;
+    const gastos=getGastosVenta();
+    const totalGastosUSD=gastos.reduce((s,g)=>s+g.montoUSD,0);
+    const saldaBoleto=document.getElementById('v-salda-boleto').checked;
+    let saldoUSDPagado=0;
+    const compra=state.compras.find(c=>c.propId===propId);
+    if(saldaBoleto&&compra&&compra.modalidad==='boleto'&&!compra.saldoSaldado){
+        saldoUSDPagado=compra.moneda==='ARS'&&cotizVenta>0?compra.saldoOriginal/cotizVenta:compra.saldoUSD;
+        compra.saldoSaldado=true;
+        compra.saldoFechaPago=document.getElementById('v-fecha').value;
+        compra.saldoCotizPago=cotizVenta;
+        compra.saldoUSDPagado=saldoUSDPagado;
     }
-
-    const venta = {
-        id: genId(), propId, inversor,
-        fecha:       val('v-fecha'),
-        precioUSD:   precio,
-        cotizacion:  cotiz,
-        gastos,      gastosUSD,
-        saldaBoleto, saldoUSDPago,
-        ingresoNeto: precio - gastosUSD,
-        partesVenta: calcPartes(inversor, precio - gastosUSD)
+    const venta={
+        id:genId(),propId,inversor,
+        fecha:document.getElementById('v-fecha').value,
+        precioUSD:precio,cotizacion:cotizVenta,gastos,totalGastosUSD,
+        saldaBoleto,saldoUSDPagado,
+        ingresoNetoUSD:precio-totalGastosUSD,
+        partesVenta:calcularPartes(inversor,precio)
     };
-
-    const idx = DB.ventas.findIndex(v => v.propId === propId);
-    if (idx >= 0) DB.ventas[idx] = venta; else DB.ventas.push(venta);
-
-    const prop = DB.propiedades.find(p => p.id === propId);
-    if (prop) prop.estado = 'vendida';
-
-    let desc = `Venta ${fUSD(precio)} — ${INV_LABEL[inversor]}${inversor==='Todos'?' ('+fUSD(precio/3)+' c/u)':''}`;
-    if (saldaBoleto) desc += ` | Saldo boleto: ${fUSD(saldoUSDPago)}`;
-    log('venta', propId, desc, venta, inversor);
-
-    save();
-    renderVentas();
-    renderCompras();
-    renderPropiedades();
-    resetVentaUI();
+    const prop=state.propiedades.find(p=>p.id===propId);
+    if(prop) prop.estado='vendida';
+    const idx=state.ventas.findIndex(v=>v.propId===propId);
+    if(idx>=0) state.ventas[idx]=venta; else state.ventas.push(venta);
+    logAuditoria('venta',propId,
+        `Venta ${formatUSD(precio)} — ${inversor}${inversor==='Todos'?` (${formatUSD(precio/3)} c/u)`:''}${saldaBoleto?` + saldo boleto ${formatUSD(saldoUSDPagado)}`:''}`,
+        venta,inversor);
+    saveState(); renderVentas(); renderCompras(); renderPropiedades(); resetVentaForm();
     alert('✅ Venta guardada');
 }
 
-function renderVentas() {
-    const cont = document.getElementById('lista-ventas');
-    if (!DB.ventas.length) {
-        cont.innerHTML = '<div class="empty-state"><span>💰</span>Sin ventas</div>'; return;
-    }
-    let html = `<table><thead><tr>
-        <th>Propiedad</th><th>Inversor</th><th>Precio</th>
-        <th>Gastos</th><th>Saldo Boleto</th><th>Neto</th><th>Fecha</th>
-    </tr></thead><tbody>`;
-    DB.ventas.forEach(v => {
-        const prop = DB.propiedades.find(p => p.id === v.propId);
-        html += `<tr>
-            <td><strong>${prop ? prop.direccion : '—'}</strong></td>
-            <td>
-                <span class="badge badge-${INV_CLASS[v.inversor]}">${INV_LABEL[v.inversor]||v.inversor}</span>
-                ${v.inversor==='Todos'?`<br><small>${fUSD(v.precioUSD/3)} c/u</small>`:''}
+function renderVentas(){
+    const cont=document.getElementById('lista-ventas');
+    if(!state.ventas.length){cont.innerHTML='<div class="empty-state"><span>💰</span>Sin ventas</div>';return;}
+    let html='<table><thead><tr><th>Propiedad</th><th>Inversor</th><th>Precio Venta</th><th>Gastos</th><th>Saldo Boleto</th><th>Ingreso Neto</th><th>Fecha</th></tr></thead><tbody>';
+    state.ventas.forEach(v=>{
+        const prop=state.propiedades.find(p=>p.id===v.propId);
+        html+=`<tr>
+            <td><strong>${prop?prop.direccion:'-'}</strong></td>
+            <td><span class="badge badge-${INVERSOR_CLASS[v.inversor]||'blue'}">${INVERSOR_LABELS[v.inversor]||v.inversor}</span>
+                ${v.inversor==='Todos'?`<br><small>${formatUSD(v.precioUSD/3)} c/u</small>`:''}
             </td>
-            <td>${fUSD(v.precioUSD)}</td>
-            <td>${fUSD(v.gastosUSD)}</td>
-            <td>${v.saldaBoleto ? `<span class="badge badge-orange">✅ ${fUSD(v.saldoUSDPago)}</span>` : '—'}</td>
-            <td><strong>${fUSD(v.ingresoNeto)}</strong></td>
-            <td>${fFecha(v.fecha)}</td>
+            <td>${formatUSD(v.precioUSD)}</td>
+            <td>${formatUSD(v.totalGastosUSD)}</td>
+            <td>${v.saldaBoleto?`<span class="badge badge-orange">✅ ${formatUSD(v.saldoUSDPagado)}</span>`:'—'}</td>
+            <td><strong>${formatUSD(v.ingresoNetoUSD)}</strong></td>
+            <td>${formatFecha(v.fecha)}</td>
         </tr>`;
     });
-    cont.innerHTML = html + '</tbody></table>';
+    cont.innerHTML=html+'</tbody></table>';
 }
 
-// ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════
 //  RESULTADOS
-// ─────────────────────────────────────────────
-function calcularResultados() {
-    const propId = val('res-propiedad');
-    const cont   = document.getElementById('resultados-content');
-    if (!propId) {
-        cont.innerHTML = '<div class="empty-state card"><span>📊</span>Seleccioná una propiedad</div>';
-        return;
-    }
-    const prop      = DB.propiedades.find(p => p.id === propId);
-    const compra    = DB.compras.find(c => c.propId === propId);
-    const refaccion = DB.refacciones.find(r => r.propId === propId);
-    const venta     = DB.ventas.find(v => v.propId === propId);
+// ════════════════════════════════════════════════════════════
+function calcularResultados(){
+    const propId=document.getElementById('res-propiedad').value;
+    const cont=document.getElementById('resultados-content');
+    if(!propId){cont.innerHTML='<div class="empty-state card"><span>📊</span>Seleccioná una propiedad</div>';return;}
+    const prop      =state.propiedades.find(p=>p.id===propId);
+    const compra    =state.compras.find(c=>c.propId===propId);
+    const refaccion =state.refacciones.find(r=>r.propId===propId);
+    const venta     =state.ventas.find(v=>v.propId===propId);
+    const inversionCompra    =compra?compra.inversionTotalUSD:0;
+    const saldoBoleto        =(venta&&venta.saldaBoleto)?venta.saldoUSDPagado:0;
+    const inversionRefaccion =refaccion?refaccion.totalUSD:0;
+    const inversionTotal     =inversionCompra+saldoBoleto+inversionRefaccion;
+    const ingresoVenta       =venta?venta.ingresoNetoUSD:0;
+    const ganancia           =ingresoVenta-inversionTotal;
+    const roi                =inversionTotal>0?(ganancia/inversionTotal*100):0;
+    let dias=0;
+    if(compra&&venta&&compra.fecha&&venta.fecha)
+        dias=Math.round((new Date(venta.fecha)-new Date(compra.fecha))/(1000*60*60*24));
+    const roiAnual=dias>0?(roi/dias*365):0;
+    const gxInv=calcularGananciaPorInversor(compra,refaccion,venta,saldoBoleto);
 
-    const invCompra   = compra    ? compra.inversionUSD : 0;
-    const saldoBoleto = venta && venta.saldaBoleto ? venta.saldoUSDPago : 0;
-    const invRef      = refaccion ? refaccion.total : 0;
-    const invTotal    = invCompra + saldoBoleto + invRef;
-    const ingresoNeto = venta     ? venta.ingresoNeto : 0;
-    const ganancia    = ingresoNeto - invTotal;
-    const roi         = invTotal > 0 ? ganancia / invTotal * 100 : 0;
-
-    let dias = 0;
-    if (compra && venta && compra.fecha && venta.fecha)
-        dias = Math.round((new Date(venta.fecha) - new Date(compra.fecha)) / 86400000);
-    const roiAnual = dias > 0 ? roi / dias * 365 : 0;
-
-    const gxInv = calcGananciaPorInversor(compra, refaccion, venta, saldoBoleto);
-
-    let html = `<div class="stat-grid">
-        <div class="stat-card">
-            <div class="label">💵 Inversión Compra</div>
-            <div class="value">${fUSD(invCompra)}</div>
-        </div>
-        ${saldoBoleto > 0 ? `<div class="stat-card purple">
-            <div class="label">📋 Saldo Boleto</div>
-            <div class="value">${fUSD(saldoBoleto)}</div>
-        </div>` : ''}
-        <div class="stat-card orange">
-            <div class="label">🔨 Refacción</div>
-            <div class="value">${fUSD(invRef)}</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">📊 Inversión Total</div>
-            <div class="value">${fUSD(invTotal)}</div>
-        </div>
-        <div class="stat-card ${ganancia >= 0 ? 'green' : 'red'}">
-            <div class="label">${ganancia >= 0 ? '✅ Ganancia' : '❌ Pérdida'}</div>
-            <div class="value">${fUSD(ganancia)}</div>
-        </div>
-        <div class="stat-card ${roi >= 0 ? 'green' : 'red'}">
-            <div class="label">📈 ROI</div>
-            <div class="value">${roi.toFixed(1)}%</div>
-        </div>
-        ${dias > 0 ? `<div class="stat-card">
-            <div class="label">📅 ROI Anualizado</div>
-            <div class="value">${roiAnual.toFixed(1)}%</div>
-        </div>` : ''}
+    let html=`<div class="stat-grid">
+        <div class="stat-card"><div class="label">💵 Inversión Compra</div><div class="value">${formatUSD(inversionCompra)}</div></div>
+        ${saldoBoleto>0?`<div class="stat-card purple"><div class="label">📋 Saldo Boleto</div><div class="value">${formatUSD(saldoBoleto)}</div></div>`:''}
+        <div class="stat-card orange"><div class="label">🔨 Refacción</div><div class="value">${formatUSD(inversionRefaccion)}</div></div>
+        <div class="stat-card"><div class="label">📊 Inversión Total</div><div class="value">${formatUSD(inversionTotal)}</div></div>
+        <div class="stat-card ${ganancia>=0?'green':'red'}"><div class="label">${ganancia>=0?'✅ Ganancia':'❌ Pérdida'}</div><div class="value">${formatUSD(ganancia)}</div></div>
+        <div class="stat-card ${roi>=0?'green':'red'}"><div class="label">📈 ROI</div><div class="value">${roi.toFixed(1)}%</div></div>
+        <div class="stat-card"><div class="label">📅 ROI Anualizado</div><div class="value">${roiAnual.toFixed(1)}%</div></div>
     </div>`;
 
-    // Por inversor
-    html += `<div class="card"><h2>👥 Resultado por Inversor</h2>
-        <div class="stat-grid">`;
-    INV_LISTA.forEach(inv => {
-        const g = gxInv[inv] || { ingreso:0, egreso:0, ganancia:0 };
-        const r = g.egreso > 0 ? g.ganancia / g.egreso * 100 : 0;
-        html += `<div class="stat-card ${INV_CLASS[inv]}">
-            <div class="label">${INV_LABEL[inv]}</div>
-            <div class="value">${fUSD(g.ganancia)}</div>
-            <div style="font-size:0.78em;opacity:0.85;margin-top:4px">
-                ROI: ${r.toFixed(1)}%<br>
-                Invertido: ${fUSD(g.egreso)}<br>
-                Recuperado: ${fUSD(g.ingreso)}
-            </div>
+    html+=`<div class="card"><h2>👥 Resultado por Inversor</h2><div class="stat-grid">`;
+    INVERSORES_LISTA.forEach(inv=>{
+        const g=gxInv[inv]||{ingreso:0,egreso:0,ganancia:0};
+        html+=`<div class="stat-card ${INVERSOR_CLASS[inv]}">
+            <div class="label">${INVERSOR_LABELS[inv]}</div>
+            <div class="value">${formatUSD(g.ganancia)}</div>
+            <div style="font-size:0.78em;opacity:0.85;margin-top:4px">Invertido: ${formatUSD(g.egreso)}<br>Recuperado: ${formatUSD(g.ingreso)}</div>
         </div>`;
     });
-    html += `</div>
-    <table><thead><tr>
-        <th>Inversor</th><th>Egreso</th><th>Ingreso</th><th>Ganancia</th><th>ROI</th>
-    </tr></thead><tbody>`;
-    INV_LISTA.forEach(inv => {
-        const g = gxInv[inv] || { ingreso:0, egreso:0, ganancia:0 };
-        const r = g.egreso > 0 ? g.ganancia / g.egreso * 100 : 0;
-        html += `<tr>
-            <td><span class="badge badge-${INV_CLASS[inv]}">${INV_LABEL[inv]}</span></td>
-            <td>${fUSD(g.egreso)}</td>
-            <td>${fUSD(g.ingreso)}</td>
-            <td style="color:${g.ganancia>=0?'#2e7d32':'#c62828'}"><strong>${fUSD(g.ganancia)}</strong></td>
-            <td><strong>${r.toFixed(2)}%</strong></td>
+    html+=`</div>
+        <table><thead><tr><th>Inversor</th><th>Ingreso</th><th>Egreso</th><th>Ganancia</th><th>ROI</th></tr></thead><tbody>`;
+    INVERSORES_LISTA.forEach(inv=>{
+        const g=gxInv[inv]||{ingreso:0,egreso:0,ganancia:0};
+        const roiInd=g.egreso>0?(g.ganancia/g.egreso*100):0;
+        html+=`<tr>
+            <td><span class="badge badge-${INVERSOR_CLASS[inv]}">${INVERSOR_LABELS[inv]}</span></td>
+            <td>${formatUSD(g.ingreso)}</td><td>${formatUSD(g.egreso)}</td>
+            <td style="color:${g.ganancia>=0?'#2e7d32':'#c62828'}"><strong>${formatUSD(g.ganancia)}</strong></td>
+            <td><strong>${roiInd.toFixed(2)}%</strong></td>
         </tr>`;
     });
-    html += `</tbody></table></div>`;
+    html+=`</tbody></table></div>`;
 
-    // Tabla resumen
-    html += `<div class="card"><h2>📋 Resumen — ${prop.direccion}</h2>
-    <table><thead><tr><th>Concepto</th><th>USD</th></tr></thead><tbody>
-        <tr><td>Inversión compra (${compra?compra.porcentaje+'%':'-'})</td><td>−${fUSD(invCompra)}</td></tr>
-        ${saldoBoleto>0?`<tr><td>Saldo boleto pagado en escritura</td><td>−${fUSD(saldoBoleto)}</td></tr>`:''}
-        ${invRef>0?`<tr><td>Gastos de refacción</td><td>−${fUSD(invRef)}</td></tr>`:''}
-        <tr style="background:#e3f2fd">
-            <td><strong>Inversión Total</strong></td>
-            <td><strong>−${fUSD(invTotal)}</strong></td>
-        </tr>
-        <tr><td>Ingreso neto de venta</td><td>${fUSD(ingresoNeto)}</td></tr>
+    html+=`<div class="card"><h2>📊 Resumen — ${prop.direccion}</h2>
+        <table><thead><tr><th>Concepto</th><th>USD</th></tr></thead><tbody>
+        <tr><td>Inversión compra (${compra?compra.porcentaje+'%':'-'})</td><td>-${formatUSD(inversionCompra)}</td></tr>
+        ${saldoBoleto>0?`<tr><td>Saldo boleto en escritura</td><td>-${formatUSD(saldoBoleto)}</td></tr>`:''}
+        ${inversionRefaccion>0?`<tr><td>Refacción</td><td>-${formatUSD(inversionRefaccion)}</td></tr>`:''}
+        <tr style="background:#e3f2fd"><td><strong>Inversión Total</strong></td><td><strong>-${formatUSD(inversionTotal)}</strong></td></tr>
+        <tr><td>Ingreso neto de venta</td><td>${formatUSD(ingresoVenta)}</td></tr>
         <tr style="background:${ganancia>=0?'#e8f5e9':'#ffebee'}">
             <td><strong>${ganancia>=0?'✅ GANANCIA':'❌ PÉRDIDA'}</strong></td>
-            <td><strong>${fUSD(ganancia)}</strong></td>
+            <td><strong>${formatUSD(ganancia)}</strong></td>
         </tr>
         <tr><td>ROI</td><td><strong>${roi.toFixed(2)}%</strong></td></tr>
-        ${dias>0?`
-        <tr><td>Duración</td><td>${dias} días (${(dias/30).toFixed(1)} meses)</td></tr>
-        <tr><td>ROI Anualizado</td><td><strong>${roiAnual.toFixed(2)}%</strong></td></tr>`:''}
-    </tbody></table>
-    <br><button class="btn btn-info" onclick="window.print()">🖨️ Imprimir</button>
+        ${dias>0?`<tr><td>Duración</td><td>${dias} días (${(dias/30).toFixed(1)} meses)</td></tr>
+        <tr><td>ROI Anualizado</td><td><strong>${roiAnual.toFixed(2)}% anual</strong></td></tr>`:''}
+        </tbody></table>
+        <br><button class="btn btn-info" onclick="window.print()">🖨️ Imprimir</button>
     </div>`;
-
-    cont.innerHTML = html;
+    cont.innerHTML=html;
 }
 
-// ─────────────────────────────────────────────
-//  GANANCIA POR INVERSOR
-// ─────────────────────────────────────────────
-function calcGananciaPorInversor(compra, refaccion, venta, saldoBoleto) {
-    const res = {};
-    INV_LISTA.forEach(inv => res[inv] = { egreso:0, ingreso:0, ganancia:0 });
-
-    // Compra
-    if (compra) {
-        calcPartes(compra.inversor, compra.pagadoUSD)
-            .forEach(p => res[p.nombre].egreso += p.monto);
-        compra.gastos.forEach(g =>
-            (g.partes || calcPartes(g.inv, g.montoUSD))
-                .forEach(p => res[p.nombre].egreso += p.monto));
-        if (saldoBoleto > 0) {
-            calcPartes(compra.inversor, saldoBoleto)
-                .forEach(p => res[p.nombre].egreso += p.monto);
-        }
+function calcularGananciaPorInversor(compra,refaccion,venta,saldoBoleto){
+    const res={};
+    INVERSORES_LISTA.forEach(inv=>res[inv]={ingreso:0,egreso:0,ganancia:0});
+    if(compra){
+        calcularPartes(compra.inversor,compra.montoPagadoUSD).forEach(p=>res[p.nombre].egreso+=p.monto);
+        compra.gastos.forEach(g=>g.partes.forEach(p=>res[p.nombre].egreso+=p.monto));
+        if(saldoBoleto>0) calcularPartes(compra.inversor,saldoBoleto).forEach(p=>res[p.nombre].egreso+=p.monto);
     }
-
-    // Refacción
-    if (refaccion) {
-        const todos = [
-            ...(refaccion.gObra  || []),
-            ...(refaccion.gImp   || []),
-            ...(refaccion.gProf  || []),
-            ...(refaccion.gOtros || [])
-        ];
-        todos.forEach(g =>
-            (g.partes || calcPartes(g.inv || 'Todos', g.montoUSD))
-                .forEach(p => res[p.nombre].egreso += p.monto));
+    if(refaccion){
+        [...(refaccion.gastosObra||[]),...(refaccion.gastosImpuestos||[]),
+         ...(refaccion.gastosProfesionales||[]),...(refaccion.gastosOtros||[])].forEach(g=>{
+            (g.partes||calcularPartes(g.inversor||'Todos',g.montoUSD)).forEach(p=>res[p.nombre].egreso+=p.monto);
+        });
     }
-
-    // Venta
-    if (venta) {
-        calcPartes(venta.inversor, venta.ingresoNeto)
-            .forEach(p => res[p.nombre].ingreso += p.monto);
+    if(venta){
+        calcularPartes(venta.inversor,venta.ingresoNetoUSD).forEach(p=>res[p.nombre].ingreso+=p.monto);
     }
-
-    INV_LISTA.forEach(inv =>
-        res[inv].ganancia = res[inv].ingreso - res[inv].egreso);
-
+    INVERSORES_LISTA.forEach(inv=>res[inv].ganancia=res[inv].ingreso-res[inv].egreso);
     return res;
 }
 
-// ─────────────────────────────────────────────
-//  PANEL INVERSORES
-// ─────────────────────────────────────────────
-function renderInversores() {
-    const cont = document.getElementById('inversores-content');
-    const totales = {};
-    INV_LISTA.forEach(inv => totales[inv] = { egreso:0, ingreso:0, ganancia:0, ops:[] });
-
-    DB.propiedades.forEach(prop => {
-        const compra    = DB.compras.find(c => c.propId === prop.id);
-        const refaccion = DB.refacciones.find(r => r.propId === prop.id);
-        const venta     = DB.ventas.find(v => v.propId === prop.id);
-        const saldo     = venta && venta.saldaBoleto ? venta.saldoUSDPago : 0;
-
-        if (!compra && !refaccion && !venta) return;
-
-        const gx = calcGananciaPorInversor(compra, refaccion, venta, saldo);
-        INV_LISTA.forEach(inv => {
-            totales[inv].egreso   += gx[inv].egreso;
-            totales[inv].ingreso  += gx[inv].ingreso;
-            totales[inv].ganancia += gx[inv].ganancia;
-            if (gx[inv].egreso > 0 || gx[inv].ingreso > 0)
-                totales[inv].ops.push({ prop, gx: gx[inv], venta });
+// ════════════════════════════════════════════════════════════
+//  INVERSORES
+// ════════════════════════════════════════════════════════════
+function renderInversores(){
+    const cont=document.getElementById('inversores-content');
+    const totales={};
+    INVERSORES_LISTA.forEach(inv=>totales[inv]={egreso:0,ingreso:0,ganancia:0,operaciones:[]});
+    state.propiedades.forEach(prop=>{
+        const compra   =state.compras.find(c=>c.propId===prop.id);
+        const refaccion=state.refacciones.find(r=>r.propId===prop.id);
+        const venta    =state.ventas.find(v=>v.propId===prop.id);
+        const saldoBoleto=(venta&&venta.saldaBoleto)?venta.saldoUSDPagado:0;
+        if(!compra&&!refaccion&&!venta) return;
+        const gxInv=calcularGananciaPorInversor(compra,refaccion,venta,saldoBoleto);
+        INVERSORES_LISTA.forEach(inv=>{
+            totales[inv].egreso  +=gxInv[inv].egreso;
+            totales[inv].ingreso +=gxInv[inv].ingreso;
+            totales[inv].ganancia+=gxInv[inv].ganancia;
+            if(gxInv[inv].egreso>0||gxInv[inv].ingreso>0)
+                totales[inv].operaciones.push({prop,compra,venta,gxInv:gxInv[inv]});
         });
     });
-
-    let html = '<div class="stat-grid">';
-    INV_LISTA.forEach(inv => {
-        const t   = totales[inv];
-        const roi = t.egreso > 0 ? t.ganancia / t.egreso * 100 : 0;
-        html += `<div class="stat-card ${INV_CLASS[inv]}">
-            <div class="label">${INV_LABEL[inv]}</div>
-            <div class="value">${fUSD(t.ganancia)}</div>
+    let html=`<div class="stat-grid">`;
+    INVERSORES_LISTA.forEach(inv=>{
+        const t=totales[inv];
+        const roi=t.egreso>0?(t.ganancia/t.egreso*100):0;
+        html+=`<div class="stat-card ${INVERSOR_CLASS[inv]}">
+            <div class="label">${INVERSOR_LABELS[inv]}</div>
+            <div class="value">${formatUSD(t.ganancia)}</div>
             <div style="font-size:0.78em;opacity:0.85;margin-top:5px">
-                ROI: ${roi.toFixed(1)}%<br>
-                Invertido: ${fUSD(t.egreso)}<br>
-                Recuperado: ${fUSD(t.ingreso)}
+                ROI: ${roi.toFixed(1)}%<br>Invertido: ${formatUSD(t.egreso)}<br>Recuperado: ${formatUSD(t.ingreso)}
             </div>
         </div>`;
     });
-    html += '</div>';
-
-    INV_LISTA.forEach(inv => {
-        const t   = totales[inv];
-        const roi = t.egreso > 0 ? t.ganancia / t.egreso * 100 : 0;
-        html += `<div class="inversor-card ${INV_CLASS[inv]}">
-            <h3>${INV_LABEL[inv]} — ${fUSD(t.ganancia)} (ROI ${roi.toFixed(1)}%)</h3>`;
-        if (!t.ops.length) {
-            html += '<p style="color:#999">Sin operaciones</p>';
-        } else {
-            html += `<table><thead><tr>
-                <th>Propiedad</th><th>Invertido</th><th>Recuperado</th><th>Ganancia</th><th>Estado</th>
-            </tr></thead><tbody>`;
-            t.ops.forEach(op => {
-                const estado = op.venta ? '✅ Vendida'
-                    : (op.prop.estado === 'en_refaccion' ? '🔨 Refacción' : '🏠 En curso');
-                html += `<tr>
+    html+=`</div>`;
+    INVERSORES_LISTA.forEach(inv=>{
+        const t=totales[inv];
+        const roi=t.egreso>0?(t.ganancia/t.egreso*100):0;
+        html+=`<div class="inversor-card ${INVERSOR_CLASS[inv]}">
+            <h3>${INVERSOR_LABELS[inv]} — ${formatUSD(t.ganancia)} (ROI ${roi.toFixed(1)}%)</h3>`;
+        if(!t.operaciones.length){html+=`<p style="color:#999">Sin operaciones</p>`;}
+        else{
+            html+=`<table><thead><tr><th>Propiedad</th><th>Invertido</th><th>Recuperado</th><th>Ganancia</th><th>Estado</th></tr></thead><tbody>`;
+            t.operaciones.forEach(op=>{
+                const estado=op.venta?'✅ Vendida':(op.prop.estado==='en_refaccion'?'🔨 Refacción':'🏠 En curso');
+                html+=`<tr>
                     <td>${op.prop.direccion}</td>
-                    <td>${fUSD(op.gx.egreso)}</td>
-                    <td>${fUSD(op.gx.ingreso)}</td>
-                    <td style="color:${op.gx.ganancia>=0?'#2e7d32':'#c62828'}">
-                        <strong>${fUSD(op.gx.ganancia)}</strong></td>
+                    <td>${formatUSD(op.gxInv.egreso)}</td>
+                    <td>${formatUSD(op.gxInv.ingreso)}</td>
+                    <td style="color:${op.gxInv.ganancia>=0?'#2e7d32':'#c62828'}"><strong>${formatUSD(op.gxInv.ganancia)}</strong></td>
                     <td>${estado}</td>
                 </tr>`;
             });
-            html += '</tbody></table>';
+            html+=`</tbody></table>`;
         }
-        html += '</div>';
+        html+=`</div>`;
     });
-
-    cont.innerHTML = html;
+    cont.innerHTML=html;
 }
 
-// ─────────────────────────────────────────────
-//  AUDITORÍA
-// ─────────────────────────────────────────────
-function renderAuditoria() {
-    const buscar  = (val('audit-buscar')||'').toLowerCase();
-    const tipo    = val('audit-tipo');
-    const invFilt = val('audit-inversor');
+// ════════════════════════════════════════════════════════════
+//  TASAS HISTÓRICAS  ← MÓDULO NUEVO (solo referencia)
+// ════════════════════════════════════════════════════════════
+function guardarTasa(){
+    const tipo  =document.getElementById('t-tipo').value;
+    const valor =parseFloat(document.getElementById('t-valor').value);
+    const unidad=document.getElementById('t-unidad').value;
+    const fecha =document.getElementById('t-fecha').value;
+    const fuente=document.getElementById('t-fuente').value.trim();
+    const notas =document.getElementById('t-notas').value.trim();
 
-    let registros = [...DB.auditoria].reverse();
-    if (tipo)    registros = registros.filter(r => r.tipo === tipo);
-    if (invFilt) registros = registros.filter(r => r.inversor === invFilt);
-    if (buscar)  registros = registros.filter(r => r.desc.toLowerCase().includes(buscar));
+    if(!valor||!fecha){ alert('⚠️ Completá valor y fecha'); return; }
 
-    const cont = document.getElementById('auditoria-content');
-    if (!registros.length) {
-        cont.innerHTML = '<div class="empty-state"><span>🔍</span>Sin registros</div>'; return;
+    const tasa={ id:genId(), tipo, valor, unidad, fecha, fuente, notas, cargadaEl:new Date().toISOString() };
+    state.tasas.push(tasa);
+    logAuditoria('tasa','—',`Tasa registrada: ${TASA_LABELS[tipo]||tipo} = ${valor} ${unidad} (${formatFecha(fecha)})`,tasa);
+    saveState(); renderTasas();
+
+    // reset form
+    document.getElementById('t-valor').value='';
+    document.getElementById('t-fecha').value='';
+    document.getElementById('t-fuente').value='';
+    document.getElementById('t-notas').value='';
+    alert('✅ Tasa guardada');
+}
+
+function renderTasas(){
+    const tipoFiltro=document.getElementById('tf-tipo').value;
+    const mesFiltro =document.getElementById('tf-mes').value;
+
+    let lista=[...state.tasas].sort((a,b)=>b.fecha.localeCompare(a.fecha));
+    if(tipoFiltro) lista=lista.filter(t=>t.tipo===tipoFiltro);
+    if(mesFiltro)  lista=lista.filter(t=>t.fecha.startsWith(mesFiltro));
+
+    // Stats del conjunto filtrado
+    const statsBox=document.getElementById('tasas-stats');
+    if(lista.length>0){
+        const valores=lista.map(t=>t.valor);
+        const min=Math.min(...valores);
+        const max=Math.max(...valores);
+        const prom=valores.reduce((s,v)=>s+v,0)/valores.length;
+        const ultimo=lista[0];
+        statsBox.innerHTML=`<div class="stat-grid">
+            <div class="stat-card"><div class="label">📋 Registros</div><div class="value">${lista.length}</div></div>
+            <div class="stat-card green"><div class="label">⬇️ Mínimo</div><div class="value">${min.toLocaleString('es-AR',{maximumFractionDigits:2})}</div></div>
+            <div class="stat-card red"><div class="label">⬆️ Máximo</div><div class="value">${max.toLocaleString('es-AR',{maximumFractionDigits:2})}</div></div>
+            <div class="stat-card orange"><div class="label">📊 Promedio</div><div class="value">${prom.toLocaleString('es-AR',{maximumFractionDigits:2})}</div></div>
+            <div class="stat-card purple"><div class="label">🕐 Último</div><div class="value">${ultimo.valor.toLocaleString('es-AR',{maximumFractionDigits:2})}</div><div class="label">${formatFecha(ultimo.fecha)}</div></div>
+        </div>`;
+    } else { statsBox.innerHTML=''; }
+
+    const cont=document.getElementById('lista-tasas');
+    if(!lista.length){
+        cont.innerHTML='<div class="empty-state"><span>📈</span>Sin tasas registradas</div>'; return;
     }
 
-    const tipoColor = { propiedad:'badge-blue', compra:'badge-green', refaccion:'badge-orange', venta:'badge-purple' };
-    const tipoIcon  = { propiedad:'🏠', compra:'💵', refaccion:'🔨', venta:'💰' };
+    // Calcular máximo para barras
+    const maxVal=Math.max(...lista.map(t=>t.valor));
 
-    let html = `<p style="color:#999;font-size:0.85em;margin-bottom:15px">${registros.length} registros</p>
-    <div class="timeline">`;
-    registros.forEach(r => {
-        const prop = DB.propiedades.find(p => p.id === r.propId);
-        const dt   = new Date(r.ts);
-        const fs   = dt.toLocaleDateString('es-AR') + ' ' + dt.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-        html += `<div class="timeline-item">
-            <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
-                <span class="badge ${tipoColor[r.tipo]||'badge-blue'}">${tipoIcon[r.tipo]||'📋'} ${r.tipo}</span>
-                ${r.inversor && r.inversor !== '—'
-                    ? `<span class="badge badge-${INV_CLASS[r.inversor]||'blue'}">${INV_LABEL[r.inversor]||r.inversor}</span>`
-                    : ''}
-                <div style="flex:1">
-                    <strong>${r.desc}</strong>
-                    ${prop ? `<br><small style="color:#999">📍 ${prop.direccion}</small>` : ''}
-                    <br><small style="color:#bbb">🕐 ${fs}</small>
-                </div>
-            </div>
-        </div>`;
+    let html=`<table>
+        <thead><tr>
+            <th>Tipo</th><th>Valor</th><th>Unidad</th><th>Fecha</th>
+            <th>Fuente</th><th>Notas</th><th>Barra</th><th></th>
+        </tr></thead><tbody>`;
+    lista.forEach(t=>{
+        const pct=maxVal>0?Math.round(t.valor/maxVal*100):0;
+        html+=`<tr>
+            <td><strong>${TASA_LABELS[t.tipo]||t.tipo}</strong></td>
+            <td style="font-size:1.1em;font-weight:700;color:#1a237e">${t.valor.toLocaleString('es-AR',{maximumFractionDigits:4})}</td>
+            <td><span class="badge badge-blue">${t.unidad}</span></td>
+            <td>${formatFecha(t.fecha)}</td>
+            <td>${t.fuente||'—'}</td>
+            <td style="color:#888;font-style:italic">${t.notas||'—'}</td>
+            <td style="min-width:80px"><div class="tasa-chart-bar" style="width:${pct}%"></div></td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarTasa('${t.id}')">🗑️</button></td>
+        </tr>`;
     });
-    cont.innerHTML = html + '</div>';
+    cont.innerHTML=html+'</tbody></table>';
 }
 
-function exportarCSV() {
-    let csv = 'Fecha,Tipo,Propiedad,Inversor,Descripcion\n';
-    DB.auditoria.forEach(r => {
-        const prop = DB.propiedades.find(p => p.id === r.propId);
-        const dt   = new Date(r.ts).toLocaleString('es-AR');
-        csv += `"${dt}","${r.tipo}","${prop?prop.direccion:'—'}","${r.inversor||'—'}","${r.desc}"\n`;
-    });
-    const a = document.createElement('a');
-    a.href     = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8;'}));
-    a.download = 'auditoria.csv';
-    a.click();
+function eliminarTasa(id){
+    if(!confirm('¿Eliminar esta tasa?')) return;
+    state.tasas=state.tasas.filter(t=>t.id!==id);
+    saveState(); renderTasas();
 }
 
-// ─────────────────────────────────────────────
-//  ELIMINAR
-// ─────────────────────────────────────────────
-function pedirEliminar(
+function exportarTasas(){
+    const tipoFiltro=document.getElementById('tf-tipo').value;
+    const mesFiltro =document
