@@ -1,1361 +1,2100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inversiones Inmobiliarias</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altan Group - Gestión de Inversiones</title>
 
-        header {
-            background: linear-gradient(135deg, #1a237e, #283593);
-            color: white; padding: 20px 30px;
-            display: flex; align-items: center; gap: 15px;
-        }
-        header h1 { font-size: 1.6em; }
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --card2: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --primary: #2563eb;
+      --primary2: #1d4ed8;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --warning: #f59e0b;
+      --border: rgba(148, 163, 184, 0.25);
+    }
 
-        nav {
-            background: #283593; display: flex; flex-wrap: wrap; padding: 0 10px;
-        }
-        nav button {
-            background: none; border: none; color: #90caf9;
-            padding: 14px 18px; cursor: pointer; font-size: 0.9em;
-            border-bottom: 3px solid transparent; transition: all 0.2s;
-        }
-        nav button:hover { color: white; background: rgba(255,255,255,0.1); }
-        nav button.active { color: white; border-bottom-color: #42a5f5; }
+    * {
+      box-sizing: border-box;
+    }
 
-        .container { max-width: 1100px; margin: 25px auto; padding: 0 15px; }
-        .section { display: none; }
-        .section.active { display: block; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: var(--text);
+    }
 
-        .card {
-            background: white; border-radius: 10px;
-            padding: 20px; margin-bottom: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .card h2 { color: #1a237e; margin-bottom: 15px; font-size: 1.2em; padding-bottom: 8px; border-bottom: 2px solid #e3f2fd; }
-        .card h3 { color: #283593; margin: 12px 0 8px; font-size: 1em; }
+    header {
+      padding: 18px 24px;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-        .form-group { display: flex; flex-direction: column; gap: 4px; }
-        .form-group label { font-size: 0.8em; font-weight: 600; color: #555; text-transform: uppercase; }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 9px 11px; border: 2px solid #e0e0e0; border-radius: 7px; font-size: 0.9em;
-        }
-        .form-group input:focus,
-        .form-group select:focus { outline: none; border-color: #42a5f5; }
+    h1, h2, h3 {
+      margin-top: 0;
+    }
 
-        .btn {
-            padding: 9px 18px; border: none; border-radius: 7px;
-            cursor: pointer; font-size: 0.9em; font-weight: 600;
-            display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.2s;
-        }
-        .btn:hover { opacity: 0.85; }
-        .btn-primary { background: #1a237e; color: white; }
-        .btn-success { background: #2e7d32; color: white; }
-        .btn-danger  { background: #c62828; color: white; }
-        .btn-warning { background: #f57f17; color: white; }
-        .btn-info    { background: #0277bd; color: white; }
-        .btn-sm { padding: 5px 11px; font-size: 0.82em; }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
 
-        table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
-        th { background: #e3f2fd; color: #1a237e; padding: 10px 8px; text-align: left; font-size: 0.8em; text-transform: uppercase; }
-        td { padding: 9px 8px; border-bottom: 1px solid #f0f0f0; }
-        tr:hover td { background: #f8f9ff; }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-        .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
-        .b-blue   { background: #e3f2fd; color: #1565c0; }
-        .b-green  { background: #e8f5e9; color: #2e7d32; }
-        .b-orange { background: #fff3e0; color: #e65100; }
-        .b-red    { background: #ffebee; color: #c62828; }
-        .b-purple { background: #f3e5f5; color: #6a1b9a; }
-        .b-gaston   { background: #e8f5e9; color: #1b5e20; }
-        .b-hernan   { background: #e3f2fd; color: #0d47a1; }
-        .b-santiago { background: #f3e5f5; color: #4a148c; }
-        .b-todos    { background: #fff8e1; color: #e65100; }
+    main {
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px; }
-        .stat-box {
-            color: white; padding: 16px; border-radius: 10px; text-align: center;
-            background: linear-gradient(135deg, #1a237e, #283593);
-        }
-        .stat-box.green  { background: linear-gradient(135deg, #2e7d32, #388e3c); }
-        .stat-box.orange { background: linear-gradient(135deg, #e65100, #f57c00); }
-        .stat-box.red    { background: linear-gradient(135deg, #c62828, #d32f2f); }
-        .stat-box.purple { background: linear-gradient(135deg, #6a1b9a, #7b1fa2); }
-        .stat-box.gaston   { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
-        .stat-box.hernan   { background: linear-gradient(135deg, #0d47a1, #1565c0); }
-        .stat-box.santiago { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
-        .stat-box .val { font-size: 1.4em; font-weight: 700; margin: 4px 0; }
-        .stat-box .lbl { font-size: 0.78em; opacity: 0.9; }
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-        .alert { padding: 10px 14px; border-radius: 7px; margin: 10px 0; font-size: 0.88em; }
-        .alert-info    { background: #e3f2fd; color: #1565c0; border-left: 4px solid #42a5f5; }
-        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #66bb6a; }
-        .alert-warning { background: #fff3e0; color: #e65100; border-left: 4px solid #ffa726; }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
 
-        .partes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: 8px 0; }
-        .parte-box { padding: 10px; border-radius: 7px; text-align: center; font-size: 0.85em; font-weight: 600; }
-        .parte-box.gaston   { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
-        .parte-box.hernan   { background: #e3f2fd; color: #0d47a1; border: 2px solid #90caf9; }
-        .parte-box.santiago { background: #f3e5f5; color: #4a148c; border: 2px solid #ce93d8; }
+    .card {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    }
 
-        .gasto-row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; flex-wrap: wrap; }
-        .gasto-row input,
-        .gasto-row select { padding: 7px 9px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 0.85em; }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
 
-        .inv-card { border-radius: 10px; padding: 18px; margin-bottom: 12px; border-left: 5px solid; }
-        .inv-card.gaston   { border-color: #2e7d32; background: #f1f8f1; }
-        .inv-card.hernan   { border-color: #1565c0; background: #f0f4ff; }
-        .inv-card.santiago { border-color: #6a1b9a; background: #f8f0ff; }
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-        .empty { text-align: center; padding: 30px; color: #aaa; font-size: 0.9em; }
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 
-        .modal-bg {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.5); z-index: 999;
-            align-items: center; justify-content: center;
-        }
-        .modal-bg.open { display: flex; }
-        .modal-box { background: white; border-radius: 10px; padding: 25px; max-width: 420px; width: 90%; }
-        .modal-box h3 { color: #1a237e; margin-bottom: 12px; }
-        .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 
-        .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
-        .filter-row input,
-        .filter-row select { padding: 7px 10px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 0.85em; }
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
 
-        .tl { padding-left: 25px; border-left: 2px solid #e0e0e0; }
-        .tl-item { position: relative; margin-bottom: 16px; padding-left: 12px; }
-        .tl-item::before {
-            content: ''; position: absolute; left: -19px; top: 4px;
-            width: 10px; height: 10px; border-radius: 50%;
-            background: #42a5f5; border: 2px solid white; box-shadow: 0 0 0 2px #42a5f5;
-        }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+      outline: none;
+    }
 
-        #saldo-boleto-wrap {
-            border: 2px solid #ffa726; border-radius: 10px;
-            padding: 16px; background: #fff8f0; margin: 15px 0; display: none;
-        }
-        #saldo-boleto-wrap h3 { color: #e65100; }
-    </style>
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn:hover {
+      background: var(--primary2);
+    }
+
+    .btn.secondary {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: var(--danger);
+    }
+
+    .btn.success {
+      background: var(--success);
+    }
+
+    .btn.warning {
+      background: var(--warning);
+      color: #111827;
+    }
+
+    .btn.small {
+      padding: 6px 9px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 11px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
+    .positive {
+      color: #22c55e;
+      font-weight: 700;
+    }
+
+    .negative {
+      color: #ef4444;
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    .badge.disponible {
+      background: rgba(34,197,94,0.12);
+      color: #22c55e;
+    }
+
+    .badge.en_compra {
+      background: rgba(245,158,11,0.12);
+      color: #f59e0b;
+    }
+
+    .badge.comprada {
+      background: rgba(59,130,246,0.12);
+      color: #60a5fa;
+    }
+
+    .badge.en_refaccion {
+      background: rgba(168,85,247,0.12);
+      color: #c084fc;
+    }
+
+    .badge.vendida {
+      background: rgba(239,68,68,0.12);
+      color: #f87171;
+    }
+
+    .kpi {
+      background: rgba(2, 6, 23, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .kpi .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .kpi .value {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .result-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .result-bar-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(2, 6, 23, 0.45);
+    }
+
+    .result-bar-title {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .result-bar-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 140px;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .result-bar-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .result-bar-track {
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+      overflow: hidden;
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .result-bar-fill.investment {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+    }
+
+    .result-bar-fill.sale {
+      background: linear-gradient(90deg, #22c55e, #14b8a6);
+    }
+
+    .result-bar-value {
+      text-align: right;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .notice {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.35);
+      color: #bfdbfe;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .result-bar-row {
+        grid-template-columns: 1fr;
+      }
+
+      .result-bar-value {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div id="app"></div>
 
-<header>
-    <span style="font-size:2em">🏢</span>
-    <div>
-        <h1>Inversiones Inmobiliarias</h1>
-        <small style="opacity:.8">Gestión y Análisis de Rentabilidad</small>
-    </div>
-</header>
+  <script>
+    const STORAGE_KEY = "altan_group_inversiones_v3";
 
-<nav id="main-nav">
-    <button class="active" data-sec="propiedades">🏗️ Propiedades</button>
-    <button data-sec="compra">💵 Compra</button>
-    <button data-sec="refaccion">🔨 Refacción</button>
-    <button data-sec="venta">💰 Venta</button>
-    <button data-sec="resultados">📊 Resultados</button>
-    <button data-sec="inversores">👥 Inversores</button>
-    <button data-sec="auditoria">🔍 Auditoría</button>
-</nav>
-
-<div class="container">
-
-    <!-- PROPIEDADES -->
-    <div id="sec-propiedades" class="section active">
-        <div class="card">
-            <h2>🏗️ Nueva Propiedad</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Dirección *</label>
-                    <input type="text" id="p-dir" placeholder="Av. Corrientes 1234">
-                </div>
-                <div class="form-group">
-                    <label>Tipo</label>
-                    <select id="p-tipo">
-                        <option>Departamento</option><option>Casa</option>
-                        <option>Local Comercial</option><option>Oficina</option>
-                        <option>Terreno</option><option>PH</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Superficie (m²)</label>
-                    <input type="number" id="p-sup" placeholder="65">
-                </div>
-                <div class="form-group">
-                    <label>Barrio / Zona</label>
-                    <input type="text" id="p-barrio" placeholder="Palermo">
-                </div>
-                <div class="form-group">
-                    <label>Notas</label>
-                    <textarea id="p-notas" rows="2" placeholder="Observaciones..."></textarea>
-                </div>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="btn-add-prop">➕ Agregar Propiedad</button>
-        </div>
-        <div class="card">
-            <h2>📋 Propiedades Registradas</h2>
-            <div id="lista-propiedades"><div class="empty">🏠 No hay propiedades registradas</div></div>
-        </div>
-    </div>
-
-    <!-- COMPRA -->
-    <div id="sec-compra" class="section">
-        <div class="card">
-            <h2>💵 Registrar Compra</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="c-prop"></select>
-                </div>
-                <div class="form-group">
-                    <label>Inversor *</label>
-                    <select id="c-inv">
-                        <option value="Todos">👥 Todos</option>
-                        <option value="Gaston">🟢 Gastón</option>
-                        <option value="Hernan">🔵 Hernán</option>
-                        <option value="Santiago">🟣 Santiago</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Modalidad</label>
-                    <select id="c-mod">
-                        <option value="directa">Compra Directa</option>
-                        <option value="boleto">Boleto de Compra/Venta</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Fecha</label>
-                    <input type="date" id="c-fecha">
-                </div>
-                <div class="form-group">
-                    <label>Moneda</label>
-                    <select id="c-moneda">
-                        <option value="USD">USD</option>
-                        <option value="ARS">ARS</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Precio Total</label>
-                    <input type="number" id="c-precio" placeholder="80000">
-                </div>
-                <div class="form-group" id="grp-cotiz-c" style="display:none">
-                    <label>Cotización USD</label>
-                    <input type="number" id="c-cotiz" placeholder="1050">
-                </div>
-            </div>
-
-            <div id="div-compra-box" style="display:none; margin-top:12px">
-                <div class="alert alert-info" id="div-compra-txt"></div>
-                <div class="partes-grid" id="div-compra-partes"></div>
-            </div>
-
-            <div id="boleto-wrap" style="display:none; margin-top:12px; border:2px solid #ffa726; border-radius:8px; padding:14px; background:#fff8f0">
-                <h3 style="color:#e65100; margin-bottom:10px">📋 Boleto de Compra/Venta</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>% Pagado en Boleto</label>
-                        <input type="number" id="c-pct" placeholder="30" min="0" max="100">
-                    </div>
-                    <div class="form-group">
-                        <label>Monto Pagado</label>
-                        <input type="text" id="c-pagado" readonly style="background:#f5f5f5">
-                    </div>
-                    <div class="form-group">
-                        <label>Saldo Pendiente</label>
-                        <input type="text" id="c-saldo" readonly style="background:#fff3e0;color:#e65100;font-weight:600">
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha Escritura</label>
-                        <input type="date" id="c-fesc">
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top:14px">
-                <h3>💸 Gastos de Compra</h3>
-                <div id="gastos-compra"></div>
-                <button class="btn btn-warning btn-sm" id="btn-add-gasto-c">➕ Agregar Gasto</button>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="btn-save-compra">💾 Guardar Compra</button>
-        </div>
-        <div class="card">
-            <h2>📋 Compras Registradas</h2>
-            <div id="lista-compras"><div class="empty">💵 No hay compras registradas</div></div>
-        </div>
-    </div>
-
-    <!-- REFACCIÓN -->
-    <div id="sec-refaccion" class="section">
-        <div class="card">
-            <h2>🔨 Registrar Refacción</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="r-prop"></select>
-                </div>
-                <div class="form-group">
-                    <label>Cotización USD/ARS</label>
-                    <input type="number" id="r-cotiz" placeholder="1050" value="1050">
-                </div>
-            </div>
-            <br>
-            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px">
-                <button class="btn btn-sm b-tab active-tab" data-tab="obra" style="background:#e3f2fd;color:#1565c0;border:2px solid #90caf9">🏗️ Obra</button>
-                <button class="btn btn-sm b-tab" data-tab="impuestos" style="background:#f5f5f5;color:#555;border:2px solid #e0e0e0">📋 Impuestos</button>
-                <button class="btn btn-sm b-tab" data-tab="profesionales" style="background:#f5f5f5;color:#555;border:2px solid #e0e0e0">👷 Profesionales</button>
-                <button class="btn btn-sm b-tab" data-tab="otros" style="background:#f5f5f5;color:#555;border:2px solid #e0e0e0">📦 Otros</button>
-            </div>
-            <div id="ref-obra">
-                <div id="gastos-obra"></div>
-                <button class="btn btn-warning btn-sm btn-add-ref" data-cat="obra">➕ Agregar</button>
-            </div>
-            <div id="ref-impuestos" style="display:none">
-                <div id="gastos-impuestos"></div>
-                <button class="btn btn-warning btn-sm btn-add-ref" data-cat="impuestos">➕ Agregar</button>
-            </div>
-            <div id="ref-profesionales" style="display:none">
-                <div id="gastos-profesionales"></div>
-                <button class="btn btn-warning btn-sm btn-add-ref" data-cat="profesionales">➕ Agregar</button>
-            </div>
-            <div id="ref-otros" style="display:none">
-                <div id="gastos-otros"></div>
-                <button class="btn btn-warning btn-sm btn-add-ref" data-cat="otros">➕ Agregar</button>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="btn-save-ref">💾 Guardar Refacción</button>
-        </div>
-        <div class="card">
-            <h2>📋 Refacciones Registradas</h2>
-            <div id="lista-refacciones"><div class="empty">🔨 No hay refacciones registradas</div></div>
-        </div>
-    </div>
-
-    <!-- VENTA -->
-    <div id="sec-venta" class="section">
-        <div class="card">
-            <h2>💰 Registrar Venta</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Propiedad *</label>
-                    <select id="v-prop"></select>
-                </div>
-                <div class="form-group">
-                    <label>Inversor *</label>
-                    <select id="v-inv">
-                        <option value="Todos">👥 Todos</option>
-                        <option value="Gaston">🟢 Gastón</option>
-                        <option value="Hernan">🔵 Hernán</option>
-                        <option value="Santiago">🟣 Santiago</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Fecha Venta</label>
-                    <input type="date" id="v-fecha">
-                </div>
-                <div class="form-group">
-                    <label>Precio Venta (USD)</label>
-                    <input type="number" id="v-precio" placeholder="110000">
-                </div>
-                <div class="form-group">
-                    <label>Cotización USD</label>
-                    <input type="number" id="v-cotiz" placeholder="1050">
-                </div>
-            </div>
-
-            <div id="div-venta-box" style="display:none; margin-top:10px">
-                <div class="alert alert-success" id="div-venta-txt"></div>
-                <div class="partes-grid" id="div-venta-partes"></div>
-            </div>
-
-            <div id="saldo-boleto-wrap">
-                <h3>⚠️ Saldo Pendiente de Boleto</h3>
-                <div class="alert alert-warning" id="saldo-alert-txt"></div>
-                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px;background:white;border-radius:7px;border:2px solid #ffe0b2;margin-top:8px">
-                    <input type="checkbox" id="v-salda" style="width:18px;height:18px;accent-color:#e65100">
-                    <span><strong>✅ Se salda el saldo pendiente en esta escritura</strong> — se sumará a la inversión</span>
-                </label>
-                <div id="saldo-detalle" style="display:none; margin-top:10px; background:white; border-radius:7px; padding:12px; border:1px solid #ffe0b2">
-                    <table>
-                        <thead><tr><th>Concepto</th><th>%</th><th>Monto Original</th><th>USD equiv.</th></tr></thead>
-                        <tbody id="saldo-tbody"></tbody>
-                    </table>
-                    <div class="alert alert-warning" id="saldo-total-txt" style="margin-top:8px"></div>
-                    <div id="div-saldo-partes-box" style="display:none; margin-top:8px">
-                        <p style="font-weight:600;color:#e65100;margin-bottom:6px">División del saldo:</p>
-                        <div class="partes-grid" id="div-saldo-partes"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top:14px">
-                <h3>💸 Gastos de Venta</h3>
-                <div id="gastos-venta"></div>
-                <button class="btn btn-warning btn-sm" id="btn-add-gasto-v">➕ Agregar Gasto</button>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="btn-save-venta">💾 Guardar Venta</button>
-        </div>
-        <div class="card">
-            <h2>📋 Ventas Registradas</h2>
-            <div id="lista-ventas"><div class="empty">💰 No hay ventas registradas</div></div>
-        </div>
-    </div>
-
-    <!-- RESULTADOS -->
-    <div id="sec-resultados" class="section">
-        <div class="card">
-            <h2>📊 Resultados por Propiedad</h2>
-            <div class="form-group" style="max-width:400px">
-                <label>Seleccionar Propiedad</label>
-                <select id="res-prop"></select>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="btn-calc-res">📊 Calcular Resultados</button>
-        </div>
-        <div id="res-content"><div class="empty card">Seleccioná una propiedad y presioná Calcular</div></div>
-    </div>
-
-    <!-- INVERSORES -->
-    <div id="sec-inversores" class="section">
-        <div class="card">
-            <h2>👥 Panel de Inversores</h2>
-            <div class="alert alert-info">💡 Cuando una erogación es de <strong>Todos</strong>, se divide en partes iguales (33.33% c/u).</div>
-            <button class="btn btn-primary btn-sm" id="btn-refresh-inv" style="margin-bottom:15px">🔄 Actualizar</button>
-            <div id="inv-content"><div class="empty">Presioná Actualizar</div></div>
-        </div>
-    </div>
-
-    <!-- AUDITORÍA -->
-    <div id="sec-auditoria" class="section">
-        <div class="card">
-            <h2>🔍 Auditoría</h2>
-            <div class="filter-row">
-                <input type="text" id="aud-buscar" placeholder="🔍 Buscar...">
-                <select id="aud-tipo">
-                    <option value="">Todos los tipos</option>
-                    <option value="propiedad">Propiedad</option>
-                    <option value="compra">Compra</option>
-                    <option value="refaccion">Refacción</option>
-                    <option value="venta">Venta</option>
-                </select>
-                <select id="aud-inv">
-                    <option value="">Todos los inversores</option>
-                    <option value="Gaston">Gastón</option>
-                    <option value="Hernan">Hernán</option>
-                    <option value="Santiago">Santiago</option>
-                    <option value="Todos">Todos</option>
-                </select>
-                <button class="btn btn-info btn-sm" id="btn-export-csv">📥 Exportar CSV</button>
-            </div>
-            <div id="aud-content"><div class="empty">Sin registros</div></div>
-        </div>
-    </div>
-
-</div>
-
-<!-- Modal confirmación -->
-<div class="modal-bg" id="modal-bg">
-    <div class="modal-box">
-        <h3>⚠️ Confirmar eliminación</h3>
-        <p>¿Estás seguro? Esta acción no se puede deshacer.</p>
-        <div class="modal-btns">
-            <button class="btn btn-danger" id="btn-confirm-del">🗑️ Eliminar</button>
-            <button class="btn" style="background:#eee" id="btn-cancel-del">Cancelar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-// ─────────────────────────────────────────────
-//  CONSTANTES
-// ─────────────────────────────────────────────
-const INV_LISTA  = ['Gaston','Hernan','Santiago'];
-const INV_LABEL  = { Gaston:'🟢 Gastón', Hernan:'🔵 Hernán', Santiago:'🟣 Santiago', Todos:'👥 Todos' };
-const INV_CLASS  = { Gaston:'gaston', Hernan:'hernan', Santiago:'santiago', Todos:'todos' };
-const INV_BADGE  = { Gaston:'b-gaston', Hernan:'b-hernan', Santiago:'b-santiago', Todos:'b-todos' };
-
-// ─────────────────────────────────────────────
-//  ESTADO
-// ─────────────────────────────────────────────
-var DB = { props:[], compras:[], refs:[], ventas:[], audit:[] };
-var pendingDel = null;
-
-function save() { try { localStorage.setItem('inm_v5', JSON.stringify(DB)); } catch(e){} }
-function load() { try { var s=localStorage.getItem('inm_v5'); if(s) DB=JSON.parse(s); } catch(e){} }
-
-// ─────────────────────────────────────────────
-//  UTILS
-// ─────────────────────────────────────────────
-function uid()      { return Date.now().toString(36)+Math.random().toString(36).substr(2); }
-function usd(n)     { return '$\u00a0'+parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function ars(n)     { return 'ARS\u00a0'+parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:0}); }
-function fFecha(f)  { if(!f) return '-'; var p=f.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
-function hoy()      { return new Date().toISOString().split('T')[0]; }
-function el(id)     { return document.getElementById(id); }
-function val(id)    { var e=el(id); return e?e.value:''; }
-function fval(id)   { return parseFloat(val(id))||0; }
-
-function partes(inv, total) {
-    if (inv === 'Todos') {
-        return INV_LISTA.map(function(n){ return { nombre:n, monto:total/3, pct:33.33 }; });
-    }
-    return [{ nombre:inv, monto:total, pct:100 }];
-}
-
-function addAudit(tipo, propId, desc, inv) {
-    DB.audit.push({ id:uid(), ts:new Date().toISOString(), tipo:tipo, propId:propId, desc:desc, inv:inv||'—' });
-}
-
-function htmlPartes(lista) {
-    return lista.map(function(p){
-        return '<div class="parte-box '+INV_CLASS[p.nombre]+'">'+INV_LABEL[p.nombre]+'<br><span style="font-size:1.1em">'+usd(p.monto)+'</span><br><small>'+p.pct.toFixed(1)+'%</small></div>';
-    }).join('');
-}
-
-// ─────────────────────────────────────────────
-//  NAVEGACIÓN
-// ─────────────────────────────────────────────
-function goTo(sec) {
-    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
-    document.querySelectorAll('#main-nav button').forEach(function(b){ b.classList.remove('active'); });
-    var s = el('sec-'+sec);
-    if (s) s.classList.add('active');
-    var btn = document.querySelector('#main-nav button[data-sec="'+sec+'"]');
-    if (btn) btn.classList.add('active');
-
-    if (sec==='compra')     fillSelect('c-prop');
-    if (sec==='refaccion')  fillSelect('r-prop');
-    if (sec==='venta')      { fillSelect('v-prop'); resetVenta(); }
-    if (sec==='resultados') fillSelect('res-prop');
-    if (sec==='inversores') renderInversores();
-    if (sec==='auditoria')  renderAudit();
-}
-
-document.querySelectorAll('#main-nav button').forEach(function(btn){
-    btn.addEventListener('click', function(){ goTo(this.getAttribute('data-sec')); });
-});
-
-// ─────────────────────────────────────────────
-//  SELECTORES DE PROPIEDAD
-// ─────────────────────────────────────────────
-function fillSelect(id) {
-    var sel = el(id);
-    if (!sel) return;
-    var cur = sel.value;
-    sel.innerHTML = '<option value="">-- Seleccionar --</option>';
-    DB.props.forEach(function(p){
-        sel.innerHTML += '<option value="'+p.id+'"'+(p.id===cur?' selected':'')+'>'+p.dir+' ('+p.tipo+')</option>';
-    });
-}
-
-// ─────────────────────────────────────────────
-//  PROPIEDADES
-// ─────────────────────────────────────────────
-el('btn-add-prop').addEventListener('click', function(){
-    var dir = el('p-dir').value.trim();
-    if (!dir) { alert('⚠️ Ingresá la dirección'); return; }
-    var p = {
-        id:uid(), dir:dir, tipo:val('p-tipo'),
-        sup:val('p-sup'), barrio:val('p-barrio'),
-        notas:val('p-notas'), alta:hoy(), estado:'disponible'
-    };
-    DB.props.push(p);
-    addAudit('propiedad', p.id, 'Alta: '+p.dir, '—');
-    save(); renderProps();
-    ['p-dir','p-sup','p-barrio','p-notas'].forEach(function(id){ el(id).value=''; });
-});
-
-function renderProps() {
-    var c = el('lista-propiedades');
-    if (!DB.props.length) { c.innerHTML='<div class="empty">🏠 No hay propiedades</div>'; return; }
-    var h = '<table><thead><tr><th>Dirección</th><th>Tipo</th><th>m²</th><th>Barrio</th><th>Estado</th><th>Alta</th><th></th></tr></thead><tbody>';
-    DB.props.forEach(function(p){
-        var est = p.estado==='vendida'?'<span class="badge b-green">✅ Vendida</span>':
-                  p.estado==='en_ref'?'<span class="badge b-orange">🔨 Refacción</span>':
-                  '<span class="badge b-blue">🏠 Disponible</span>';
-        h += '<tr><td><strong>'+p.dir+'</strong></td><td>'+p.tipo+'</td><td>'+(p.sup||'-')+'</td><td>'+(p.barrio||'-')+'</td><td>'+est+'</td><td>'+fFecha(p.alta)+'</td>';
-        h += '<td><button class="btn btn-danger btn-sm" data-del-prop="'+p.id+'">🗑️</button></td></tr>';
-    });
-    c.innerHTML = h+'</tbody></table>';
-    c.querySelectorAll('[data-del-prop]').forEach(function(btn){
-        btn.addEventListener('click', function(){ abrirModal('prop', this.getAttribute('data-del-prop')); });
-    });
-}
-
-// ─────────────────────────────────────────────
-//  COMPRA — eventos
-// ─────────────────────────────────────────────
-el('c-mod').addEventListener('change', function(){
-    el('boleto-wrap').style.display = this.value==='boleto' ? 'block' : 'none';
-    actuDivCompra();
-});
-
-el('c-moneda').addEventListener('change', function(){
-    el('grp-cotiz-c').style.display = this.value==='ARS' ? 'block' : 'none';
-    actuDivCompra();
-});
-
-el('c-precio').addEventListener('input', function(){ calcBoleto(); actuDivCompra(); });
-el('c-cotiz').addEventListener('input',  function(){ calcBoleto(); actuDivCompra(); });
-el('c-pct').addEventListener('input',    function(){ calcBoleto(); actuDivCompra(); });
-el('c-inv').addEventListener('change',   function(){ actuDivCompra(); });
-
-function calcBoleto() {
-    var total = fval('c-precio');
-    var pct   = fval('c-pct');
-    var pag   = total * pct / 100;
-    el('c-pagado').value = usd(pag);
-    el('c-saldo').value  = usd(total - pag);
-}
-
-function actuDivCompra() {
-    var inv    = val('c-inv');
-    var moneda = val('c-moneda');
-    var precio = fval('c-precio');
-    var cotiz  = fval('c-cotiz') || 1;
-    var pUSD   = moneda==='ARS' ? precio/cotiz : precio;
-    var mod    = val('c-mod');
-    var pct    = mod==='boleto' ? fval('c-pct') : 100;
-    var pagUSD = pUSD * pct / 100;
-
-    if (!precio) { el('div-compra-box').style.display='none'; return; }
-    el('div-compra-box').style.display = 'block';
-
-    var ps = partes(inv, pagUSD);
-    el('div-compra-txt').innerHTML = inv==='Todos'
-        ? '👥 <strong>Erogación compartida</strong> — '+usd(pagUSD)+' ÷ 3 = '+usd(pagUSD/3)+' c/u'
-        : INV_LABEL[inv]+' asume la totalidad: <strong>'+usd(pagUSD)+'</strong>';
-    el('div-compra-partes').innerHTML = htmlPartes(ps);
-}
-
-el('btn-add-gasto-c').addEventListener('click', function(){ addGastoRow('gastos-compra','c'); });
-
-el('btn-save-compra').addEventListener('click', function(){
-    var propId = val('c-prop');
-    var precio = fval('c-precio');
-    var inv    = val('c-inv');
-    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-    if (!precio) { alert('⚠️ Ingresá el precio'); return; }
-
-    var moneda = val('c-moneda');
-    var cotiz  = fval('c-cotiz') || 1;
-    var pUSD   = moneda==='ARS' ? precio/cotiz : precio;
-    var mod    = val('c-mod');
-    var pct    = mod==='boleto' ? fval('c-pct') : 100;
-    var saldPct= 100 - pct;
-    var pagUSD = pUSD * pct / 100;
-    var gastos = getGastosRows('gastos-compra','c');
-    var totGast= gastos.reduce(function(s,g){ return s+g.usd; },0);
-
-    var c = {
-        id:uid(), propId:propId, inv:inv, fecha:val('c-fecha'),
-        mod:mod, moneda:moneda, precio:precio, pUSD:pUSD, cotiz:cotiz,
-        pct:pct, saldPct:saldPct,
-        saldUSD:  pUSD * saldPct / 100,
-        saldOrig: precio * saldPct / 100,
-        fEsc:val('c-fesc'), gastos:gastos, totGast:totGast,
-        pagUSD:pagUSD, totInv:pagUSD+totGast, saldado:false
+    let state = null;
+    let currentUser = null;
+    let activeTab = "inicio";
+    let editing = {
+      propertyId: null,
+      purchaseId: null,
+      renovationId: null,
+      saleId: null
     };
 
-    var prop = DB.props.find(function(p){ return p.id===propId; });
-    if (prop) prop.estado = 'comprada';
+    const initialUsers = [
+      { id: "gaston", name: "Gaston", password: "1234", role: "admin" },
+      { id: "hernan", name: "Hernan", password: "1234", role: "investor" },
+      { id: "santiago", name: "Santiago", password: "1234", role: "investor" }
+    ];
 
-    var idx = DB.compras.findIndex(function(x){ return x.propId===propId; });
-    if (idx>=0) DB.compras[idx]=c; else DB.compras.push(c);
-
-    addAudit('compra', propId,
-        'Compra '+usd(pUSD)+' — Inv: '+inv+(inv==='Todos'?' ('+usd(pagUSD/3)+' c/u)':'')
-        +' — '+mod, inv);
-    save(); renderCompras(); renderProps();
-    alert('✅ Compra guardada');
-});
-
-function renderCompras() {
-    var c = el('lista-compras');
-    if (!DB.compras.length) { c.innerHTML='<div class="empty">💵 Sin compras</div>'; return; }
-    var h='<table><thead><tr><th>Propiedad</th><th>Inversor</th><th>Modalidad</th><th>Precio USD</th><th>Pagado</th><th>Saldo</th><th>Fecha</th></tr></thead><tbody>';
-    DB.compras.forEach(function(c){
-        var prop=DB.props.find(function(p){ return p.id===c.propId; });
-        var saldBadge = c.mod==='boleto'
-            ? (c.saldado ? '<span class="badge b-green">✅ Saldado</span>' : '<span class="badge b-orange">⏳ '+usd(c.saldUSD)+'</span>')
-            : '<span class="badge b-blue">N/A</span>';
-        h+='<tr>';
-        h+='<td><strong>'+(prop?prop.dir:'?')+'</strong></td>';
-        h+='<td><span class="badge '+INV_BADGE[c.inv]+'">'+INV_LABEL[c.inv]+'</span>'+(c.inv==='Todos'?'<br><small>'+usd(c.pagUSD/3)+' c/u</small>':'')+'</td>';
-        h+='<td>'+(c.mod==='boleto'?'📋 Boleto':'💵 Directa')+'</td>';
-        h+='<td>'+usd(c.pUSD)+'</td>';
-        h+='<td>'+usd(c.pagUSD)+' ('+c.pct+'%)</td>';
-        h+='<td>'+saldBadge+'</td>';
-        h+='<td>'+fFecha(c.fecha)+'</td>';
-        h+='</tr>';
-    });
-    c.innerHTML=h+'</tbody></table>';
-}
-
-// ─────────────────────────────────────────────
-//  GASTOS — helpers genéricos
-// ─────────────────────────────────────────────
-function addGastoRow(containerId, prefix) {
-    var cont = el(containerId);
-    var div  = document.createElement('div');
-    div.className = 'gasto-row';
-    div.innerHTML =
-        '<input type="text" placeholder="Descripción" style="flex:2;min-width:120px">'+
-        '<select class="sel-inv-'+prefix+'" style="min-width:110px">'+
-            '<option value="Todos">👥 Todos</option>'+
-            '<option value="Gaston">🟢 Gastón</option>'+
-            '<option value="Hernan">🔵 Hernán</option>'+
-            '<option value="Santiago">🟣 Santiago</option>'+
-        '</select>'+
-        '<select class="sel-mon-'+prefix+'" style="min-width:70px">'+
-            '<option value="USD">USD</option>'+
-            '<option value="ARS">ARS</option>'+
-        '</select>'+
-        '<input type="number" placeholder="Monto" style="flex:1;min-width:90px">'+
-        '<input type="number" placeholder="Cotiz" style="flex:1;min-width:80px;display:none" class="inp-cotiz-'+prefix+'">'+
-        '<button type="button" style="background:#c62828;color:white;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-weight:600">✕</button>';
-
-    div.querySelector('.sel-mon-'+prefix).addEventListener('change', function(){
-        div.querySelector('.inp-cotiz-'+prefix).style.display = this.value==='ARS' ? 'block' : 'none';
-    });
-    div.querySelector('button').addEventListener('click', function(){ div.remove(); });
-    cont.appendChild(div);
-}
-
-function getGastosRows(containerId, prefix) {
-    var rows = el(containerId).querySelectorAll('.gasto-row');
-    var out  = [];
-    rows.forEach(function(row){
-        var inputs = row.querySelectorAll('input');
-        var desc   = inputs[0] ? inputs[0].value.trim() : '';
-        var inv    = row.querySelector('.sel-inv-'+prefix) ? row.querySelector('.sel-inv-'+prefix).value : 'Todos';
-        var moneda = row.querySelector('.sel-mon-'+prefix) ? row.querySelector('.sel-mon-'+prefix).value : 'USD';
-        var monto  = parseFloat(inputs[1] ? inputs[1].value : 0)||0;
-        var cotiz  = parseFloat(inputs[2] ? inputs[2].value : 0)||1050;
-        if (monto) {
-            var montoUSD = moneda==='ARS' ? monto/cotiz : monto;
-            out.push({ desc:desc, inv:inv, moneda:moneda, monto:monto, cotiz:cotiz, usd:montoUSD,
-                       pts:partes(inv, montoUSD) });
-        }
-    });
-    return out;
-}
-
-// ─────────────────────────────────────────────
-//  REFACCIÓN
-// ─────────────────────────────────────────────
-var CATS = {
-    obra:['Albañilería','Pintura','Plomería','Electricidad','Carpintería','Pisos','Demolición','Otros'],
-    impuestos:['ABL','AGIP','Agua','Luz','Gas','Expensas','Sellado','Otros'],
-    profesionales:['Arquitecto','Ingeniero','Maestro Mayor','Plomero','Electricista','Escribano','Otros'],
-    otros:['Materiales','Herramientas','Transporte','Limpieza','Seguros','Otros']
-};
-
-// Tabs de refacción
-document.querySelectorAll('.b-tab').forEach(function(btn){
-    btn.addEventListener('click', function(){
-        var tab = this.getAttribute('data-tab');
-        ['obra','impuestos','profesionales','otros'].forEach(function(t){
-            el('ref-'+t).style.display = t===tab ? 'block' : 'none';
-        });
-        document.querySelectorAll('.b-tab').forEach(function(b){
-            b.style.background='#f5f5f5'; b.style.color='#555'; b.style.border='2px solid #e0e0e0';
-        });
-        this.style.background='#e3f2fd'; this.style.color='#1565c0'; this.style.border='2px solid #90caf9';
-    });
-});
-
-// Botones agregar por categoría
-document.querySelectorAll('.btn-add-ref').forEach(function(btn){
-    btn.addEventListener('click', function(){
-        var cat = this.getAttribute('data-cat');
-        addRefRow(cat);
-    });
-});
-
-function addRefRow(cat) {
-    var cont = el('gastos-'+cat);
-    var div  = document.createElement('div');
-    div.className = 'gasto-row';
-    var opts = (CATS[cat]||['Otros']).map(function(c){ return '<option>'+c+'</option>'; }).join('');
-    div.innerHTML =
-        '<select style="min-width:120px">'+opts+'</select>'+
-        '<input type="text" placeholder="Detalle" style="flex:2;min-width:100px">'+
-        '<select class="sel-inv-r" style="min-width:110px">'+
-            '<option value="Todos">👥 Todos</option>'+
-            '<option value="Gaston">🟢 Gastón</option>'+
-            '<option value="Hernan">🔵 Hernán</option>'+
-            '<option value="Santiago">🟣 Santiago</option>'+
-        '</select>'+
-        '<select class="sel-mon-r" style="min-width:70px">'+
-            '<option value="ARS">ARS</option>'+
-            '<option value="USD">USD</option>'+
-        '</select>'+
-        '<input type="number" placeholder="Monto" style="flex:1;min-width:90px">'+
-        '<input type="number" placeholder="Cotiz" style="flex:1;min-width:80px" class="inp-cotiz-r">'+
-        '<input type="date" style="min-width:130px">'+
-        '<button type="button" style="background:#c62828;color:white;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-weight:600">✕</button>';
-
-    div.querySelector('.sel-mon-r').addEventListener('change', function(){
-        // cotización siempre visible en ref (ARS es la moneda principal)
-    });
-    div.querySelector('button').addEventListener('click', function(){ div.remove(); });
-    cont.appendChild(div);
-}
-
-function getRefRows(cat) {
-    var rows = el('gastos-'+cat).querySelectorAll('.gasto-row');
-    var out  = [];
-    var cotizGlobal = fval('r-cotiz') || 1050;
-    rows.forEach(function(row){
-        var sels   = row.querySelectorAll('select');
-        var inputs = row.querySelectorAll('input');
-        var subcat = sels[0] ? sels[0].value : '';
-        var detalle= inputs[0] ? inputs[0].value : '';
-        var inv    = sels[1] ? sels[1].value : 'Todos';
-        var moneda = sels[2] ? sels[2].value : 'ARS';
-        var monto  = parseFloat(inputs[1] ? inputs[1].value : 0)||0;
-        var cotiz  = parseFloat(inputs[2] ? inputs[2].value : 0)||cotizGlobal;
-        var fecha  = inputs[3] ? inputs[3].value : '';
-        if (monto) {
-            var montoUSD = moneda==='ARS' ? monto/cotiz : monto;
-            out.push({ cat:cat, subcat:subcat, detalle:detalle, inv:inv,
-                       moneda:moneda, monto:monto, cotiz:cotiz, usd:montoUSD,
-                       fecha:fecha, pts:partes(inv, montoUSD) });
-        }
-    });
-    return out;
-}
-
-el('btn-save-ref').addEventListener('click', function(){
-    var propId = val('r-prop');
-    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-
-    var cotiz  = fval('r-cotiz')||1050;
-    var gObra  = getRefRows('obra');
-    var gImp   = getRefRows('impuestos');
-    var gProf  = getRefRows('profesionales');
-    var gOtros = getRefRows('otros');
-    var todos  = gObra.concat(gImp).concat(gProf).concat(gOtros);
-    var total  = todos.reduce(function(s,g){ return s+g.usd; },0);
-
-    if (!todos.length) { alert('⚠️ Agregá al menos un gasto'); return; }
-
-    var ref = { id:uid(), propId:propId, cotiz:cotiz,
-                obra:gObra, imp:gImp, prof:gProf, otros:gOtros, total:total, fecha:hoy() };
-
-    var prop = DB.props.find(function(p){ return p.id===propId; });
-    if (prop && prop.estado!=='vendida') prop.estado='en_ref';
-
-    var idx = DB.refs.findIndex(function(r){ return r.propId===propId; });
-    if (idx>=0) {
-        ['obra','imp','prof','otros'].forEach(function(k){
-            DB.refs[idx][k] = DB.refs[idx][k].concat(ref[k]);
-        });
-        DB.refs[idx].total += total;
-    } else {
-        DB.refs.push(ref);
+    function createInitialState() {
+      return {
+        users: structuredClone(initialUsers),
+        properties: [],
+        purchases: [],
+        renovations: [],
+        sales: [],
+        createdAt: new Date().toISOString()
+      };
     }
 
-    addAudit('refaccion', propId, 'Refacción '+usd(total)+' — '+todos.length+' ítems', '—');
-    save(); renderRefs(); renderProps();
-    ['obra','impuestos','profesionales','otros'].forEach(function(c){ el('gastos-'+c).innerHTML=''; });
-    alert('✅ Refacción guardada');
-});
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
 
-function renderRefs() {
-    var cont = el('lista-refacciones');
-    if (!DB.refs.length) { cont.innerHTML='<div class="empty">🔨 Sin refacciones</div>'; return; }
-    var h = '';
-    DB.refs.forEach(function(r){
-        var prop = DB.props.find(function(p){ return p.id===r.propId; });
-        h += '<div class="card" style="margin-bottom:10px"><h3>🔨 '+(prop?prop.dir:'?')+' — Total: '+usd(r.total)+'</h3>';
-        var cats = [{lbl:'🏗️ Obra',items:r.obra},{lbl:'📋 Impuestos',items:r.imp},
-                    {lbl:'👷 Profesionales',items:r.prof},{lbl:'📦 Otros',items:r.otros}];
-        cats.forEach(function(cat){
-            if (!cat.items||!cat.items.length) return;
-            h += '<p style="margin:8px 0 4px;font-weight:600">'+cat.lbl+'</p>';
-            h += '<table><thead><tr><th>Subcategoría</th><th>Detalle</th><th>Inversor</th><th>Monto</th><th>USD</th></tr></thead><tbody>';
-            cat.items.forEach(function(g){
-                h += '<tr><td>'+g.subcat+'</td><td>'+(g.detalle||'-')+'</td>';
-                h += '<td><span class="badge '+INV_BADGE[g.inv]+'">'+INV_LABEL[g.inv]+'</span>';
-                if (g.inv==='Todos') h += '<br><small>'+usd(g.usd/3)+' c/u</small>';
-                h += '</td>';
-                h += '<td>'+(g.moneda==='ARS'?ars(g.monto):usd(g.monto))+'</td>';
-                h += '<td>'+usd(g.usd)+'</td></tr>';
+      if (!raw) {
+        state = createInitialState();
+        saveState();
+        return;
+      }
+
+      try {
+        state = JSON.parse(raw);
+      } catch {
+        state = createInitialState();
+      }
+
+      if (!Array.isArray(state.users)) state.users = [];
+      if (!Array.isArray(state.properties)) state.properties = [];
+      if (!Array.isArray(state.purchases)) state.purchases = [];
+      if (!Array.isArray(state.renovations)) state.renovations = [];
+      if (!Array.isArray(state.sales)) state.sales = [];
+
+      ensureInitialUsers();
+      migrateData();
+      updateStatuses();
+      saveState();
+    }
+
+    function ensureInitialUsers() {
+      initialUsers.forEach(user => {
+        const exists = state.users.some(u => u.id === user.id);
+        if (!exists) state.users.push({ ...user });
+      });
+
+      state.users = state.users.filter((user, index, arr) => {
+        return arr.findIndex(u => u.id === user.id) === index;
+      });
+    }
+
+    function migrateData() {
+      state.properties.forEach(p => {
+        delete p.shares;
+        delete p.participations;
+        delete p.investors;
+        if (!p.id) p.id = uid();
+        if (!p.status) p.status = "disponible";
+      });
+
+      state.purchases.forEach(p => {
+        if (!p.id) p.id = uid();
+        if (!p.modality) p.modality = "escritura";
+        p.priceUsd = num(p.priceUsd || p.amountUsd || 0);
+
+        if (p.amountPaid === undefined) {
+          p.amountPaid = p.modality === "boleto"
+            ? num(p.amountUsd || 0)
+            : p.priceUsd;
+        }
+
+        p.pendingBalance = Math.max(0, p.priceUsd - num(p.amountPaid));
+
+        p.commissionExpense = num(p.commissionExpense);
+        p.deedExpense = num(p.deedExpense);
+        p.miscExpense = num(p.miscExpense);
+        if (!p.payerId) p.payerId = "equipo";
+      });
+
+      state.renovations.forEach(r => {
+        if (!r.id) r.id = uid();
+        r.amountUsd = num(r.amountUsd);
+        if (!r.payerId) r.payerId = "equipo";
+      });
+
+      state.sales.forEach(s => {
+        if (!s.id) s.id = uid();
+        s.salePriceUsd = num(s.salePriceUsd || s.priceUsd || 0);
+        s.commissionExpense = num(s.commissionExpense);
+        s.deedExpense = num(s.deedExpense);
+        s.miscExpense = num(s.miscExpense);
+        if (!s.payerId) s.payerId = "equipo";
+      });
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function uid() {
+      return "id_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+    }
+
+    function num(value) {
+      return Number(value || 0);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatUSD(value) {
+      return new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(num(value));
+    }
+
+    function formatPct(value) {
+      return `${num(value).toFixed(2)}%`;
+    }
+
+    function getInvestorUsers() {
+      return state.users.filter(u => u.id !== "equipo");
+    }
+
+    function isTeamPayer(payerId) {
+      return payerId === "equipo" || payerId === "Equipo";
+    }
+
+    function getUserName(id) {
+      if (isTeamPayer(id)) return "Equipo";
+      return state.users.find(u => u.id === id)?.name || "-";
+    }
+
+    function getPropertyById(id) {
+      return state.properties.find(p => p.id === id);
+    }
+
+    function getPropertyName(id) {
+      return getPropertyById(id)?.name || "-";
+    }
+
+    function getAvailableProperties() {
+      return state.properties.filter(p => p.status !== "vendida");
+    }
+
+    function getPropertyInvestorShares(propertyId) {
+      const investors = getInvestorUsers();
+      if (!investors.length) return [];
+
+      const equalPct = 1 / investors.length;
+
+      return investors.map(user => ({
+        userId: user.id,
+        pct: equalPct
+      }));
+    }
+
+    function updateStatuses() {
+      state.properties.forEach(property => {
+        const purchases = state.purchases.filter(p => p.propertyId === property.id);
+        const renovations = state.renovations.filter(r => r.propertyId === property.id);
+        const sales = state.sales.filter(s => s.propertyId === property.id);
+
+        if (sales.length > 0) {
+          property.status = "vendida";
+          return;
+        }
+
+        if (renovations.length > 0) {
+          property.status = "en_refaccion";
+          return;
+        }
+
+        if (purchases.length > 0) {
+          const agreed = purchases.reduce((sum, p) => sum + num(p.priceUsd), 0);
+          const paid = purchases.reduce((sum, p) => sum + num(p.amountPaid), 0);
+
+          property.status = paid >= agreed && agreed > 0
+            ? "comprada"
+            : "en_compra";
+          return;
+        }
+
+        property.status = "disponible";
+      });
+    }
+
+    function statusLabel(status) {
+      const labels = {
+        disponible: "Disponible",
+        en_compra: "En compra",
+        comprada: "Comprada",
+        en_refaccion: "En refacción",
+        vendida: "Vendida"
+      };
+
+      return labels[status] || status;
+    }
+
+    function renderStatus(status) {
+      return `<span class="badge ${status}">${statusLabel(status)}</span>`;
+    }
+
+    function payerOptions(selected = "equipo") {
+      const options = [
+        `<option value="equipo" ${selected === "equipo" ? "selected" : ""}>Equipo</option>`
+      ];
+
+      getInvestorUsers().forEach(user => {
+        options.push(`
+          <option value="${user.id}" ${selected === user.id ? "selected" : ""}>
+            ${escapeHtml(user.name)}
+          </option>
+        `);
+      });
+
+      return options.join("");
+    }
+
+    function propertyOptions(selected = "", onlyAvailable = true) {
+      const list = onlyAvailable ? getAvailableProperties() : state.properties;
+
+      if (!list.length) {
+        return `<option value="">No hay propiedades disponibles</option>`;
+      }
+
+      return [
+        `<option value="">Seleccionar propiedad</option>`,
+        ...list.map(p => `
+          <option value="${p.id}" ${selected === p.id ? "selected" : ""}>
+            ${escapeHtml(p.name)} - ${statusLabel(p.status)}
+          </option>
+        `)
+      ].join("");
+    }
+
+    function getSaleAmount(item) {
+      return num(item.salePriceUsd || item.priceUsd || item.amountUsd || item.valueUsd);
+    }
+
+    function getPurchasePendingBalance(item) {
+      return num(item.pendingBalance || item.balancePending || item.boletoPendingBalance);
+    }
+
+    function getPropertyFinancialResult(propertyId) {
+      const purchases = state.purchases.filter(item => item.propertyId === propertyId);
+      const renovations = state.renovations.filter(item => item.propertyId === propertyId);
+      const sales = state.sales.filter(item => item.propertyId === propertyId);
+
+      const purchasePaid = purchases.reduce((sum, item) => {
+        return sum + num(item.amountPaid || item.amountUsd || item.priceUsd);
+      }, 0);
+
+      const purchaseExpenses = purchases.reduce((sum, item) => {
+        return sum +
+          num(item.commissionExpense) +
+          num(item.deedExpense) +
+          num(item.miscExpense);
+      }, 0);
+
+      const renovationsTotal = renovations.reduce((sum, item) => {
+        return sum + num(item.amountUsd);
+      }, 0);
+
+      const saleExpenses = sales.reduce((sum, item) => {
+        return sum +
+          num(item.commissionExpense) +
+          num(item.deedExpense) +
+          num(item.miscExpense);
+      }, 0);
+
+      const pendingBoletoBalance = purchases.reduce((sum, item) => {
+        return sum + getPurchasePendingBalance(item);
+      }, 0);
+
+      const grossSale = sales.reduce((sum, item) => {
+        return sum + getSaleAmount(item);
+      }, 0);
+
+      const netSale = grossSale - pendingBoletoBalance;
+
+      const effectiveInvestment =
+        purchasePaid +
+        purchaseExpenses +
+        renovationsTotal +
+        saleExpenses;
+
+      const profit = sales.length > 0
+        ? netSale - effectiveInvestment
+        : 0;
+
+      const profitability = effectiveInvestment > 0
+        ? profit / effectiveInvestment * 100
+        : 0;
+
+      return {
+        propertyId,
+        isSold: sales.length > 0,
+        purchasePaid,
+        purchaseExpenses,
+        renovationsTotal,
+        saleExpenses,
+        pendingBoletoBalance,
+        grossSale,
+        netSale,
+        effectiveInvestment,
+        profit,
+        profitability
+      };
+    }
+
+    function renderPropertyProfitability(propertyId) {
+      const result = getPropertyFinancialResult(propertyId);
+
+      if (!result.isSold) {
+        return `<span class="muted">-</span>`;
+      }
+
+      const className = result.profitability >= 0 ? "positive" : "negative";
+
+      return `
+        <div class="${className}">
+          ${formatPct(result.profitability)}
+        </div>
+        <div class="small muted">
+          Resultado: ${formatUSD(result.profit)}
+        </div>
+      `;
+    }
+
+    function login(userId, password) {
+      const user = state.users.find(u => u.id === userId && u.password === password);
+
+      if (!user) {
+        alert("Usuario o clave incorrecta");
+        return;
+      }
+
+      currentUser = user;
+      activeTab = "inicio";
+      renderApp();
+    }
+
+    function logout() {
+      currentUser = null;
+      renderApp();
+    }
+
+    function renderLogin() {
+      const users = getInvestorUsers();
+
+      document.getElementById("app").innerHTML = `
+        <div class="login-page">
+          <div class="login-card">
+            <h1>🏢 Altan Group</h1>
+            <p class="subtitle">Gestión inmobiliaria e inversiones</p>
+
+            <div class="field">
+              <label>Usuario</label>
+              <select id="loginUser">
+                ${users.map(u => `<option value="${u.id}">${escapeHtml(u.name)}</option>`).join("")}
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Clave</label>
+              <input id="loginPassword" type="password" placeholder="Clave" />
+            </div>
+
+            <button class="btn" style="width:100%;" onclick="login(
+              document.getElementById('loginUser').value,
+              document.getElementById('loginPassword').value
+            )">
+              Ingresar
+            </button>
+
+            <p class="small muted" style="margin-top:14px;">
+              Clave inicial para todos: 1234
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderApp() {
+      if (!currentUser) {
+        renderLogin();
+        return;
+      }
+
+      updateStatuses();
+      saveState();
+
+      const tabs = [
+        ["inicio", "🏠 Inicio"],
+        ["propiedades", "🏘️ Propiedades"],
+        ["compras", "🧾 Compra"],
+        ["refacciones", "🛠️ Refacción"],
+        ["ventas", "💰 Venta"],
+        ["resumen", "📊 Resultados"]
+      ];
+
+      if (currentUser.role === "admin") {
+        tabs.push(["config", "⚙️ Configuración"]);
+      }
+
+      document.getElementById("app").innerHTML = `
+        <header>
+          <div>
+            <h1>Altan Group</h1>
+            <div class="subtitle">Sesión: ${escapeHtml(currentUser.name)} · Rol: ${escapeHtml(currentUser.role)}</div>
+          </div>
+
+          <button class="btn secondary" onclick="logout()">Salir</button>
+        </header>
+
+        <main>
+          <div class="tabs">
+            ${tabs.map(([id, label]) => `
+              <button class="tab ${activeTab === id ? "active" : ""}" onclick="setTab('${id}')">
+                ${label}
+              </button>
+            `).join("")}
+          </div>
+
+          <div id="content">
+            ${renderTab()}
+          </div>
+        </main>
+      `;
+    }
+
+    function setTab(tab) {
+      activeTab = tab;
+      renderApp();
+    }
+
+    function renderTab() {
+      if (activeTab === "inicio") return renderHome();
+      if (activeTab === "propiedades") return renderProperties();
+      if (activeTab === "compras") return renderPurchases();
+      if (activeTab === "refacciones") return renderRenovations();
+      if (activeTab === "ventas") return renderSales();
+      if (activeTab === "resumen") return renderSummary();
+      if (activeTab === "config") return renderConfig();
+
+      return renderHome();
+    }
+
+    function renderHome() {
+      const totalProperties = state.properties.length;
+      const sold = state.properties.filter(p => p.status === "vendida").length;
+      const available = state.properties.filter(p => p.status === "disponible").length;
+
+      const totalInvestment = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).effectiveInvestment;
+      }, 0);
+
+      const totalNetSale = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).netSale;
+      }, 0);
+
+      const totalProfit = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).profit;
+      }, 0);
+
+      return `
+        <div class="grid grid-4">
+          <div class="kpi">
+            <div class="label">Propiedades</div>
+            <div class="value">${totalProperties}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Disponibles</div>
+            <div class="value">${available}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Vendidas</div>
+            <div class="value">${sold}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Resultado total</div>
+            <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">${formatUSD(totalProfit)}</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📌 Resumen general</h3>
+          <div class="grid grid-3">
+            <div class="kpi">
+              <div class="label">Inversión efectiva</div>
+              <div class="value">${formatUSD(totalInvestment)}</div>
+            </div>
+
+            <div class="kpi">
+              <div class="label">Venta neta</div>
+              <div class="value">${formatUSD(totalNetSale)}</div>
+            </div>
+
+            <div class="kpi">
+              <div class="label">Rentabilidad total</div>
+              <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">
+                ${totalInvestment > 0 ? formatPct(totalProfit / totalInvestment * 100) : "0.00%"}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderProperties() {
+      const editingProperty = editing.propertyId
+        ? state.properties.find(p => p.id === editing.propertyId)
+        : null;
+
+      return `
+        <div class="card">
+          <h3>🏘️ ${editingProperty ? "Editar propiedad" : "Nueva propiedad"}</h3>
+
+          <div class="notice">
+            Las participaciones fueron eliminadas de la solapa Propiedades.
+            Cuando paga el Equipo, la erogación se reparte automáticamente en partes iguales entre los inversores.
+          </div>
+
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Nombre / Identificación</label>
+              <input id="propertyName" value="${escapeHtml(editingProperty?.name || "")}" placeholder="Ej: Depto Palermo" />
+            </div>
+
+            <div class="field">
+              <label>Tipo</label>
+              <input id="propertyType" value="${escapeHtml(editingProperty?.type || "")}" placeholder="Casa, departamento, lote..." />
+            </div>
+
+            <div class="field">
+              <label>Dirección</label>
+              <input id="propertyAddress" value="${escapeHtml(editingProperty?.address || "")}" placeholder="Dirección" />
+            </div>
+
+            <div class="field">
+              <label>Notas</label>
+              <input id="propertyNotes" value="${escapeHtml(editingProperty?.notes || "")}" placeholder="Notas" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn success" onclick="saveProperty()">
+              ${editingProperty ? "Guardar cambios" : "Agregar propiedad"}
+            </button>
+
+            ${editingProperty ? `
+              <button class="btn secondary" onclick="cancelEditProperty()">Cancelar</button>
+            ` : ""}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Listado de propiedades</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Tipo</th>
+                  <th>Dirección</th>
+                  <th>Estado</th>
+                  <th>Rentabilidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${state.properties.length ? state.properties.map(item => `
+                  <tr>
+                    <td><strong>${escapeHtml(item.name)}</strong></td>
+                    <td>${escapeHtml(item.type || "-")}</td>
+                    <td>${escapeHtml(item.address || "-")}</td>
+                    <td>${renderStatus(item.status)}</td>
+                    <td>${renderPropertyProfitability(item.id)}</td>
+                    <td>
+                      <div class="actions">
+                        <button class="btn small secondary" onclick="editProperty('${item.id}')">Editar</button>
+                        <button class="btn small danger" onclick="deleteProperty('${item.id}')">Eliminar</button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join("") : `
+                  <tr>
+                    <td colspan="6" class="muted">No hay propiedades cargadas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveProperty() {
+      const name = document.getElementById("propertyName").value.trim();
+      const type = document.getElementById("propertyType").value.trim();
+      const address = document.getElementById("propertyAddress").value.trim();
+      const notes = document.getElementById("propertyNotes").value.trim();
+
+      if (!name) {
+        alert("Ingresá el nombre de la propiedad");
+        return;
+      }
+
+      if (editing.propertyId) {
+        const property = state.properties.find(p => p.id === editing.propertyId);
+        property.name = name;
+        property.type = type;
+        property.address = address;
+        property.notes = notes;
+        property.updatedAt = new Date().toISOString();
+
+        delete property.shares;
+        delete property.participations;
+        delete property.investors;
+      } else {
+        state.properties.push({
+          id: uid(),
+          name,
+          type,
+          address,
+          notes,
+          status: "disponible",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+      }
+
+      editing.propertyId = null;
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function editProperty(id) {
+      editing.propertyId = id;
+      renderApp();
+    }
+
+    function cancelEditProperty() {
+      editing.propertyId = null;
+      renderApp();
+    }
+
+    function deleteProperty(id) {
+      const hasOps =
+        state.purchases.some(p => p.propertyId === id) ||
+        state.renovations.some(r => r.propertyId === id) ||
+        state.sales.some(s => s.propertyId === id);
+
+      if (hasOps) {
+        alert("No se puede eliminar una propiedad con operaciones cargadas.");
+        return;
+      }
+
+      if (!confirm("¿Eliminar propiedad?")) return;
+
+      state.properties = state.properties.filter(p => p.id !== id);
+      saveState();
+      renderApp();
+    }
+
+    function renderPurchases() {
+      const item = editing.purchaseId
+        ? state.purchases.find(p => p.id === editing.purchaseId)
+        : null;
+
+      return `
+        <div class="card">
+          <h3>🧾 ${item ? "Editar compra" : "Registrar compra"}</h3>
+
+          <div class="notice">
+            En compras por Boleto se registra el precio total acordado y el monto efectivamente abonado.
+            La diferencia queda como saldo pendiente y se descuenta en la venta.
+          </div>
+
+          <div class="grid grid-3">
+            <div class="field">
+              <label>Propiedad</label>
+              <select id="purchaseProperty">
+                ${propertyOptions(item?.propertyId || "", true)}
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Modalidad</label>
+              <select id="purchaseModality" onchange="handlePurchaseModalityChange()">
+                <option value="boleto" ${item?.modality === "boleto" ? "selected" : ""}>Boleto</option>
+                <option value="escritura" ${item?.modality === "escritura" || !item ? "selected" : ""}>Escritura</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Quién realiza la erogación</label>
+              <select id="purchasePayer">${payerOptions(item?.payerId || "equipo")}</select>
+            </div>
+
+            <div class="field">
+              <label>Precio total acordado USD</label>
+              <input id="purchasePrice" type="number" value="${item?.priceUsd || ""}" oninput="handlePurchaseModalityChange()" />
+            </div>
+
+            <div class="field">
+              <label>Monto efectivamente abonado USD</label>
+              <input id="purchasePaid" type="number" value="${item?.amountPaid || ""}" oninput="handlePurchaseModalityChange()" />
+            </div>
+
+            <div class="field">
+              <label>Saldo pendiente boleto USD</label>
+              <input id="purchasePending" type="number" value="${item?.pendingBalance || ""}" disabled />
+            </div>
+
+            <div class="field">
+              <label>Comisión inmobiliaria USD</label>
+              <input id="purchaseCommission" type="number" value="${item?.commissionExpense || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Escrituración USD</label>
+              <input id="purchaseDeed" type="number" value="${item?.deedExpense || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Gastos varios USD</label>
+              <input id="purchaseMisc" type="number" value="${item?.miscExpense || ""}" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Notas</label>
+            <textarea id="purchaseNotes">${escapeHtml(item?.notes || "")}</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn success" onclick="savePurchase()">${item ? "Guardar cambios" : "Registrar compra"}</button>
+            ${item ? `<button class="btn secondary" onclick="cancelEditPurchase()">Cancelar</button>` : ""}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Compras</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Modalidad</th>
+                  <th>Precio acordado</th>
+                  <th>Monto abonado</th>
+                  <th>Saldo pendiente</th>
+                  <th>Gastos</th>
+                  <th>Pagador</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${state.purchases.length ? state.purchases.map(p => `
+                  <tr>
+                    <td>${escapeHtml(getPropertyName(p.propertyId))}</td>
+                    <td>${p.modality === "boleto" ? "Boleto" : "Escritura"}</td>
+                    <td>${formatUSD(p.priceUsd)}</td>
+                    <td>${formatUSD(p.amountPaid)}</td>
+                    <td>${formatUSD(p.pendingBalance)}</td>
+                    <td>${formatUSD(num(p.commissionExpense) + num(p.deedExpense) + num(p.miscExpense))}</td>
+                    <td>${escapeHtml(getUserName(p.payerId))}</td>
+                    <td>
+                      <div class="actions">
+                        <button class="btn small secondary" onclick="editPurchase('${p.id}')">Editar</button>
+                        <button class="btn small danger" onclick="deletePurchase('${p.id}')">Eliminar</button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join("") : `
+                  <tr>
+                    <td colspan="8" class="muted">No hay compras cargadas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function handlePurchaseModalityChange() {
+      const modality = document.getElementById("purchaseModality")?.value;
+      const price = num(document.getElementById("purchasePrice")?.value);
+      const paidInput = document.getElementById("purchasePaid");
+      const pendingInput = document.getElementById("purchasePending");
+
+      if (!paidInput || !pendingInput) return;
+
+      if (modality === "escritura") {
+        paidInput.value = price || "";
+        pendingInput.value = 0;
+      } else {
+        const paid = num(paidInput.value);
+        pendingInput.value = Math.max(0, price - paid);
+      }
+    }
+
+    function savePurchase() {
+      const propertyId = document.getElementById("purchaseProperty").value;
+      const property = getPropertyById(propertyId);
+
+      if (!property) {
+        alert("Seleccioná una propiedad");
+        return;
+      }
+
+      if (property.status === "vendida") {
+        alert("No se puede cargar compra sobre una propiedad vendida.");
+        return;
+      }
+
+      const modality = document.getElementById("purchaseModality").value;
+      const priceUsd = num(document.getElementById("purchasePrice").value);
+      let amountPaid = num(document.getElementById("purchasePaid").value);
+
+      if (priceUsd <= 0) {
+        alert("Ingresá el precio total acordado.");
+        return;
+      }
+
+      if (modality === "escritura") {
+        amountPaid = priceUsd;
+      }
+
+      if (amountPaid <= 0) {
+        alert("Ingresá el monto efectivamente abonado.");
+        return;
+      }
+
+      if (amountPaid > priceUsd) {
+        alert("El monto abonado no puede superar el precio acordado.");
+        return;
+      }
+
+      const data = {
+        propertyId,
+        modality,
+        priceUsd,
+        amountPaid,
+        pendingBalance: Math.max(0, priceUsd - amountPaid),
+        payerId: document.getElementById("purchasePayer").value,
+        commissionExpense: num(document.getElementById("purchaseCommission").value),
+        deedExpense: num(document.getElementById("purchaseDeed").value),
+        miscExpense: num(document.getElementById("purchaseMisc").value),
+        notes: document.getElementById("purchaseNotes").value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+
+      if (editing.purchaseId) {
+        const item = state.purchases.find(p => p.id === editing.purchaseId);
+        Object.assign(item, data);
+      } else {
+        state.purchases.push({
+          id: uid(),
+          ...data,
+          createdAt: new Date().toISOString()
+        });
+      }
+
+      editing.purchaseId = null;
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function editPurchase(id) {
+      editing.purchaseId = id;
+      renderApp();
+      setTimeout(handlePurchaseModalityChange, 0);
+    }
+
+    function cancelEditPurchase() {
+      editing.purchaseId = null;
+      renderApp();
+    }
+
+    function deletePurchase(id) {
+      if (!confirm("¿Eliminar compra?")) return;
+      state.purchases = state.purchases.filter(p => p.id !== id);
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function renderRenovations() {
+      const item = editing.renovationId
+        ? state.renovations.find(r => r.id === editing.renovationId)
+        : null;
+
+      return `
+        <div class="card">
+          <h3>🛠️ ${item ? "Editar refacción" : "Registrar refacción"}</h3>
+
+          <div class="grid grid-3">
+            <div class="field">
+              <label>Propiedad</label>
+              <select id="renovationProperty">${propertyOptions(item?.propertyId || "", true)}</select>
+            </div>
+
+            <div class="field">
+              <label>Monto USD</label>
+              <input id="renovationAmount" type="number" value="${item?.amountUsd || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Quién realiza la erogación</label>
+              <select id="renovationPayer">${payerOptions(item?.payerId || "equipo")}</select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Detalle</label>
+            <textarea id="renovationNotes">${escapeHtml(item?.notes || "")}</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn success" onclick="saveRenovation()">${item ? "Guardar cambios" : "Registrar refacción"}</button>
+            ${item ? `<button class="btn secondary" onclick="cancelEditRenovation()">Cancelar</button>` : ""}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Refacciones</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Monto</th>
+                  <th>Pagador</th>
+                  <th>Detalle</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${state.renovations.length ? state.renovations.map(r => `
+                  <tr>
+                    <td>${escapeHtml(getPropertyName(r.propertyId))}</td>
+                    <td>${formatUSD(r.amountUsd)}</td>
+                    <td>${escapeHtml(getUserName(r.payerId))}</td>
+                    <td>${escapeHtml(r.notes || "-")}</td>
+                    <td>
+                      <div class="actions">
+                        <button class="btn small secondary" onclick="editRenovation('${r.id}')">Editar</button>
+                        <button class="btn small danger" onclick="deleteRenovation('${r.id}')">Eliminar</button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join("") : `
+                  <tr>
+                    <td colspan="5" class="muted">No hay refacciones cargadas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveRenovation() {
+      const propertyId = document.getElementById("renovationProperty").value;
+      const property = getPropertyById(propertyId);
+
+      if (!property) {
+        alert("Seleccioná una propiedad");
+        return;
+      }
+
+      if (property.status === "vendida") {
+        alert("No se puede cargar refacción sobre una propiedad vendida.");
+        return;
+      }
+
+      const amountUsd = num(document.getElementById("renovationAmount").value);
+
+      if (amountUsd <= 0) {
+        alert("Ingresá un monto válido.");
+        return;
+      }
+
+      const data = {
+        propertyId,
+        amountUsd,
+        payerId: document.getElementById("renovationPayer").value,
+        notes: document.getElementById("renovationNotes").value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+
+      if (editing.renovationId) {
+        Object.assign(state.renovations.find(r => r.id === editing.renovationId), data);
+      } else {
+        state.renovations.push({
+          id: uid(),
+          ...data,
+          createdAt: new Date().toISOString()
+        });
+      }
+
+      editing.renovationId = null;
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function editRenovation(id) {
+      editing.renovationId = id;
+      renderApp();
+    }
+
+    function cancelEditRenovation() {
+      editing.renovationId = null;
+      renderApp();
+    }
+
+    function deleteRenovation(id) {
+      if (!confirm("¿Eliminar refacción?")) return;
+      state.renovations = state.renovations.filter(r => r.id !== id);
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function renderSales() {
+      const item = editing.saleId
+        ? state.sales.find(s => s.id === editing.saleId)
+        : null;
+
+      return `
+        <div class="card">
+          <h3>💰 ${item ? "Editar venta" : "Registrar venta"}</h3>
+
+          <div class="notice">
+            En la venta, el saldo pendiente de boleto se descuenta de la venta bruta para calcular la venta neta.
+            Ese saldo pendiente no se suma como erogación.
+          </div>
+
+          <div class="grid grid-3">
+            <div class="field">
+              <label>Propiedad</label>
+              <select id="saleProperty">${propertyOptions(item?.propertyId || "", true)}</select>
+            </div>
+
+            <div class="field">
+              <label>Valor de venta USD</label>
+              <input id="salePrice" type="number" value="${item?.salePriceUsd || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Quién realiza la erogación de gastos</label>
+              <select id="salePayer">${payerOptions(item?.payerId || "equipo")}</select>
+            </div>
+
+            <div class="field">
+              <label>Comisión inmobiliaria USD</label>
+              <input id="saleCommission" type="number" value="${item?.commissionExpense || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Escrituración USD</label>
+              <input id="saleDeed" type="number" value="${item?.deedExpense || ""}" />
+            </div>
+
+            <div class="field">
+              <label>Gastos varios USD</label>
+              <input id="saleMisc" type="number" value="${item?.miscExpense || ""}" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Notas</label>
+            <textarea id="saleNotes">${escapeHtml(item?.notes || "")}</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn success" onclick="saveSale()">${item ? "Guardar cambios" : "Registrar venta"}</button>
+            ${item ? `<button class="btn secondary" onclick="cancelEditSale()">Cancelar</button>` : ""}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Ventas</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Venta bruta</th>
+                  <th>Saldo boleto descontado</th>
+                  <th>Venta neta</th>
+                  <th>Gastos venta</th>
+                  <th>Pagador gastos</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${state.sales.length ? state.sales.map(s => {
+                  const result = getPropertyFinancialResult(s.propertyId);
+                  const saleExpenses = num(s.commissionExpense) + num(s.deedExpense) + num(s.miscExpense);
+
+                  return `
+                    <tr>
+                      <td>${escapeHtml(getPropertyName(s.propertyId))}</td>
+                      <td>${formatUSD(s.salePriceUsd)}</td>
+                      <td>${formatUSD(result.pendingBoletoBalance)}</td>
+                      <td>${formatUSD(result.netSale)}</td>
+                      <td>${formatUSD(saleExpenses)}</td>
+                      <td>${escapeHtml(getUserName(s.payerId))}</td>
+                      <td>
+                        <div class="actions">
+                          <button class="btn small secondary" onclick="editSale('${s.id}')">Editar</button>
+                          <button class="btn small danger" onclick="deleteSale('${s.id}')">Eliminar</button>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join("") : `
+                  <tr>
+                    <td colspan="7" class="muted">No hay ventas cargadas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveSale() {
+      const propertyId = document.getElementById("saleProperty").value;
+      const property = getPropertyById(propertyId);
+
+      if (!property) {
+        alert("Seleccioná una propiedad");
+        return;
+      }
+
+      if (state.sales.some(s => s.propertyId === propertyId && s.id !== editing.saleId)) {
+        alert("Esta propiedad ya tiene una venta registrada.");
+        return;
+      }
+
+      const salePriceUsd = num(document.getElementById("salePrice").value);
+
+      if (salePriceUsd <= 0) {
+        alert("Ingresá el valor de venta.");
+        return;
+      }
+
+      const data = {
+        propertyId,
+        salePriceUsd,
+        payerId: document.getElementById("salePayer").value,
+        commissionExpense: num(document.getElementById("saleCommission").value),
+        deedExpense: num(document.getElementById("saleDeed").value),
+        miscExpense: num(document.getElementById("saleMisc").value),
+        notes: document.getElementById("saleNotes").value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+
+      if (editing.saleId) {
+        Object.assign(state.sales.find(s => s.id === editing.saleId), data);
+      } else {
+        state.sales.push({
+          id: uid(),
+          ...data,
+          createdAt: new Date().toISOString()
+        });
+      }
+
+      editing.saleId = null;
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function editSale(id) {
+      editing.saleId = id;
+      renderApp();
+    }
+
+    function cancelEditSale() {
+      editing.saleId = null;
+      renderApp();
+    }
+
+    function deleteSale(id) {
+      if (!confirm("¿Eliminar venta?")) return;
+      state.sales = state.sales.filter(s => s.id !== id);
+      updateStatuses();
+      saveState();
+      renderApp();
+    }
+
+    function renderResultsBarChart() {
+      const soldProperties = state.properties.filter(property => {
+        const result = getPropertyFinancialResult(property.id);
+        return result.isSold;
+      });
+
+      if (!soldProperties.length) {
+        return `
+          <div class="card">
+            <h3>📊 Resultados por propiedad vendida</h3>
+            <p class="muted small">
+              Todavía no hay propiedades vendidas para graficar resultados.
+            </p>
+          </div>
+        `;
+      }
+
+      const results = soldProperties.map(property => {
+        const result = getPropertyFinancialResult(property.id);
+
+        return {
+          property,
+          ...result
+        };
+      });
+
+      const maxValue = Math.max(
+        1,
+        ...results.map(item => item.effectiveInvestment),
+        ...results.map(item => item.netSale)
+      );
+
+      const rows = results.map(item => {
+        const investmentWidth = Math.max(2, item.effectiveInvestment / maxValue * 100);
+        const saleWidth = Math.max(2, item.netSale / maxValue * 100);
+        const profitClass = item.profit >= 0 ? "positive" : "negative";
+
+        return `
+          <div class="result-bar-item">
+            <div class="result-bar-title">
+              🏠 ${escapeHtml(item.property.name)}
+            </div>
+
+            <div class="result-bar-row">
+              <div class="result-bar-label">Inversión efectiva</div>
+              <div class="result-bar-track">
+                <div class="result-bar-fill investment" style="width:${investmentWidth}%"></div>
+              </div>
+              <div class="result-bar-value">${formatUSD(item.effectiveInvestment)}</div>
+            </div>
+
+            <div class="result-bar-row">
+              <div class="result-bar-label">Venta neta</div>
+              <div class="result-bar-track">
+                <div class="result-bar-fill sale" style="width:${saleWidth}%"></div>
+              </div>
+              <div class="result-bar-value">${formatUSD(item.netSale)}</div>
+            </div>
+
+            <div class="small muted" style="margin-top:10px;">
+              Venta bruta: ${formatUSD(item.grossSale)} ·
+              Saldo boleto descontado: ${formatUSD(item.pendingBoletoBalance)} ·
+              Resultado: <span class="${profitClass}">${formatUSD(item.profit)}</span> ·
+              Rentabilidad: <span class="${profitClass}">${formatPct(item.profitability)}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <div class="card">
+          <h3>📊 Resultados por propiedad vendida</h3>
+
+          <p class="small muted">
+            El gráfico compara la inversión efectiva contra la venta neta.
+            La inversión efectiva no incluye saldo pendiente de boleto.
+          </p>
+
+          <div class="result-bars">
+            ${rows}
+          </div>
+        </div>
+      `;
+    }
+
+    function getErogationsByInvestor() {
+      const details = [];
+      const totals = {};
+
+      getInvestorUsers().forEach(user => {
+        totals[user.id] = 0;
+      });
+
+      function addErogation({ propertyId, concept, payerId, amount }) {
+        amount = num(amount);
+        if (amount <= 0) return;
+
+        if (isTeamPayer(payerId)) {
+          const shares = getPropertyInvestorShares(propertyId);
+
+          shares.forEach(share => {
+            const assigned = amount * share.pct;
+            totals[share.userId] = num(totals[share.userId]) + assigned;
+
+            details.push({
+              propertyId,
+              concept,
+              originalPayer: "Equipo",
+              investorId: share.userId,
+              assigned,
+              criteria: "Equipo: reparto en partes iguales"
             });
-            h += '</tbody></table>';
-        });
-        h += '</div>';
-    });
-    cont.innerHTML = h;
-}
-
-// ─────────────────────────────────────────────
-//  VENTA
-// ─────────────────────────────────────────────
-function resetVenta() {
-    el('saldo-boleto-wrap').style.display = 'none';
-    el('saldo-detalle').style.display     = 'none';
-    el('div-venta-box').style.display     = 'none';
-    el('v-salda').checked = false;
-}
-
-el('v-prop').addEventListener('change', function(){ cargarSaldoBoleto(); });
-el('v-precio').addEventListener('input', function(){ actuDivVenta(); });
-el('v-inv').addEventListener('change',   function(){ actuDivVenta(); });
-el('v-cotiz').addEventListener('input',  function(){ recalcSaldo(); actuDivVenta(); });
-
-el('v-salda').addEventListener('change', function(){
-    el('saldo-detalle').style.display = this.checked ? 'block' : 'none';
-    if (this.checked) renderSaldoDetalle();
-});
-
-function actuDivVenta() {
-    var inv    = val('v-inv');
-    var precio = fval('v-precio');
-    if (!precio) { el('div-venta-box').style.display='none'; return; }
-    el('div-venta-box').style.display = 'block';
-    var ps = partes(inv, precio);
-    el('div-venta-txt').innerHTML = inv==='Todos'
-        ? '👥 <strong>Ingreso distribuido</strong> — '+usd(precio)+' ÷ 3 = '+usd(precio/3)+' c/u'
-        : INV_LABEL[inv]+' recibe: <strong>'+usd(precio)+'</strong>';
-    el('div-venta-partes').innerHTML = htmlPartes(ps);
-}
-
-function cargarSaldoBoleto() {
-    resetVenta();
-    var propId = val('v-prop');
-    if (!propId) return;
-    var comp = DB.compras.find(function(c){ return c.propId===propId; });
-    if (!comp || comp.mod!=='boleto' || comp.saldPct<=0 || comp.saldado) return;
-    el('saldo-boleto-wrap').style.display = 'block';
-    renderSaldoAlerta(comp);
-}
-
-function recalcSaldo() {
-    var propId = val('v-prop');
-    if (!propId) return;
-    var comp = DB.compras.find(function(c){ return c.propId===propId; });
-    if (!comp || comp.mod!=='boleto' || comp.saldPct<=0 || comp.saldado) return;
-    renderSaldoAlerta(comp);
-    if (el('v-salda').checked) renderSaldoDetalle();
-}
-
-function renderSaldoAlerta(comp) {
-    var cotiz = fval('v-cotiz');
-    var txt = '⚠️ Saldo pendiente: <strong>'+comp.saldPct+'%</strong> → <strong>'+usd(comp.saldUSD)+'</strong>';
-    if (comp.moneda==='ARS' && cotiz>0) {
-        txt += '<br>• En ARS: '+ars(comp.saldOrig)+' ≈ '+usd(comp.saldOrig/cotiz)+' al tipo actual';
-    }
-    txt += '<br>• Escritura pactada: <strong>'+fFecha(comp.fEsc)+'</strong>';
-    el('saldo-alert-txt').innerHTML = txt;
-}
-
-function renderSaldoDetalle() {
-    var propId = val('v-prop');
-    var comp   = DB.compras.find(function(c){ return c.propId===propId; });
-    if (!comp) return;
-    var cotiz  = fval('v-cotiz');
-    var sUSD   = (comp.moneda==='ARS' && cotiz>0) ? comp.saldOrig/cotiz : comp.saldUSD;
-
-    el('saldo-tbody').innerHTML =
-        '<tr><td>Saldo boleto ('+comp.saldPct+'%)</td><td>'+comp.saldPct+'%</td>'+
-        '<td>'+(comp.moneda==='ARS'?ars(comp.saldOrig):usd(comp.saldOrig))+'</td>'+
-        '<td><strong>'+usd(sUSD)+'</strong></td></tr>';
-
-    el('saldo-total-txt').innerHTML = '💡 Se sumará <strong>'+usd(sUSD)+'</strong> a la inversión total';
-
-    var ps = partes(comp.inv, sUSD);
-    el('div-saldo-partes-box').style.display = 'block';
-    el('div-saldo-partes').innerHTML = htmlPartes(ps);
-}
-
-el('btn-add-gasto-v').addEventListener('click', function(){ addGastoVentaRow(); });
-
-function addGastoVentaRow() {
-    var cont = el('gastos-venta');
-    var div  = document.createElement('div');
-    div.className = 'gasto-row';
-    div.innerHTML =
-        '<select style="min-width:150px">'+
-            '<option>Comisión inmobiliaria</option><option>Escrituración</option>'+
-            '<option>Honorarios escribano</option><option>ITI</option>'+
-            '<option>Sellado</option><option>Otros</option>'+
-        '</select>'+
-        '<input type="text" placeholder="Detalle" style="flex:2;min-width:100px">'+
-        '<select class="sel-inv-v" style="min-width:110px">'+
-            '<option value="Todos">👥 Todos</option>'+
-            '<option value="Gaston">🟢 Gastón</option>'+
-            '<option value="Hernan">🔵 Hernán</option>'+
-            '<option value="Santiago">🟣 Santiago</option>'+
-        '</select>'+
-        '<select class="sel-mon-v" style="min-width:70px">'+
-            '<option value="USD">USD</option>'+
-            '<option value="ARS">ARS</option>'+
-        '</select>'+
-        '<input type="number" placeholder="Monto" style="flex:1;min-width:90px">'+
-        '<input type="number" placeholder="Cotiz" style="flex:1;min-width:80px;display:none" class="inp-cotiz-v">'+
-        '<button type="button" style="background:#c62828;color:white;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-weight:600">✕</button>';
-
-    div.querySelector('.sel-mon-v').addEventListener('change', function(){
-        div.querySelector('.inp-cotiz-v').style.display = this.value==='ARS' ? 'block' : 'none';
-    });
-    div.querySelector('button').addEventListener('click', function(){ div.remove(); });
-    cont.appendChild(div);
-}
-
-function getGastosVenta() {
-    var rows = el('gastos-venta').querySelectorAll('.gasto-row');
-    var out  = [];
-    var cotizGlobal = fval('v-cotiz')||1050;
-    rows.forEach(function(row){
-        var sels   = row.querySelectorAll('select');
-        var inputs = row.querySelectorAll('input');
-        var cat    = sels[0] ? sels[0].value : '';
-        var detalle= inputs[0] ? inputs[0].value : '';
-        var inv    = sels[1] ? sels[1].value : 'Todos';
-        var moneda = sels[2] ? sels[2].value : 'USD';
-        var monto  = parseFloat(inputs[1] ? inputs[1].value : 0)||0;
-        var cotiz  = parseFloat(inputs[2] ? inputs[2].value : 0)||cotizGlobal;
-        if (monto) {
-            var montoUSD = moneda==='ARS' ? monto/cotiz : monto;
-            out.push({ cat:cat, detalle:detalle, inv:inv, moneda:moneda,
-                       monto:monto, cotiz:cotiz, usd:montoUSD, pts:partes(inv,montoUSD) });
-        }
-    });
-    return out;
-}
-
-el('btn-save-venta').addEventListener('click', function(){
-    var propId = val('v-prop');
-    var precio = fval('v-precio');
-    var inv    = val('v-inv');
-    if (!propId) { alert('⚠️ Seleccioná una propiedad'); return; }
-    if (!precio) { alert('⚠️ Ingresá el precio de venta'); return; }
-
-    var cotiz   = fval('v-cotiz');
-    var gastos  = getGastosVenta();
-    var totGast = gastos.reduce(function(s,g){ return s+g.usd; },0);
-    var salda   = el('v-salda').checked;
-    var sUSD    = 0;
-    var comp    = DB.compras.find(function(c){ return c.propId===propId; });
-
-    if (salda && comp && comp.mod==='boleto' && !comp.saldado) {
-        sUSD = (comp.moneda==='ARS' && cotiz>0) ? comp.saldOrig/cotiz : comp.saldUSD;
-        comp.saldado   = true;
-        comp.saldFecha = val('v-fecha');
-        comp.saldCotiz = cotiz;
-        comp.saldPagUSD= sUSD;
-    }
-
-    var neto = precio - totGast;
-    var psV  = partes(inv, precio);
-
-    var v = {
-        id:uid(), propId:propId, inv:inv, fecha:val('v-fecha'),
-        precio:precio, cotiz:cotiz, gastos:gastos, totGast:totGast,
-        salda:salda, sUSD:sUSD, neto:neto, partes:psV
-    };
-
-    var prop = DB.props.find(function(p){ return p.id===propId; });
-    if (prop) prop.estado='vendida';
-
-    var idx = DB.ventas.findIndex(function(x){ return x.propId===propId; });
-    if (idx>=0) DB.ventas[idx]=v; else DB.ventas.push(v);
-
-    var logMsg = 'Venta '+usd(precio)+' — Inv: '+inv+(inv==='Todos'?' ('+usd(precio/3)+' c/u)':'');
-    if (salda) logMsg += ' — Saldo boleto: '+usd(sUSD);
-    addAudit('venta', propId, logMsg, inv);
-
-    save(); renderVentas(); renderCompras(); renderProps(); resetVenta();
-    el('gastos-venta').innerHTML='';
-    alert('✅ Venta guardada');
-});
-
-function renderVentas() {
-    var c = el('lista-ventas');
-    if (!DB.ventas.length) { c.innerHTML='<div class="empty">💰 Sin ventas</div>'; return; }
-    var h='<table><thead><tr><th>Propiedad</th><th>Inversor</th><th>Precio</th><th>Gastos</th><th>Saldo Boleto</th><th>Neto</th><th>Fecha</th></tr></thead><tbody>';
-    DB.ventas.forEach(function(v){
-        var prop=DB.props.find(function(p){ return p.id===v.propId; });
-        h+='<tr>';
-        h+='<td><strong>'+(prop?prop.dir:'?')+'</strong></td>';
-        h+='<td><span class="badge '+INV_BADGE[v.inv]+'">'+INV_LABEL[v.inv]+'</span>'+(v.inv==='Todos'?'<br><small>'+usd(v.precio/3)+' c/u</small>':'')+'</td>';
-        h+='<td>'+usd(v.precio)+'</td>';
-        h+='<td>'+usd(v.totGast)+'</td>';
-        h+='<td>'+(v.salda?'<span class="badge b-orange">✅ '+usd(v.sUSD)+'</span>':'—')+'</td>';
-        h+='<td><strong>'+usd(v.neto)+'</strong></td>';
-        h+='<td>'+fFecha(v.fecha)+'</td>';
-        h+='</tr>';
-    });
-    c.innerHTML=h+'</tbody></table>';
-}
-
-// ─────────────────────────────────────────────
-//  RESULTADOS
-// ─────────────────────────────────────────────
-el('btn-calc-res').addEventListener('click', function(){ calcResultados(); });
-
-function calcResultados() {
-    var propId = val('res-prop');
-    var cont   = el('res-content');
-    if (!propId) { cont.innerHTML='<div class="empty card">Seleccioná una propiedad</div>'; return; }
-
-    var prop = DB.props.find(function(p){ return p.id===propId; });
-    var comp = DB.compras.find(function(c){ return c.propId===propId; });
-    var ref  = DB.refs.find(function(r){ return r.propId===propId; });
-    var vta  = DB.ventas.find(function(v){ return v.propId===propId; });
-
-    var invComp  = comp ? comp.totInv : 0;
-    var saldBol  = (vta && vta.salda) ? vta.sUSD : 0;
-    var invRef   = ref  ? ref.total : 0;
-    var invTot   = invComp + saldBol + invRef;
-    var ingrNeto = vta  ? vta.neto : 0;
-    var gan      = ingrNeto - invTot;
-    var roi      = invTot>0 ? (gan/invTot*100) : 0;
-
-    var dias = 0;
-    if (comp && vta && comp.fecha && vta.fecha) {
-        dias = Math.round((new Date(vta.fecha)-new Date(comp.fecha))/(86400000));
-    }
-    var roiA = dias>0 ? (roi/dias*365) : 0;
-
-    // Ganancia por inversor
-    var gxInv = calcGxInv(comp, ref, vta, saldBol);
-
-    var h = '';
-
-    // Stats globales
-    h += '<div class="card"><h2>📊 Resumen — '+prop.dir+'</h2><div class="stat-grid">';
-    h += statBox('', '💵 Inversión Compra', usd(invComp));
-    if (saldBol>0) h += statBox('purple', '📋 Saldo Boleto', usd(saldBol));
-    h += statBox('orange', '🔨 Refacción', usd(invRef));
-    h += statBox('', '📊 Inversión Total', usd(invTot));
-    h += statBox(gan>=0?'green':'red', (gan>=0?'✅ Ganancia':'❌ Pérdida'), usd(gan));
-    h += statBox(roi>=0?'green':'red', '📈 ROI', roi.toFixed(1)+'%');
-    if (dias>0) h += statBox('', '📅 ROI Anual', roiA.toFixed(1)+'%');
-    h += '</div>';
-
-    // Tabla resumen
-    h += '<table style="margin-top:15px"><thead><tr><th>Concepto</th><th>USD</th></tr></thead><tbody>';
-    h += '<tr><td>Inversión compra'+(comp?' ('+comp.pct+'%)':'')+'</td><td>-'+usd(invComp)+'</td></tr>';
-    if (saldBol>0) h += '<tr><td>Saldo boleto en escritura</td><td>-'+usd(saldBol)+'</td></tr>';
-    if (invRef>0)  h += '<tr><td>Refacción</td><td>-'+usd(invRef)+'</td></tr>';
-    h += '<tr style="background:#e3f2fd"><td><strong>Inversión Total</strong></td><td><strong>-'+usd(invTot)+'</strong></td></tr>';
-    h += '<tr><td>Ingreso neto venta</td><td>'+usd(ingrNeto)+'</td></tr>';
-    h += '<tr style="background:'+(gan>=0?'#e8f5e9':'#ffebee')+'"><td><strong>'+(gan>=0?'✅ GANANCIA':'❌ PÉRDIDA')+'</strong></td><td><strong>'+usd(gan)+'</strong></td></tr>';
-    h += '<tr><td>ROI</td><td><strong>'+roi.toFixed(2)+'%</strong></td></tr>';
-    if (dias>0) h += '<tr><td>Duración</td><td>'+dias+' días ('+Math.round(dias/30)+' meses)</td></tr>';
-    if (dias>0) h += '<tr><td>ROI Anualizado</td><td><strong>'+roiA.toFixed(2)+'% anual</strong></td></tr>';
-    h += '</tbody></table></div>';
-
-    // Por inversor
-    h += '<div class="card"><h2>👥 Resultado por Inversor</h2><div class="stat-grid">';
-    INV_LISTA.forEach(function(inv){
-        var g = gxInv[inv]||{ingreso:0,egreso:0,gan:0};
-        h += '<div class="stat-box '+INV_CLASS[inv]+'"><div class="lbl">'+INV_LABEL[inv]+'</div>';
-        h += '<div class="val">'+usd(g.gan)+'</div>';
-        h += '<div style="font-size:0.78em;opacity:.85;margin-top:4px">Egresó: '+usd(g.egreso)+'<br>Ingresó: '+usd(g.ingreso)+'</div></div>';
-    });
-    h += '</div>';
-    h += '<table style="margin-top:12px"><thead><tr><th>Inversor</th><th>Egresó</th><th>Ingresó</th><th>Ganancia</th><th>ROI</th></tr></thead><tbody>';
-    INV_LISTA.forEach(function(inv){
-        var g = gxInv[inv]||{ingreso:0,egreso:0,gan:0};
-        var ri = g.egreso>0?(g.gan/g.egreso*100):0;
-        h += '<tr><td><span class="badge '+INV_BADGE[inv]+'">'+INV_LABEL[inv]+'</span></td>';
-        h += '<td>'+usd(g.egreso)+'</td><td>'+usd(g.ingreso)+'</td>';
-        h += '<td style="color:'+(g.gan>=0?'#2e7d32':'#c62828')+'"><strong>'+usd(g.gan)+'</strong></td>';
-        h += '<td><strong>'+ri.toFixed(2)+'%</strong></td></tr>';
-    });
-    h += '</tbody></table></div>';
-
-    cont.innerHTML = h;
-}
-
-function statBox(cls, lbl, val) {
-    return '<div class="stat-box '+(cls||')+'">'+'<div class="lbl">'+lbl+'</div><div class="val">'+val+'</div></div>';
-}
-
-function calcGxInv(comp, ref, vta, saldBol) {
-    var res = {};
-    INV_LISTA.forEach(function(inv){ res[inv]={egreso:0,ingreso:0,gan:0}; });
-
-    if (comp) {
-        partes(comp.inv, comp.pagUSD).forEach(function(p){ res[p.nombre].egreso+=p.monto; });
-        comp.gastos.forEach(function(g){
-            g.pts.forEach(function(p){ res[p.nombre].egreso+=p.monto; });
-        });
-        if (saldBol>0) {
-            partes(comp.inv, saldBol).forEach(function(p){ res[p.nombre].egreso+=p.monto; });
-        }
-    }
-    if (ref) {
-        ref.obra.concat(ref.imp).concat(ref.prof).concat(ref.otros).forEach(function(g){
-            (g.pts||partes(g.inv||'Todos',g.usd)).forEach(function(p){ res[p.nombre].egreso+=p.monto; });
-        });
-    }
-    if (vta) {
-        partes(vta.inv, vta.neto).forEach(function(p){ res[p.nombre].ingreso+=p.monto; });
-    }
-    INV_LISTA.forEach(function(inv){ res[inv].gan = res[inv].ingreso - res[inv].egreso; });
-    return res;
-}
-
-// ─────────────────────────────────────────────
-//  PANEL INVERSORES
-// ─────────────────────────────────────────────
-el('btn-refresh-inv').addEventListener('click', function(){ renderInversores(); });
-
-function renderInversores() {
-    var cont = el('inv-content');
-    var tots = {};
-    INV_LISTA.forEach(function(inv){ tots[inv]={egreso:0,ingreso:0,gan:0,ops:[]}; });
-
-    DB.props.forEach(function(prop){
-        var comp = DB.compras.find(function(c){ return c.propId===prop.id; });
-        var ref  = DB.refs.find(function(r){ return r.propId===prop.id; });
-        var vta  = DB.ventas.find(function(v){ return v.propId===prop.id; });
-        var sB   = (vta&&vta.salda)?vta.sUSD:0;
-        if (!comp && !ref && !vta) return;
-        var gx = calcGxInv(comp, ref, vta, sB);
-        INV_LISTA.forEach(function(inv){
-            tots[inv].egreso  += gx[inv].egreso;
-            tots[inv].ingreso += gx[inv].ingreso;
-            tots[inv].gan     += gx[inv].gan;
-            if (gx[inv].egreso>0||gx[inv].ingreso>0)
-                tots[inv].ops.push({ prop:prop, vta:vta, g:gx[inv] });
-        });
-    });
-
-    var h = '<div class="stat-grid">';
-    INV_LISTA.forEach(function(inv){
-        var t  = tots[inv];
-        var ri = t.egreso>0?(t.gan/t.egreso*100):0;
-        h += '<div class="stat-box '+INV_CLASS[inv]+'"><div class="lbl">'+INV_LABEL[inv]+'</div>';
-        h += '<div class="val">'+usd(t.gan)+'</div>';
-        h += '<div style="font-size:0.78em;opacity:.85;margin-top:4px">ROI: '+ri.toFixed(1)+'%<br>Invertido: '+usd(t.egreso)+'<br>Recuperado: '+usd(t.ingreso)+'</div></div>';
-    });
-    h += '</div>';
-
-    INV_LISTA.forEach(function(inv){
-        var t  = tots[inv];
-        var ri = t.egreso>0?(t.gan/t.egreso*100):0;
-        h += '<div class="inv-card '+INV_CLASS[inv]+'">';
-        h += '<h3>'+INV_LABEL[inv]+' — '+usd(t.gan)+' (ROI '+ri.toFixed(1)+'%)</h3>';
-        if (!t.ops.length) {
-            h += '<p style="color:#999">Sin operaciones</p>';
+          });
         } else {
-            h += '<table><thead><tr><th>Propiedad</th><th>Invertido</th><th>Recuperado</th><th>Ganancia</th><th>Estado</th></tr></thead><tbody>';
-            t.ops.forEach(function(op){
-                var est = op.vta ? '✅ Vendida' : (op.prop.estado==='en_ref'?'🔨 Refacción':'🏠 En curso');
-                h += '<tr><td>'+op.prop.dir+'</td><td>'+usd(op.g.egreso)+'</td><td>'+usd(op.g.ingreso)+'</td>';
-                h += '<td style="color:'+(op.g.gan>=0?'#2e7d32':'#c62828')+'"><strong>'+usd(op.g.gan)+'</strong></td>';
-                h += '<td>'+est+'</td></tr>';
-            });
-            h += '</tbody></table>';
+          totals[payerId] = num(totals[payerId]) + amount;
+
+          details.push({
+            propertyId,
+            concept,
+            originalPayer: getUserName(payerId),
+            investorId: payerId,
+            assigned: amount,
+            criteria: "Pago directo del inversor"
+          });
         }
-        h += '</div>';
-    });
+      }
 
-    cont.innerHTML = h;
-}
+      state.purchases.forEach(p => {
+        addErogation({
+          propertyId: p.propertyId,
+          concept: "Compra - monto abonado",
+          payerId: p.payerId,
+          amount: p.amountPaid
+        });
 
-// ─────────────────────────────────────────────
-//  AUDITORÍA
-// ─────────────────────────────────────────────
-el('aud-buscar').addEventListener('input',  function(){ renderAudit(); });
-el('aud-tipo').addEventListener('change',   function(){ renderAudit(); });
-el('aud-inv').addEventListener('change',    function(){ renderAudit(); });
-el('btn-export-csv').addEventListener('click', function(){ exportCSV(); });
+        addErogation({
+          propertyId: p.propertyId,
+          concept: "Compra - comisión inmobiliaria",
+          payerId: p.payerId,
+          amount: p.commissionExpense
+        });
 
-function renderAudit() {
-    var buscar = (el('aud-buscar').value||'').toLowerCase();
-    var tipo   = val('aud-tipo');
-    var inv    = val('aud-inv');
-    var recs   = DB.audit.slice().reverse();
-    if (tipo)   recs = recs.filter(function(r){ return r.tipo===tipo; });
-    if (inv)    recs = recs.filter(function(r){ return r.inv===inv; });
-    if (buscar) recs = recs.filter(function(r){ return r.desc.toLowerCase().indexOf(buscar)>=0; });
+        addErogation({
+          propertyId: p.propertyId,
+          concept: "Compra - escrituración",
+          payerId: p.payerId,
+          amount: p.deedExpense
+        });
 
-    var cont = el('aud-content');
-    if (!recs.length) { cont.innerHTML='<div class="empty">Sin registros</div>'; return; }
+        addErogation({
+          propertyId: p.propertyId,
+          concept: "Compra - gastos varios",
+          payerId: p.payerId,
+          amount: p.miscExpense
+        });
+      });
 
-    var TCOLOR = { propiedad:'b-blue', compra:'b-green', refaccion:'b-orange', venta:'b-purple' };
-    var TICON  = { propiedad:'🏠', compra:'💵', refaccion:'🔨', venta:'💰' };
+      state.renovations.forEach(r => {
+        addErogation({
+          propertyId: r.propertyId,
+          concept: "Refacción",
+          payerId: r.payerId,
+          amount: r.amountUsd
+        });
+      });
 
-    var h = '<p style="color:#999;font-size:0.82em;margin-bottom:12px">'+recs.length+' registros</p><div class="tl">';
-    recs.forEach(function(r){
-        var prop = DB.props.find(function(p){ return p.id===r.propId; });
-        var dt   = new Date(r.ts);
-        var fs   = dt.toLocaleDateString('es-AR')+' '+dt.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-        h += '<div class="tl-item">';
-        h += '<div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">';
-        h += '<span class="badge '+(TCOLOR[r.tipo]||'b-blue')+'">'+(TICON[r.tipo]||'📋')+' '+r.tipo+'</span>';
-        if (r.inv && r.inv!=='—') h += '<span class="badge '+(INV_BADGE[r.inv]||'b-blue')+'">'+INV_LABEL[r.inv]+'</span>';
-        h += '<div style="flex:1"><strong>'+r.desc+'</strong>';
-        if (prop) h += '<br><small style="color:#999">📍 '+prop.dir+'</small>';
-        h += '<br><small style="color:#bbb">🕐 '+fs+'</small></div></div></div>';
-    });
-    h += '</div>';
-    cont.innerHTML = h;
-}
+      state.sales.forEach(s => {
+        addErogation({
+          propertyId: s.propertyId,
+          concept: "Venta - comisión inmobiliaria",
+          payerId: s.payerId,
+          amount: s.commissionExpense
+        });
 
-function exportCSV() {
-    var csv = 'Fecha,Tipo,Propiedad,Inversor,Descripcion\n';
-    DB.audit.forEach(function(r){
-        var prop = DB.props.find(function(p){ return p.id===r.propId; });
-        var dt   = new Date(r.ts).toLocaleString('es-AR');
-        csv += '"'+dt+'","'+r.tipo+'","'+(prop?prop.dir:'-')+'","'+(r.inv||'-')+'","'+r.desc+'"\n';
-    });
-    var blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
-    var a    = document.createElement('a');
-    a.href   = URL.createObjectURL(blob);
-    a.download = 'auditoria.csv';
-    a.click();
-}
+        addErogation({
+          propertyId: s.propertyId,
+          concept: "Venta - escrituración",
+          payerId: s.payerId,
+          amount: s.deedExpense
+        });
 
-// ─────────────────────────────────────────────
-//  MODAL ELIMINAR
-// ─────────────────────────────────────────────
-function abrirModal(tipo, id) {
-    pendingDel = { tipo:tipo, id:id };
-    el('modal-bg').classList.add('open');
-}
+        addErogation({
+          propertyId: s.propertyId,
+          concept: "Venta - gastos varios",
+          payerId: s.payerId,
+          amount: s.miscExpense
+        });
+      });
 
-el('btn-confirm-del').addEventListener('click', function(){
-    if (!pendingDel) return;
-    if (pendingDel.tipo==='prop') {
-        DB.props = DB.props.filter(function(p){ return p.id!==pendingDel.id; });
+      return { totals, details };
     }
-    save(); renderProps(); cerrarModal();
-});
 
-el('btn-cancel-del').addEventListener('click', cerrarModal);
+    function renderSummary() {
+      const totalInvestment = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).effectiveInvestment;
+      }, 0);
 
-function cerrarModal() {
-    el('modal-bg').classList.remove('open');
-    pendingDel = null;
-}
+      const totalGrossSale = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).grossSale;
+      }, 0);
 
-// ─────────────────────────────────────────────
-//  INIT
-// ─────────────────────────────────────────────
-load();
-renderProps();
-renderCompras();
-renderRefs();
-renderVentas();
-el('c-fecha').value = hoy();
-el('v-fecha').value = hoy();
-</script>
+      const totalNetSale = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).netSale;
+      }, 0);
+
+      const totalProfit = state.properties.reduce((sum, p) => {
+        return sum + getPropertyFinancialResult(p.id).profit;
+      }, 0);
+
+      const profitability = totalInvestment > 0
+        ? totalProfit / totalInvestment * 100
+        : 0;
+
+      const erogations = getErogationsByInvestor();
+
+      return `
+        <div class="grid grid-4">
+          <div class="kpi">
+            <div class="label">Inversión efectiva</div>
+            <div class="value">${formatUSD(totalInvestment)}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Venta bruta</div>
+            <div class="value">${formatUSD(totalGrossSale)}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Venta neta</div>
+            <div class="value">${formatUSD(totalNetSale)}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Rentabilidad</div>
+            <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">${formatPct(profitability)}</div>
+          </div>
+        </div>
+
+        ${renderResultsBarChart()}
+
+        <div class="card">
+          <h3>📈 Resultados por propiedad</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Estado</th>
+                  <th>Inversión efectiva</th>
+                  <th>Venta bruta</th>
+                  <th>Saldo boleto</th>
+                  <th>Venta neta</th>
+                  <th>Resultado</th>
+                  <th>Rentabilidad</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${state.properties.length ? state.properties.map(p => {
+                  const r = getPropertyFinancialResult(p.id);
+                  const cls = r.profit >= 0 ? "positive" : "negative";
+
+                  return `
+                    <tr>
+                      <td>${escapeHtml(p.name)}</td>
+                      <td>${renderStatus(p.status)}</td>
+                      <td>${formatUSD(r.effectiveInvestment)}</td>
+                      <td>${formatUSD(r.grossSale)}</td>
+                      <td>${formatUSD(r.pendingBoletoBalance)}</td>
+                      <td>${formatUSD(r.netSale)}</td>
+                      <td class="${r.isSold ? cls : ""}">${r.isSold ? formatUSD(r.profit) : "-"}</td>
+                      <td class="${r.isSold ? cls : ""}">${r.isSold ? formatPct(r.profitability) : "-"}</td>
+                    </tr>
+                  `;
+                }).join("") : `
+                  <tr>
+                    <td colspan="8" class="muted">No hay propiedades cargadas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>👥 Erogaciones asignadas por inversor</h3>
+
+          <div class="grid grid-3">
+            ${getInvestorUsers().map(user => `
+              <div class="kpi">
+                <div class="label">${escapeHtml(user.name)}</div>
+                <div class="value">${formatUSD(erogations.totals[user.id] || 0)}</div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🔎 Detalle de erogaciones</h3>
+
+          <div class="notice">
+            Cuando el pagador original es Equipo, el importe se reparte en partes iguales entre Gaston, Hernan y Santiago.
+            En ventas solo se suman gastos reales; el saldo pendiente de boleto no se considera erogación.
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propiedad</th>
+                  <th>Concepto</th>
+                  <th>Pagador original</th>
+                  <th>Inversor asignado</th>
+                  <th>Monto asignado</th>
+                  <th>Criterio</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${erogations.details.length ? erogations.details.map(d => `
+                  <tr>
+                    <td>${escapeHtml(getPropertyName(d.propertyId))}</td>
+                    <td>${escapeHtml(d.concept)}</td>
+                    <td>${escapeHtml(d.originalPayer)}</td>
+                    <td>${escapeHtml(getUserName(d.investorId))}</td>
+                    <td>${formatUSD(d.assigned)}</td>
+                    <td>${escapeHtml(d.criteria)}</td>
+                  </tr>
+                `).join("") : `
+                  <tr>
+                    <td colspan="6" class="muted">No hay erogaciones registradas.</td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderConfig() {
+      if (currentUser.role !== "admin") {
+        return `<div class="card">No tenés permisos para acceder.</div>`;
+      }
+
+      return `
+        <div class="card">
+          <h3>⚙️ Configuración de usuarios</h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Nombre</th>
+                  <th>Clave</th>
+                  <th>Rol</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${getInvestorUsers().map(user => `
+                  <tr>
+                    <td>${escapeHtml(user.id)}</td>
+                    <td>
+                      <input id="userName_${user.id}" value="${escapeHtml(user.name)}" />
+                    </td>
+                    <td>
+                      <input id="userPass_${user.id}" value="${escapeHtml(user.password)}" />
+                    </td>
+                    <td>
+                      <select id="userRole_${user.id}">
+                        <option value="admin" ${user.role === "admin" ? "selected" : ""}>Admin</option>
+                        <option value="investor" ${user.role === "investor" ? "selected" : ""}>Inversor</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button class="btn small success" onclick="saveUserConfig('${user.id}')">Guardar</button>
+                    </td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📦 Datos</h3>
+
+          <div class="actions">
+            <button class="btn secondary" onclick="exportData()">Exportar JSON</button>
+            <button class="btn warning" onclick="document.getElementById('importFile').click()">Importar JSON</button>
+            <button class="btn danger" onclick="resetAllData()">Resetear todo</button>
+          </div>
+
+          <input id="importFile" type="file" accept="application/json" style="display:none;" onchange="importData(event)" />
+        </div>
+      `;
+    }
+
+    function saveUserConfig(userId) {
+      const user = state.users.find(u => u.id === userId);
+
+      if (!user) return;
+
+      user.name = document.getElementById(`userName_${userId}`).value.trim() || user.name;
+      user.password = document.getElementById(`userPass_${userId}`).value.trim() || user.password;
+      user.role = document.getElementById(`userRole_${userId}`).value;
+
+      if (currentUser.id === userId) {
+        currentUser = user;
+      }
+
+      saveState();
+      renderApp();
+    }
+
+    function exportData() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], {
+        type: "application/json"
+      });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "altan_group_inversiones.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+
+          if (!confirm("Esto reemplazará todos los datos actuales. ¿Continuar?")) return;
+
+          state = imported;
+          ensureInitialUsers();
+          migrateData();
+          updateStatuses();
+          saveState();
+          renderApp();
+        } catch {
+          alert("Archivo inválido.");
+        }
+      };
+
+      reader.readAsText(file);
+    }
+
+    function resetAllData() {
+      if (!confirm("¿Seguro que querés borrar toda la información?")) return;
+
+      localStorage.removeItem(STORAGE_KEY);
+      state = createInitialState();
+      currentUser = null;
+      saveState();
+      renderApp();
+    }
+
+    loadState();
+    renderApp();
+  </script>
 </body>
 </html>
