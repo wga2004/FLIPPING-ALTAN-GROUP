@@ -2,2099 +2,1386 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>ALTAN GROUP - Gestión Inmobiliaria</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Altan Group - Gestión de Inversiones</title>
 
   <style>
-    :root {
-      --bg: #020617;
-      --card: #0f172a;
-      --card2: #111827;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --primary: #2563eb;
-      --primary2: #1d4ed8;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --warning: #f59e0b;
-      --border: rgba(148, 163, 184, 0.25);
-    }
-
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #020617, #0f172a);
-      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f5f7;
+      color: #222;
     }
 
     header {
+      background: #111827;
+      color: white;
       padding: 18px 24px;
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 20;
     }
 
-    h1, h2, h3 {
-      margin-top: 0;
+    header h1 {
+      margin: 0;
+      font-size: 24px;
     }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 4px;
+    header p {
+      margin: 6px 0 0;
+      color: #d1d5db;
     }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    main {
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    .container {
+      padding: 20px;
+      max-width: 1300px;
+      margin: auto;
     }
 
     .card {
-      background: rgba(15, 23, 42, 0.88);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: white;
+      border-radius: 12px;
       padding: 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .login-box {
+      max-width: 420px;
+      margin: 50px auto;
     }
 
     label {
+      font-weight: bold;
       display: block;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
+      margin-top: 12px;
+      margin-bottom: 5px;
     }
 
-    input, select, textarea {
+    input, select, textarea, button {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #020617;
-      color: var(--text);
-      outline: none;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
 
     textarea {
-      min-height: 80px;
-      resize: vertical;
+      min-height: 70px;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-    }
-
-    .field {
-      margin-bottom: 12px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 10px 14px;
-      background: var(--primary);
+    button {
+      background: #2563eb;
       color: white;
+      border: none;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: bold;
+      margin-top: 12px;
     }
 
-    .btn:hover {
-      background: var(--primary2);
+    button:hover {
+      background: #1d4ed8;
     }
 
-    .btn.secondary {
-      background: #334155;
+    .btn-danger {
+      background: #dc2626;
     }
 
-    .btn.danger {
-      background: var(--danger);
+    .btn-danger:hover {
+      background: #b91c1c;
     }
 
-    .btn.success {
-      background: var(--success);
+    .btn-secondary {
+      background: #4b5563;
     }
 
-    .btn.warning {
-      background: var(--warning);
-      color: #111827;
-    }
-
-    .btn.small {
-      padding: 6px 9px;
-      font-size: 12px;
-      border-radius: 8px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
+    .btn-secondary:hover {
+      background: #374151;
     }
 
     .tabs {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 20px;
     }
 
-    .tab {
+    .tabs button {
+      width: auto;
       padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text);
-      cursor: pointer;
+      margin-top: 0;
+      background: #e5e7eb;
+      color: #111827;
     }
 
-    .tab.active {
-      background: var(--primary);
-      border-color: var(--primary);
+    .tabs button.active {
+      background: #111827;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      overflow: hidden;
-    }
-
-    th, td {
-      padding: 11px;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-      vertical-align: top;
+      margin-top: 15px;
       font-size: 13px;
     }
 
+    th, td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+
     th {
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      background: #f9fafb;
     }
 
-    .table-wrap {
-      overflow-x: auto;
+    .right {
+      text-align: right;
     }
 
-    .muted {
-      color: var(--muted);
+    .success {
+      color: #059669;
+      font-weight: bold;
+    }
+
+    .danger {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .warning {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .topbar button {
+      width: auto;
+      margin-top: 0;
     }
 
     .small {
       font-size: 12px;
-    }
-
-    .positive {
-      color: #22c55e;
-      font-weight: 700;
-    }
-
-    .negative {
-      color: #ef4444;
-      font-weight: 700;
+      color: #6b7280;
     }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
+      display: inline-block;
       padding: 4px 8px;
       border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
       font-size: 12px;
-      font-weight: 700;
-      border: 1px solid var(--border);
+      font-weight: bold;
     }
 
-    .badge.disponible {
-      background: rgba(34,197,94,0.12);
-      color: #22c55e;
-    }
-
-    .badge.en_compra {
-      background: rgba(245,158,11,0.12);
-      color: #f59e0b;
-    }
-
-    .badge.comprada {
-      background: rgba(59,130,246,0.12);
-      color: #60a5fa;
-    }
-
-    .badge.en_refaccion {
-      background: rgba(168,85,247,0.12);
-      color: #c084fc;
-    }
-
-    .badge.vendida {
-      background: rgba(239,68,68,0.12);
-      color: #f87171;
-    }
-
-    .kpi {
-      background: rgba(2, 6, 23, 0.55);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-    }
-
-    .kpi .label {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .kpi .value {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .result-bars {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .result-bar-item {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      background: rgba(2, 6, 23, 0.45);
-    }
-
-    .result-bar-title {
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .result-bar-row {
-      display: grid;
-      grid-template-columns: 170px 1fr 140px;
-      align-items: center;
-      gap: 10px;
-      margin: 8px 0;
-    }
-
-    .result-bar-label {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .result-bar-track {
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.18);
-      overflow: hidden;
-    }
-
-    .result-bar-fill {
-      height: 100%;
-      border-radius: 999px;
-    }
-
-    .result-bar-fill.investment {
-      background: linear-gradient(90deg, #f59e0b, #f97316);
-    }
-
-    .result-bar-fill.sale {
-      background: linear-gradient(90deg, #22c55e, #14b8a6);
-    }
-
-    .result-bar-value {
-      text-align: right;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .notice {
+    .error-box {
+      background: #fee2e2;
+      color: #991b1b;
       padding: 12px;
-      border-radius: 12px;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.35);
-      color: #bfdbfe;
-      font-size: 13px;
-      margin-bottom: 14px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: none;
     }
 
     @media (max-width: 900px) {
-      .grid-2, .grid-3, .grid-4 {
+      .grid, .grid-2 {
         grid-template-columns: 1fr;
       }
 
-      .result-bar-row {
-        grid-template-columns: 1fr;
-      }
-
-      .result-bar-value {
-        text-align: left;
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
       }
     }
   </style>
 </head>
 
 <body>
-  <div id="app"></div>
 
-  <script>
-    const STORAGE_KEY = "altan_group_inversiones_v3";
+<header>
+  <h1>ALTAN GROUP</h1>
+  <p>Inversiones Inmobiliarias - Compra, Refacción y Venta de Propiedades</p>
+</header>
 
-    let state = null;
-    let currentUser = null;
-    let activeTab = "inicio";
-    let editing = {
-      propertyId: null,
-      purchaseId: null,
-      renovationId: null,
-      saleId: null
-    };
+<div id="app" class="container"></div>
 
-    const initialUsers = [
-      { id: "gaston", name: "Gaston", password: "1234", role: "admin" },
-      { id: "hernan", name: "Hernan", password: "1234", role: "investor" },
-      { id: "santiago", name: "Santiago", password: "1234", role: "investor" }
-    ];
+<script>
+(function () {
+  "use strict";
 
-    function createInitialState() {
-      return {
-        users: structuredClone(initialUsers),
-        properties: [],
-        purchases: [],
-        renovations: [],
-        sales: [],
-        createdAt: new Date().toISOString()
-      };
-    }
+  const STORAGE_KEY = "altan_group_app_v2";
 
-    function loadState() {
+  const defaultState = {
+    investors: [
+      { name: "Gaston", password: null },
+      { name: "Hernan", password: null },
+      { name: "Santiago", password: null }
+    ],
+    properties: [],
+    analysis: [],
+    purchases: [],
+    renovations: [],
+    sales: []
+  };
+
+  let state = loadState();
+  let currentUserIndex = null;
+  let currentTab = "propiedades";
+
+  const app = document.getElementById("app");
+
+  function loadState() {
+    try {
       const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return structuredClone(defaultState);
 
-      if (!raw) {
-        state = createInitialState();
-        saveState();
-        return;
-      }
-
-      try {
-        state = JSON.parse(raw);
-      } catch {
-        state = createInitialState();
-      }
-
-      if (!Array.isArray(state.users)) state.users = [];
-      if (!Array.isArray(state.properties)) state.properties = [];
-      if (!Array.isArray(state.purchases)) state.purchases = [];
-      if (!Array.isArray(state.renovations)) state.renovations = [];
-      if (!Array.isArray(state.sales)) state.sales = [];
-
-      ensureInitialUsers();
-      migrateData();
-      updateStatuses();
-      saveState();
-    }
-
-    function ensureInitialUsers() {
-      initialUsers.forEach(user => {
-        const exists = state.users.some(u => u.id === user.id);
-        if (!exists) state.users.push({ ...user });
-      });
-
-      state.users = state.users.filter((user, index, arr) => {
-        return arr.findIndex(u => u.id === user.id) === index;
-      });
-    }
-
-    function migrateData() {
-      state.properties.forEach(p => {
-        delete p.shares;
-        delete p.participations;
-        delete p.investors;
-        if (!p.id) p.id = uid();
-        if (!p.status) p.status = "disponible";
-      });
-
-      state.purchases.forEach(p => {
-        if (!p.id) p.id = uid();
-        if (!p.modality) p.modality = "escritura";
-        p.priceUsd = num(p.priceUsd || p.amountUsd || 0);
-
-        if (p.amountPaid === undefined) {
-          p.amountPaid = p.modality === "boleto"
-            ? num(p.amountUsd || 0)
-            : p.priceUsd;
-        }
-
-        p.pendingBalance = Math.max(0, p.priceUsd - num(p.amountPaid));
-
-        p.commissionExpense = num(p.commissionExpense);
-        p.deedExpense = num(p.deedExpense);
-        p.miscExpense = num(p.miscExpense);
-        if (!p.payerId) p.payerId = "equipo";
-      });
-
-      state.renovations.forEach(r => {
-        if (!r.id) r.id = uid();
-        r.amountUsd = num(r.amountUsd);
-        if (!r.payerId) r.payerId = "equipo";
-      });
-
-      state.sales.forEach(s => {
-        if (!s.id) s.id = uid();
-        s.salePriceUsd = num(s.salePriceUsd || s.priceUsd || 0);
-        s.commissionExpense = num(s.commissionExpense);
-        s.deedExpense = num(s.deedExpense);
-        s.miscExpense = num(s.miscExpense);
-        if (!s.payerId) s.payerId = "equipo";
-      });
-    }
-
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
-
-    function uid() {
-      return "id_" + Date.now() + "_" + Math.random().toString(16).slice(2);
-    }
-
-    function num(value) {
-      return Number(value || 0);
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function formatUSD(value) {
-      return new Intl.NumberFormat("es-AR", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 0
-      }).format(num(value));
-    }
-
-    function formatPct(value) {
-      return `${num(value).toFixed(2)}%`;
-    }
-
-    function getInvestorUsers() {
-      return state.users.filter(u => u.id !== "equipo");
-    }
-
-    function isTeamPayer(payerId) {
-      return payerId === "equipo" || payerId === "Equipo";
-    }
-
-    function getUserName(id) {
-      if (isTeamPayer(id)) return "Equipo";
-      return state.users.find(u => u.id === id)?.name || "-";
-    }
-
-    function getPropertyById(id) {
-      return state.properties.find(p => p.id === id);
-    }
-
-    function getPropertyName(id) {
-      return getPropertyById(id)?.name || "-";
-    }
-
-    function getAvailableProperties() {
-      return state.properties.filter(p => p.status !== "vendida");
-    }
-
-    function getPropertyInvestorShares(propertyId) {
-      const investors = getInvestorUsers();
-      if (!investors.length) return [];
-
-      const equalPct = 1 / investors.length;
-
-      return investors.map(user => ({
-        userId: user.id,
-        pct: equalPct
-      }));
-    }
-
-    function updateStatuses() {
-      state.properties.forEach(property => {
-        const purchases = state.purchases.filter(p => p.propertyId === property.id);
-        const renovations = state.renovations.filter(r => r.propertyId === property.id);
-        const sales = state.sales.filter(s => s.propertyId === property.id);
-
-        if (sales.length > 0) {
-          property.status = "vendida";
-          return;
-        }
-
-        if (renovations.length > 0) {
-          property.status = "en_refaccion";
-          return;
-        }
-
-        if (purchases.length > 0) {
-          const agreed = purchases.reduce((sum, p) => sum + num(p.priceUsd), 0);
-          const paid = purchases.reduce((sum, p) => sum + num(p.amountPaid), 0);
-
-          property.status = paid >= agreed && agreed > 0
-            ? "comprada"
-            : "en_compra";
-          return;
-        }
-
-        property.status = "disponible";
-      });
-    }
-
-    function statusLabel(status) {
-      const labels = {
-        disponible: "Disponible",
-        en_compra: "En compra",
-        comprada: "Comprada",
-        en_refaccion: "En refacción",
-        vendida: "Vendida"
-      };
-
-      return labels[status] || status;
-    }
-
-    function renderStatus(status) {
-      return `<span class="badge ${status}">${statusLabel(status)}</span>`;
-    }
-
-    function payerOptions(selected = "equipo") {
-      const options = [
-        `<option value="equipo" ${selected === "equipo" ? "selected" : ""}>Equipo</option>`
-      ];
-
-      getInvestorUsers().forEach(user => {
-        options.push(`
-          <option value="${user.id}" ${selected === user.id ? "selected" : ""}>
-            ${escapeHtml(user.name)}
-          </option>
-        `);
-      });
-
-      return options.join("");
-    }
-
-    function propertyOptions(selected = "", onlyAvailable = true) {
-      const list = onlyAvailable ? getAvailableProperties() : state.properties;
-
-      if (!list.length) {
-        return `<option value="">No hay propiedades disponibles</option>`;
-      }
-
-      return [
-        `<option value="">Seleccionar propiedad</option>`,
-        ...list.map(p => `
-          <option value="${p.id}" ${selected === p.id ? "selected" : ""}>
-            ${escapeHtml(p.name)} - ${statusLabel(p.status)}
-          </option>
-        `)
-      ].join("");
-    }
-
-    function getSaleAmount(item) {
-      return num(item.salePriceUsd || item.priceUsd || item.amountUsd || item.valueUsd);
-    }
-
-    function getPurchasePendingBalance(item) {
-      return num(item.pendingBalance || item.balancePending || item.boletoPendingBalance);
-    }
-
-    function getPropertyFinancialResult(propertyId) {
-      const purchases = state.purchases.filter(item => item.propertyId === propertyId);
-      const renovations = state.renovations.filter(item => item.propertyId === propertyId);
-      const sales = state.sales.filter(item => item.propertyId === propertyId);
-
-      const purchasePaid = purchases.reduce((sum, item) => {
-        return sum + num(item.amountPaid || item.amountUsd || item.priceUsd);
-      }, 0);
-
-      const purchaseExpenses = purchases.reduce((sum, item) => {
-        return sum +
-          num(item.commissionExpense) +
-          num(item.deedExpense) +
-          num(item.miscExpense);
-      }, 0);
-
-      const renovationsTotal = renovations.reduce((sum, item) => {
-        return sum + num(item.amountUsd);
-      }, 0);
-
-      const saleExpenses = sales.reduce((sum, item) => {
-        return sum +
-          num(item.commissionExpense) +
-          num(item.deedExpense) +
-          num(item.miscExpense);
-      }, 0);
-
-      const pendingBoletoBalance = purchases.reduce((sum, item) => {
-        return sum + getPurchasePendingBalance(item);
-      }, 0);
-
-      const grossSale = sales.reduce((sum, item) => {
-        return sum + getSaleAmount(item);
-      }, 0);
-
-      const netSale = grossSale - pendingBoletoBalance;
-
-      const effectiveInvestment =
-        purchasePaid +
-        purchaseExpenses +
-        renovationsTotal +
-        saleExpenses;
-
-      const profit = sales.length > 0
-        ? netSale - effectiveInvestment
-        : 0;
-
-      const profitability = effectiveInvestment > 0
-        ? profit / effectiveInvestment * 100
-        : 0;
+      const parsed = JSON.parse(raw);
 
       return {
-        propertyId,
-        isSold: sales.length > 0,
-        purchasePaid,
-        purchaseExpenses,
-        renovationsTotal,
-        saleExpenses,
-        pendingBoletoBalance,
-        grossSale,
-        netSale,
-        effectiveInvestment,
-        profit,
-        profitability
+        investors: parsed.investors || structuredClone(defaultState.investors),
+        properties: parsed.properties || [],
+        analysis: parsed.analysis || [],
+        purchases: parsed.purchases || [],
+        renovations: parsed.renovations || [],
+        sales: parsed.sales || []
       };
-    }
-
-    function renderPropertyProfitability(propertyId) {
-      const result = getPropertyFinancialResult(propertyId);
-
-      if (!result.isSold) {
-        return `<span class="muted">-</span>`;
-      }
-
-      const className = result.profitability >= 0 ? "positive" : "negative";
-
-      return `
-        <div class="${className}">
-          ${formatPct(result.profitability)}
-        </div>
-        <div class="small muted">
-          Resultado: ${formatUSD(result.profit)}
-        </div>
-      `;
-    }
-
-    function login(userId, password) {
-      const user = state.users.find(u => u.id === userId && u.password === password);
-
-      if (!user) {
-        alert("Usuario o clave incorrecta");
-        return;
-      }
-
-      currentUser = user;
-      activeTab = "inicio";
-      renderApp();
-    }
-
-    function logout() {
-      currentUser = null;
-      renderApp();
-    }
-
-    function renderLogin() {
-      const users = getInvestorUsers();
-
-      document.getElementById("app").innerHTML = `
-        <div class="login-page">
-          <div class="login-card">
-            <h1>🏢 Altan Group</h1>
-            <p class="subtitle">Gestión inmobiliaria e inversiones</p>
-
-            <div class="field">
-              <label>Usuario</label>
-              <select id="loginUser">
-                ${users.map(u => `<option value="${u.id}">${escapeHtml(u.name)}</option>`).join("")}
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Clave</label>
-              <input id="loginPassword" type="password" placeholder="Clave" />
-            </div>
-
-            <button class="btn" style="width:100%;" onclick="login(
-              document.getElementById('loginUser').value,
-              document.getElementById('loginPassword').value
-            )">
-              Ingresar
-            </button>
-
-            <p class="small muted" style="margin-top:14px;">
-              Clave inicial para todos: 1234
-            </p>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderApp() {
-      if (!currentUser) {
-        renderLogin();
-        return;
-      }
-
-      updateStatuses();
-      saveState();
-
-      const tabs = [
-        ["inicio", "🏠 Inicio"],
-        ["propiedades", "🏘️ Propiedades"],
-        ["compras", "🧾 Compra"],
-        ["refacciones", "🛠️ Refacción"],
-        ["ventas", "💰 Venta"],
-        ["resumen", "📊 Resultados"]
-      ];
-
-      if (currentUser.role === "admin") {
-        tabs.push(["config", "⚙️ Configuración"]);
-      }
-
-      document.getElementById("app").innerHTML = `
-        <header>
-          <div>
-            <h1>Altan Group</h1>
-            <div class="subtitle">Sesión: ${escapeHtml(currentUser.name)} · Rol: ${escapeHtml(currentUser.role)}</div>
-          </div>
-
-          <button class="btn secondary" onclick="logout()">Salir</button>
-        </header>
-
-        <main>
-          <div class="tabs">
-            ${tabs.map(([id, label]) => `
-              <button class="tab ${activeTab === id ? "active" : ""}" onclick="setTab('${id}')">
-                ${label}
-              </button>
-            `).join("")}
-          </div>
-
-          <div id="content">
-            ${renderTab()}
-          </div>
-        </main>
-      `;
-    }
-
-    function setTab(tab) {
-      activeTab = tab;
-      renderApp();
-    }
-
-    function renderTab() {
-      if (activeTab === "inicio") return renderHome();
-      if (activeTab === "propiedades") return renderProperties();
-      if (activeTab === "compras") return renderPurchases();
-      if (activeTab === "refacciones") return renderRenovations();
-      if (activeTab === "ventas") return renderSales();
-      if (activeTab === "resumen") return renderSummary();
-      if (activeTab === "config") return renderConfig();
-
-      return renderHome();
-    }
-
-    function renderHome() {
-      const totalProperties = state.properties.length;
-      const sold = state.properties.filter(p => p.status === "vendida").length;
-      const available = state.properties.filter(p => p.status === "disponible").length;
-
-      const totalInvestment = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).effectiveInvestment;
-      }, 0);
-
-      const totalNetSale = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).netSale;
-      }, 0);
-
-      const totalProfit = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).profit;
-      }, 0);
-
-      return `
-        <div class="grid grid-4">
-          <div class="kpi">
-            <div class="label">Propiedades</div>
-            <div class="value">${totalProperties}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Disponibles</div>
-            <div class="value">${available}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Vendidas</div>
-            <div class="value">${sold}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Resultado total</div>
-            <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">${formatUSD(totalProfit)}</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📌 Resumen general</h3>
-          <div class="grid grid-3">
-            <div class="kpi">
-              <div class="label">Inversión efectiva</div>
-              <div class="value">${formatUSD(totalInvestment)}</div>
-            </div>
-
-            <div class="kpi">
-              <div class="label">Venta neta</div>
-              <div class="value">${formatUSD(totalNetSale)}</div>
-            </div>
-
-            <div class="kpi">
-              <div class="label">Rentabilidad total</div>
-              <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">
-                ${totalInvestment > 0 ? formatPct(totalProfit / totalInvestment * 100) : "0.00%"}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderProperties() {
-      const editingProperty = editing.propertyId
-        ? state.properties.find(p => p.id === editing.propertyId)
-        : null;
-
-      return `
-        <div class="card">
-          <h3>🏘️ ${editingProperty ? "Editar propiedad" : "Nueva propiedad"}</h3>
-
-          <div class="notice">
-            Las participaciones fueron eliminadas de la solapa Propiedades.
-            Cuando paga el Equipo, la erogación se reparte automáticamente en partes iguales entre los inversores.
-          </div>
-
-          <div class="grid grid-2">
-            <div class="field">
-              <label>Nombre / Identificación</label>
-              <input id="propertyName" value="${escapeHtml(editingProperty?.name || "")}" placeholder="Ej: Depto Palermo" />
-            </div>
-
-            <div class="field">
-              <label>Tipo</label>
-              <input id="propertyType" value="${escapeHtml(editingProperty?.type || "")}" placeholder="Casa, departamento, lote..." />
-            </div>
-
-            <div class="field">
-              <label>Dirección</label>
-              <input id="propertyAddress" value="${escapeHtml(editingProperty?.address || "")}" placeholder="Dirección" />
-            </div>
-
-            <div class="field">
-              <label>Notas</label>
-              <input id="propertyNotes" value="${escapeHtml(editingProperty?.notes || "")}" placeholder="Notas" />
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="btn success" onclick="saveProperty()">
-              ${editingProperty ? "Guardar cambios" : "Agregar propiedad"}
-            </button>
-
-            ${editingProperty ? `
-              <button class="btn secondary" onclick="cancelEditProperty()">Cancelar</button>
-            ` : ""}
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📋 Listado de propiedades</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Tipo</th>
-                  <th>Dirección</th>
-                  <th>Estado</th>
-                  <th>Rentabilidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${state.properties.length ? state.properties.map(item => `
-                  <tr>
-                    <td><strong>${escapeHtml(item.name)}</strong></td>
-                    <td>${escapeHtml(item.type || "-")}</td>
-                    <td>${escapeHtml(item.address || "-")}</td>
-                    <td>${renderStatus(item.status)}</td>
-                    <td>${renderPropertyProfitability(item.id)}</td>
-                    <td>
-                      <div class="actions">
-                        <button class="btn small secondary" onclick="editProperty('${item.id}')">Editar</button>
-                        <button class="btn small danger" onclick="deleteProperty('${item.id}')">Eliminar</button>
-                      </div>
-                    </td>
-                  </tr>
-                `).join("") : `
-                  <tr>
-                    <td colspan="6" class="muted">No hay propiedades cargadas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-
-    function saveProperty() {
-      const name = document.getElementById("propertyName").value.trim();
-      const type = document.getElementById("propertyType").value.trim();
-      const address = document.getElementById("propertyAddress").value.trim();
-      const notes = document.getElementById("propertyNotes").value.trim();
-
-      if (!name) {
-        alert("Ingresá el nombre de la propiedad");
-        return;
-      }
-
-      if (editing.propertyId) {
-        const property = state.properties.find(p => p.id === editing.propertyId);
-        property.name = name;
-        property.type = type;
-        property.address = address;
-        property.notes = notes;
-        property.updatedAt = new Date().toISOString();
-
-        delete property.shares;
-        delete property.participations;
-        delete property.investors;
-      } else {
-        state.properties.push({
-          id: uid(),
-          name,
-          type,
-          address,
-          notes,
-          status: "disponible",
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        });
-      }
-
-      editing.propertyId = null;
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function editProperty(id) {
-      editing.propertyId = id;
-      renderApp();
-    }
-
-    function cancelEditProperty() {
-      editing.propertyId = null;
-      renderApp();
-    }
-
-    function deleteProperty(id) {
-      const hasOps =
-        state.purchases.some(p => p.propertyId === id) ||
-        state.renovations.some(r => r.propertyId === id) ||
-        state.sales.some(s => s.propertyId === id);
-
-      if (hasOps) {
-        alert("No se puede eliminar una propiedad con operaciones cargadas.");
-        return;
-      }
-
-      if (!confirm("¿Eliminar propiedad?")) return;
-
-      state.properties = state.properties.filter(p => p.id !== id);
-      saveState();
-      renderApp();
-    }
-
-    function renderPurchases() {
-      const item = editing.purchaseId
-        ? state.purchases.find(p => p.id === editing.purchaseId)
-        : null;
-
-      return `
-        <div class="card">
-          <h3>🧾 ${item ? "Editar compra" : "Registrar compra"}</h3>
-
-          <div class="notice">
-            En compras por Boleto se registra el precio total acordado y el monto efectivamente abonado.
-            La diferencia queda como saldo pendiente y se descuenta en la venta.
-          </div>
-
-          <div class="grid grid-3">
-            <div class="field">
-              <label>Propiedad</label>
-              <select id="purchaseProperty">
-                ${propertyOptions(item?.propertyId || "", true)}
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Modalidad</label>
-              <select id="purchaseModality" onchange="handlePurchaseModalityChange()">
-                <option value="boleto" ${item?.modality === "boleto" ? "selected" : ""}>Boleto</option>
-                <option value="escritura" ${item?.modality === "escritura" || !item ? "selected" : ""}>Escritura</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Quién realiza la erogación</label>
-              <select id="purchasePayer">${payerOptions(item?.payerId || "equipo")}</select>
-            </div>
-
-            <div class="field">
-              <label>Precio total acordado USD</label>
-              <input id="purchasePrice" type="number" value="${item?.priceUsd || ""}" oninput="handlePurchaseModalityChange()" />
-            </div>
-
-            <div class="field">
-              <label>Monto efectivamente abonado USD</label>
-              <input id="purchasePaid" type="number" value="${item?.amountPaid || ""}" oninput="handlePurchaseModalityChange()" />
-            </div>
-
-            <div class="field">
-              <label>Saldo pendiente boleto USD</label>
-              <input id="purchasePending" type="number" value="${item?.pendingBalance || ""}" disabled />
-            </div>
-
-            <div class="field">
-              <label>Comisión inmobiliaria USD</label>
-              <input id="purchaseCommission" type="number" value="${item?.commissionExpense || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Escrituración USD</label>
-              <input id="purchaseDeed" type="number" value="${item?.deedExpense || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Gastos varios USD</label>
-              <input id="purchaseMisc" type="number" value="${item?.miscExpense || ""}" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Notas</label>
-            <textarea id="purchaseNotes">${escapeHtml(item?.notes || "")}</textarea>
-          </div>
-
-          <div class="actions">
-            <button class="btn success" onclick="savePurchase()">${item ? "Guardar cambios" : "Registrar compra"}</button>
-            ${item ? `<button class="btn secondary" onclick="cancelEditPurchase()">Cancelar</button>` : ""}
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📋 Compras</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Modalidad</th>
-                  <th>Precio acordado</th>
-                  <th>Monto abonado</th>
-                  <th>Saldo pendiente</th>
-                  <th>Gastos</th>
-                  <th>Pagador</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${state.purchases.length ? state.purchases.map(p => `
-                  <tr>
-                    <td>${escapeHtml(getPropertyName(p.propertyId))}</td>
-                    <td>${p.modality === "boleto" ? "Boleto" : "Escritura"}</td>
-                    <td>${formatUSD(p.priceUsd)}</td>
-                    <td>${formatUSD(p.amountPaid)}</td>
-                    <td>${formatUSD(p.pendingBalance)}</td>
-                    <td>${formatUSD(num(p.commissionExpense) + num(p.deedExpense) + num(p.miscExpense))}</td>
-                    <td>${escapeHtml(getUserName(p.payerId))}</td>
-                    <td>
-                      <div class="actions">
-                        <button class="btn small secondary" onclick="editPurchase('${p.id}')">Editar</button>
-                        <button class="btn small danger" onclick="deletePurchase('${p.id}')">Eliminar</button>
-                      </div>
-                    </td>
-                  </tr>
-                `).join("") : `
-                  <tr>
-                    <td colspan="8" class="muted">No hay compras cargadas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-
-    function handlePurchaseModalityChange() {
-      const modality = document.getElementById("purchaseModality")?.value;
-      const price = num(document.getElementById("purchasePrice")?.value);
-      const paidInput = document.getElementById("purchasePaid");
-      const pendingInput = document.getElementById("purchasePending");
-
-      if (!paidInput || !pendingInput) return;
-
-      if (modality === "escritura") {
-        paidInput.value = price || "";
-        pendingInput.value = 0;
-      } else {
-        const paid = num(paidInput.value);
-        pendingInput.value = Math.max(0, price - paid);
-      }
-    }
-
-    function savePurchase() {
-      const propertyId = document.getElementById("purchaseProperty").value;
-      const property = getPropertyById(propertyId);
-
-      if (!property) {
-        alert("Seleccioná una propiedad");
-        return;
-      }
-
-      if (property.status === "vendida") {
-        alert("No se puede cargar compra sobre una propiedad vendida.");
-        return;
-      }
-
-      const modality = document.getElementById("purchaseModality").value;
-      const priceUsd = num(document.getElementById("purchasePrice").value);
-      let amountPaid = num(document.getElementById("purchasePaid").value);
-
-      if (priceUsd <= 0) {
-        alert("Ingresá el precio total acordado.");
-        return;
-      }
-
-      if (modality === "escritura") {
-        amountPaid = priceUsd;
-      }
-
-      if (amountPaid <= 0) {
-        alert("Ingresá el monto efectivamente abonado.");
-        return;
-      }
-
-      if (amountPaid > priceUsd) {
-        alert("El monto abonado no puede superar el precio acordado.");
-        return;
-      }
-
-      const data = {
-        propertyId,
-        modality,
-        priceUsd,
-        amountPaid,
-        pendingBalance: Math.max(0, priceUsd - amountPaid),
-        payerId: document.getElementById("purchasePayer").value,
-        commissionExpense: num(document.getElementById("purchaseCommission").value),
-        deedExpense: num(document.getElementById("purchaseDeed").value),
-        miscExpense: num(document.getElementById("purchaseMisc").value),
-        notes: document.getElementById("purchaseNotes").value.trim(),
-        updatedAt: new Date().toISOString()
-      };
-
-      if (editing.purchaseId) {
-        const item = state.purchases.find(p => p.id === editing.purchaseId);
-        Object.assign(item, data);
-      } else {
-        state.purchases.push({
-          id: uid(),
-          ...data,
-          createdAt: new Date().toISOString()
-        });
-      }
-
-      editing.purchaseId = null;
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function editPurchase(id) {
-      editing.purchaseId = id;
-      renderApp();
-      setTimeout(handlePurchaseModalityChange, 0);
-    }
-
-    function cancelEditPurchase() {
-      editing.purchaseId = null;
-      renderApp();
-    }
-
-    function deletePurchase(id) {
-      if (!confirm("¿Eliminar compra?")) return;
-      state.purchases = state.purchases.filter(p => p.id !== id);
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function renderRenovations() {
-      const item = editing.renovationId
-        ? state.renovations.find(r => r.id === editing.renovationId)
-        : null;
-
-      return `
-        <div class="card">
-          <h3>🛠️ ${item ? "Editar refacción" : "Registrar refacción"}</h3>
-
-          <div class="grid grid-3">
-            <div class="field">
-              <label>Propiedad</label>
-              <select id="renovationProperty">${propertyOptions(item?.propertyId || "", true)}</select>
-            </div>
-
-            <div class="field">
-              <label>Monto USD</label>
-              <input id="renovationAmount" type="number" value="${item?.amountUsd || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Quién realiza la erogación</label>
-              <select id="renovationPayer">${payerOptions(item?.payerId || "equipo")}</select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Detalle</label>
-            <textarea id="renovationNotes">${escapeHtml(item?.notes || "")}</textarea>
-          </div>
-
-          <div class="actions">
-            <button class="btn success" onclick="saveRenovation()">${item ? "Guardar cambios" : "Registrar refacción"}</button>
-            ${item ? `<button class="btn secondary" onclick="cancelEditRenovation()">Cancelar</button>` : ""}
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📋 Refacciones</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Monto</th>
-                  <th>Pagador</th>
-                  <th>Detalle</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${state.renovations.length ? state.renovations.map(r => `
-                  <tr>
-                    <td>${escapeHtml(getPropertyName(r.propertyId))}</td>
-                    <td>${formatUSD(r.amountUsd)}</td>
-                    <td>${escapeHtml(getUserName(r.payerId))}</td>
-                    <td>${escapeHtml(r.notes || "-")}</td>
-                    <td>
-                      <div class="actions">
-                        <button class="btn small secondary" onclick="editRenovation('${r.id}')">Editar</button>
-                        <button class="btn small danger" onclick="deleteRenovation('${r.id}')">Eliminar</button>
-                      </div>
-                    </td>
-                  </tr>
-                `).join("") : `
-                  <tr>
-                    <td colspan="5" class="muted">No hay refacciones cargadas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-
-    function saveRenovation() {
-      const propertyId = document.getElementById("renovationProperty").value;
-      const property = getPropertyById(propertyId);
-
-      if (!property) {
-        alert("Seleccioná una propiedad");
-        return;
-      }
-
-      if (property.status === "vendida") {
-        alert("No se puede cargar refacción sobre una propiedad vendida.");
-        return;
-      }
-
-      const amountUsd = num(document.getElementById("renovationAmount").value);
-
-      if (amountUsd <= 0) {
-        alert("Ingresá un monto válido.");
-        return;
-      }
-
-      const data = {
-        propertyId,
-        amountUsd,
-        payerId: document.getElementById("renovationPayer").value,
-        notes: document.getElementById("renovationNotes").value.trim(),
-        updatedAt: new Date().toISOString()
-      };
-
-      if (editing.renovationId) {
-        Object.assign(state.renovations.find(r => r.id === editing.renovationId), data);
-      } else {
-        state.renovations.push({
-          id: uid(),
-          ...data,
-          createdAt: new Date().toISOString()
-        });
-      }
-
-      editing.renovationId = null;
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function editRenovation(id) {
-      editing.renovationId = id;
-      renderApp();
-    }
-
-    function cancelEditRenovation() {
-      editing.renovationId = null;
-      renderApp();
-    }
-
-    function deleteRenovation(id) {
-      if (!confirm("¿Eliminar refacción?")) return;
-      state.renovations = state.renovations.filter(r => r.id !== id);
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function renderSales() {
-      const item = editing.saleId
-        ? state.sales.find(s => s.id === editing.saleId)
-        : null;
-
-      return `
-        <div class="card">
-          <h3>💰 ${item ? "Editar venta" : "Registrar venta"}</h3>
-
-          <div class="notice">
-            En la venta, el saldo pendiente de boleto se descuenta de la venta bruta para calcular la venta neta.
-            Ese saldo pendiente no se suma como erogación.
-          </div>
-
-          <div class="grid grid-3">
-            <div class="field">
-              <label>Propiedad</label>
-              <select id="saleProperty">${propertyOptions(item?.propertyId || "", true)}</select>
-            </div>
-
-            <div class="field">
-              <label>Valor de venta USD</label>
-              <input id="salePrice" type="number" value="${item?.salePriceUsd || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Quién realiza la erogación de gastos</label>
-              <select id="salePayer">${payerOptions(item?.payerId || "equipo")}</select>
-            </div>
-
-            <div class="field">
-              <label>Comisión inmobiliaria USD</label>
-              <input id="saleCommission" type="number" value="${item?.commissionExpense || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Escrituración USD</label>
-              <input id="saleDeed" type="number" value="${item?.deedExpense || ""}" />
-            </div>
-
-            <div class="field">
-              <label>Gastos varios USD</label>
-              <input id="saleMisc" type="number" value="${item?.miscExpense || ""}" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Notas</label>
-            <textarea id="saleNotes">${escapeHtml(item?.notes || "")}</textarea>
-          </div>
-
-          <div class="actions">
-            <button class="btn success" onclick="saveSale()">${item ? "Guardar cambios" : "Registrar venta"}</button>
-            ${item ? `<button class="btn secondary" onclick="cancelEditSale()">Cancelar</button>` : ""}
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📋 Ventas</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Venta bruta</th>
-                  <th>Saldo boleto descontado</th>
-                  <th>Venta neta</th>
-                  <th>Gastos venta</th>
-                  <th>Pagador gastos</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${state.sales.length ? state.sales.map(s => {
-                  const result = getPropertyFinancialResult(s.propertyId);
-                  const saleExpenses = num(s.commissionExpense) + num(s.deedExpense) + num(s.miscExpense);
-
-                  return `
-                    <tr>
-                      <td>${escapeHtml(getPropertyName(s.propertyId))}</td>
-                      <td>${formatUSD(s.salePriceUsd)}</td>
-                      <td>${formatUSD(result.pendingBoletoBalance)}</td>
-                      <td>${formatUSD(result.netSale)}</td>
-                      <td>${formatUSD(saleExpenses)}</td>
-                      <td>${escapeHtml(getUserName(s.payerId))}</td>
-                      <td>
-                        <div class="actions">
-                          <button class="btn small secondary" onclick="editSale('${s.id}')">Editar</button>
-                          <button class="btn small danger" onclick="deleteSale('${s.id}')">Eliminar</button>
-                        </div>
-                      </td>
-                    </tr>
-                  `;
-                }).join("") : `
-                  <tr>
-                    <td colspan="7" class="muted">No hay ventas cargadas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-
-    function saveSale() {
-      const propertyId = document.getElementById("saleProperty").value;
-      const property = getPropertyById(propertyId);
-
-      if (!property) {
-        alert("Seleccioná una propiedad");
-        return;
-      }
-
-      if (state.sales.some(s => s.propertyId === propertyId && s.id !== editing.saleId)) {
-        alert("Esta propiedad ya tiene una venta registrada.");
-        return;
-      }
-
-      const salePriceUsd = num(document.getElementById("salePrice").value);
-
-      if (salePriceUsd <= 0) {
-        alert("Ingresá el valor de venta.");
-        return;
-      }
-
-      const data = {
-        propertyId,
-        salePriceUsd,
-        payerId: document.getElementById("salePayer").value,
-        commissionExpense: num(document.getElementById("saleCommission").value),
-        deedExpense: num(document.getElementById("saleDeed").value),
-        miscExpense: num(document.getElementById("saleMisc").value),
-        notes: document.getElementById("saleNotes").value.trim(),
-        updatedAt: new Date().toISOString()
-      };
-
-      if (editing.saleId) {
-        Object.assign(state.sales.find(s => s.id === editing.saleId), data);
-      } else {
-        state.sales.push({
-          id: uid(),
-          ...data,
-          createdAt: new Date().toISOString()
-        });
-      }
-
-      editing.saleId = null;
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function editSale(id) {
-      editing.saleId = id;
-      renderApp();
-    }
-
-    function cancelEditSale() {
-      editing.saleId = null;
-      renderApp();
-    }
-
-    function deleteSale(id) {
-      if (!confirm("¿Eliminar venta?")) return;
-      state.sales = state.sales.filter(s => s.id !== id);
-      updateStatuses();
-      saveState();
-      renderApp();
-    }
-
-    function renderResultsBarChart() {
-      const soldProperties = state.properties.filter(property => {
-        const result = getPropertyFinancialResult(property.id);
-        return result.isSold;
-      });
-
-      if (!soldProperties.length) {
-        return `
-          <div class="card">
-            <h3>📊 Resultados por propiedad vendida</h3>
-            <p class="muted small">
-              Todavía no hay propiedades vendidas para graficar resultados.
-            </p>
-          </div>
-        `;
-      }
-
-      const results = soldProperties.map(property => {
-        const result = getPropertyFinancialResult(property.id);
-
-        return {
-          property,
-          ...result
-        };
-      });
-
-      const maxValue = Math.max(
-        1,
-        ...results.map(item => item.effectiveInvestment),
-        ...results.map(item => item.netSale)
-      );
-
-      const rows = results.map(item => {
-        const investmentWidth = Math.max(2, item.effectiveInvestment / maxValue * 100);
-        const saleWidth = Math.max(2, item.netSale / maxValue * 100);
-        const profitClass = item.profit >= 0 ? "positive" : "negative";
-
-        return `
-          <div class="result-bar-item">
-            <div class="result-bar-title">
-              🏠 ${escapeHtml(item.property.name)}
-            </div>
-
-            <div class="result-bar-row">
-              <div class="result-bar-label">Inversión efectiva</div>
-              <div class="result-bar-track">
-                <div class="result-bar-fill investment" style="width:${investmentWidth}%"></div>
-              </div>
-              <div class="result-bar-value">${formatUSD(item.effectiveInvestment)}</div>
-            </div>
-
-            <div class="result-bar-row">
-              <div class="result-bar-label">Venta neta</div>
-              <div class="result-bar-track">
-                <div class="result-bar-fill sale" style="width:${saleWidth}%"></div>
-              </div>
-              <div class="result-bar-value">${formatUSD(item.netSale)}</div>
-            </div>
-
-            <div class="small muted" style="margin-top:10px;">
-              Venta bruta: ${formatUSD(item.grossSale)} ·
-              Saldo boleto descontado: ${formatUSD(item.pendingBoletoBalance)} ·
-              Resultado: <span class="${profitClass}">${formatUSD(item.profit)}</span> ·
-              Rentabilidad: <span class="${profitClass}">${formatPct(item.profitability)}</span>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      return `
-        <div class="card">
-          <h3>📊 Resultados por propiedad vendida</h3>
-
-          <p class="small muted">
-            El gráfico compara la inversión efectiva contra la venta neta.
-            La inversión efectiva no incluye saldo pendiente de boleto.
-          </p>
-
-          <div class="result-bars">
-            ${rows}
-          </div>
-        </div>
-      `;
-    }
-
-    function getErogationsByInvestor() {
-      const details = [];
-      const totals = {};
-
-      getInvestorUsers().forEach(user => {
-        totals[user.id] = 0;
-      });
-
-      function addErogation({ propertyId, concept, payerId, amount }) {
-        amount = num(amount);
-        if (amount <= 0) return;
-
-        if (isTeamPayer(payerId)) {
-          const shares = getPropertyInvestorShares(propertyId);
-
-          shares.forEach(share => {
-            const assigned = amount * share.pct;
-            totals[share.userId] = num(totals[share.userId]) + assigned;
-
-            details.push({
-              propertyId,
-              concept,
-              originalPayer: "Equipo",
-              investorId: share.userId,
-              assigned,
-              criteria: "Equipo: reparto en partes iguales"
-            });
-          });
-        } else {
-          totals[payerId] = num(totals[payerId]) + amount;
-
-          details.push({
-            propertyId,
-            concept,
-            originalPayer: getUserName(payerId),
-            investorId: payerId,
-            assigned: amount,
-            criteria: "Pago directo del inversor"
-          });
-        }
-      }
-
-      state.purchases.forEach(p => {
-        addErogation({
-          propertyId: p.propertyId,
-          concept: "Compra - monto abonado",
-          payerId: p.payerId,
-          amount: p.amountPaid
-        });
-
-        addErogation({
-          propertyId: p.propertyId,
-          concept: "Compra - comisión inmobiliaria",
-          payerId: p.payerId,
-          amount: p.commissionExpense
-        });
-
-        addErogation({
-          propertyId: p.propertyId,
-          concept: "Compra - escrituración",
-          payerId: p.payerId,
-          amount: p.deedExpense
-        });
-
-        addErogation({
-          propertyId: p.propertyId,
-          concept: "Compra - gastos varios",
-          payerId: p.payerId,
-          amount: p.miscExpense
-        });
-      });
-
-      state.renovations.forEach(r => {
-        addErogation({
-          propertyId: r.propertyId,
-          concept: "Refacción",
-          payerId: r.payerId,
-          amount: r.amountUsd
-        });
-      });
-
-      state.sales.forEach(s => {
-        addErogation({
-          propertyId: s.propertyId,
-          concept: "Venta - comisión inmobiliaria",
-          payerId: s.payerId,
-          amount: s.commissionExpense
-        });
-
-        addErogation({
-          propertyId: s.propertyId,
-          concept: "Venta - escrituración",
-          payerId: s.payerId,
-          amount: s.deedExpense
-        });
-
-        addErogation({
-          propertyId: s.propertyId,
-          concept: "Venta - gastos varios",
-          payerId: s.payerId,
-          amount: s.miscExpense
-        });
-      });
-
-      return { totals, details };
-    }
-
-    function renderSummary() {
-      const totalInvestment = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).effectiveInvestment;
-      }, 0);
-
-      const totalGrossSale = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).grossSale;
-      }, 0);
-
-      const totalNetSale = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).netSale;
-      }, 0);
-
-      const totalProfit = state.properties.reduce((sum, p) => {
-        return sum + getPropertyFinancialResult(p.id).profit;
-      }, 0);
-
-      const profitability = totalInvestment > 0
-        ? totalProfit / totalInvestment * 100
-        : 0;
-
-      const erogations = getErogationsByInvestor();
-
-      return `
-        <div class="grid grid-4">
-          <div class="kpi">
-            <div class="label">Inversión efectiva</div>
-            <div class="value">${formatUSD(totalInvestment)}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Venta bruta</div>
-            <div class="value">${formatUSD(totalGrossSale)}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Venta neta</div>
-            <div class="value">${formatUSD(totalNetSale)}</div>
-          </div>
-
-          <div class="kpi">
-            <div class="label">Rentabilidad</div>
-            <div class="value ${totalProfit >= 0 ? "positive" : "negative"}">${formatPct(profitability)}</div>
-          </div>
-        </div>
-
-        ${renderResultsBarChart()}
-
-        <div class="card">
-          <h3>📈 Resultados por propiedad</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Estado</th>
-                  <th>Inversión efectiva</th>
-                  <th>Venta bruta</th>
-                  <th>Saldo boleto</th>
-                  <th>Venta neta</th>
-                  <th>Resultado</th>
-                  <th>Rentabilidad</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${state.properties.length ? state.properties.map(p => {
-                  const r = getPropertyFinancialResult(p.id);
-                  const cls = r.profit >= 0 ? "positive" : "negative";
-
-                  return `
-                    <tr>
-                      <td>${escapeHtml(p.name)}</td>
-                      <td>${renderStatus(p.status)}</td>
-                      <td>${formatUSD(r.effectiveInvestment)}</td>
-                      <td>${formatUSD(r.grossSale)}</td>
-                      <td>${formatUSD(r.pendingBoletoBalance)}</td>
-                      <td>${formatUSD(r.netSale)}</td>
-                      <td class="${r.isSold ? cls : ""}">${r.isSold ? formatUSD(r.profit) : "-"}</td>
-                      <td class="${r.isSold ? cls : ""}">${r.isSold ? formatPct(r.profitability) : "-"}</td>
-                    </tr>
-                  `;
-                }).join("") : `
-                  <tr>
-                    <td colspan="8" class="muted">No hay propiedades cargadas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>👥 Erogaciones asignadas por inversor</h3>
-
-          <div class="grid grid-3">
-            ${getInvestorUsers().map(user => `
-              <div class="kpi">
-                <div class="label">${escapeHtml(user.name)}</div>
-                <div class="value">${formatUSD(erogations.totals[user.id] || 0)}</div>
-              </div>
-            `).join("")}
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>🔎 Detalle de erogaciones</h3>
-
-          <div class="notice">
-            Cuando el pagador original es Equipo, el importe se reparte en partes iguales entre Gaston, Hernan y Santiago.
-            En ventas solo se suman gastos reales; el saldo pendiente de boleto no se considera erogación.
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Propiedad</th>
-                  <th>Concepto</th>
-                  <th>Pagador original</th>
-                  <th>Inversor asignado</th>
-                  <th>Monto asignado</th>
-                  <th>Criterio</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${erogations.details.length ? erogations.details.map(d => `
-                  <tr>
-                    <td>${escapeHtml(getPropertyName(d.propertyId))}</td>
-                    <td>${escapeHtml(d.concept)}</td>
-                    <td>${escapeHtml(d.originalPayer)}</td>
-                    <td>${escapeHtml(getUserName(d.investorId))}</td>
-                    <td>${formatUSD(d.assigned)}</td>
-                    <td>${escapeHtml(d.criteria)}</td>
-                  </tr>
-                `).join("") : `
-                  <tr>
-                    <td colspan="6" class="muted">No hay erogaciones registradas.</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderConfig() {
-      if (currentUser.role !== "admin") {
-        return `<div class="card">No tenés permisos para acceder.</div>`;
-      }
-
-      return `
-        <div class="card">
-          <h3>⚙️ Configuración de usuarios</h3>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Clave</th>
-                  <th>Rol</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${getInvestorUsers().map(user => `
-                  <tr>
-                    <td>${escapeHtml(user.id)}</td>
-                    <td>
-                      <input id="userName_${user.id}" value="${escapeHtml(user.name)}" />
-                    </td>
-                    <td>
-                      <input id="userPass_${user.id}" value="${escapeHtml(user.password)}" />
-                    </td>
-                    <td>
-                      <select id="userRole_${user.id}">
-                        <option value="admin" ${user.role === "admin" ? "selected" : ""}>Admin</option>
-                        <option value="investor" ${user.role === "investor" ? "selected" : ""}>Inversor</option>
-                      </select>
-                    </td>
-                    <td>
-                      <button class="btn small success" onclick="saveUserConfig('${user.id}')">Guardar</button>
-                    </td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>📦 Datos</h3>
-
-          <div class="actions">
-            <button class="btn secondary" onclick="exportData()">Exportar JSON</button>
-            <button class="btn warning" onclick="document.getElementById('importFile').click()">Importar JSON</button>
-            <button class="btn danger" onclick="resetAllData()">Resetear todo</button>
-          </div>
-
-          <input id="importFile" type="file" accept="application/json" style="display:none;" onchange="importData(event)" />
-        </div>
-      `;
-    }
-
-    function saveUserConfig(userId) {
-      const user = state.users.find(u => u.id === userId);
-
-      if (!user) return;
-
-      user.name = document.getElementById(`userName_${userId}`).value.trim() || user.name;
-      user.password = document.getElementById(`userPass_${userId}`).value.trim() || user.password;
-      user.role = document.getElementById(`userRole_${userId}`).value;
-
-      if (currentUser.id === userId) {
-        currentUser = user;
-      }
-
-      saveState();
-      renderApp();
-    }
-
-    function exportData() {
-      const blob = new Blob([JSON.stringify(state, null, 2)], {
-        type: "application/json"
-      });
-
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "altan_group_inversiones.json";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function importData(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        try {
-          const imported = JSON.parse(e.target.result);
-
-          if (!confirm("Esto reemplazará todos los datos actuales. ¿Continuar?")) return;
-
-          state = imported;
-          ensureInitialUsers();
-          migrateData();
-          updateStatuses();
-          saveState();
-          renderApp();
-        } catch {
-          alert("Archivo inválido.");
-        }
-      };
-
-      reader.readAsText(file);
-    }
-
-    function resetAllData() {
-      if (!confirm("¿Seguro que querés borrar toda la información?")) return;
-
+    } catch (e) {
+      console.error("Error cargando localStorage:", e);
       localStorage.removeItem(STORAGE_KEY);
-      state = createInitialState();
-      currentUser = null;
-      saveState();
-      renderApp();
+      return structuredClone(defaultState);
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function money(value) {
+    const n = Number(value || 0);
+    return "USD " + n.toLocaleString("es-AR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function moneyARS(value) {
+    const n = Number(value || 0);
+    return "ARS " + n.toLocaleString("es-AR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function numberValue(id) {
+    const el = document.getElementById(id);
+    return Number(el && el.value ? el.value : 0);
+  }
+
+  function textValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+
+  function selectValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : "";
+  }
+
+  function uid() {
+    return Date.now().toString() + Math.random().toString(16).slice(2);
+  }
+
+  function investorOptions(selected) {
+    return state.investors.map((inv, index) => {
+      const sel = String(selected) === String(index) ? "selected" : "";
+      return `<option value="${index}" ${sel}>${inv.name}</option>`;
+    }).join("");
+  }
+
+  function investorOptionsWithTeam(selected) {
+    const base = investorOptions(selected);
+    const teamSel = selected === "team" ? "selected" : "";
+    return base + `<option value="team" ${teamSel}>Equipo ALTAN GROUP - 33,33% cada uno</option>`;
+  }
+
+  function propertyOptions(selected) {
+    if (state.properties.length === 0) {
+      return `<option value="">Sin propiedades cargadas</option>`;
     }
 
-    loadState();
+    return state.properties.map(p => {
+      const sel = selected === p.id ? "selected" : "";
+      return `<option value="${p.id}" ${sel}>${p.address} - ${p.city || ""}</option>`;
+    }).join("");
+  }
+
+  function propertyName(id) {
+    const p = state.properties.find(x => x.id === id);
+    return p ? `${p.address} - ${p.city || ""}` : "Sin propiedad";
+  }
+
+  function investorName(value) {
+    if (value === "team") return "Equipo ALTAN GROUP";
+    const inv = state.investors[Number(value)];
+    return inv ? inv.name : "-";
+  }
+
+  function renderLogin(message = "") {
+    app.innerHTML = `
+      <div class="card login-box">
+        <h2>🔐 Ingreso de inversores</h2>
+        <p class="small">
+          En el primer ingreso, cada inversor deberá definir su clave.
+        </p>
+
+        ${message ? `<div class="error-box" style="display:block">${message}</div>` : ""}
+
+        <label>Inversor</label>
+        <select id="loginInvestor">
+          ${investorOptions(0)}
+        </select>
+
+        <label>Clave</label>
+        <input id="loginPassword" type="password" placeholder="Ingresar clave" />
+
+        <button id="btnLogin">Ingresar</button>
+
+        <p class="small">
+          Nota: si el usuario no tiene clave, la clave ingresada se guardará como su primera clave.
+        </p>
+      </div>
+    `;
+
+    document.getElementById("btnLogin").addEventListener("click", login);
+  }
+
+  function login() {
+    const idx = Number(selectValue("loginInvestor"));
+    const pass = textValue("loginPassword");
+
+    if (!pass || pass.length < 4) {
+      renderLogin("La clave debe tener al menos 4 caracteres.");
+      return;
+    }
+
+    const investor = state.investors[idx];
+
+    if (!investor.password) {
+      investor.password = pass;
+      saveState();
+      currentUserIndex = idx;
+      renderApp();
+      return;
+    }
+
+    if (investor.password !== pass) {
+      renderLogin("Clave incorrecta.");
+      return;
+    }
+
+    currentUserIndex = idx;
     renderApp();
-  </script>
+  }
+
+  function logout() {
+    currentUserIndex = null;
+    renderLogin();
+  }
+
+  function renderApp() {
+    const userName = state.investors[currentUserIndex].name;
+
+    app.innerHTML = `
+      <div class="topbar">
+        <div>
+          <h2>👋 Bienvenido, ${userName}</h2>
+          <span class="badge">Usuario activo</span>
+        </div>
+        <button class="btn-secondary" id="btnLogout">Cerrar sesión</button>
+      </div>
+
+      <div class="tabs">
+        <button data-tab="propiedades" class="${currentTab === "propiedades" ? "active" : ""}">🏠 Propiedades</button>
+        <button data-tab="analisis" class="${currentTab === "analisis" ? "active" : ""}">📊 Análisis</button>
+        <button data-tab="compras" class="${currentTab === "compras" ? "active" : ""}">🧾 Compras</button>
+        <button data-tab="refacciones" class="${currentTab === "refacciones" ? "active" : ""}">🛠️ Refacciones</button>
+        <button data-tab="ventas" class="${currentTab === "ventas" ? "active" : ""}">💰 Ventas</button>
+        <button data-tab="resultados" class="${currentTab === "resultados" ? "active" : ""}">📈 Resultados</button>
+        ${currentUserIndex === 0 ? `<button data-tab="config" class="${currentTab === "config" ? "active" : ""}">⚙️ Configuración</button>` : ""}
+      </div>
+
+      <div id="tabContent"></div>
+    `;
+
+    document.getElementById("btnLogout").addEventListener("click", logout);
+
+    document.querySelectorAll("[data-tab]").forEach(btn => {
+      btn.addEventListener("click", function () {
+        currentTab = this.dataset.tab;
+        renderApp();
+      });
+    });
+
+    renderCurrentTab();
+  }
+
+  function renderCurrentTab() {
+    const content = document.getElementById("tabContent");
+
+    if (currentTab === "propiedades") renderProperties(content);
+    if (currentTab === "analisis") renderAnalysis(content);
+    if (currentTab === "compras") renderPurchases(content);
+    if (currentTab === "refacciones") renderRenovations(content);
+    if (currentTab === "ventas") renderSales(content);
+    if (currentTab === "resultados") renderResults(content);
+    if (currentTab === "config") renderConfig(content);
+  }
+
+  function renderProperties(content) {
+    content.innerHTML = `
+      <div class="card">
+        <h3>🏠 Carga de propiedades con posibilidad de compra</h3>
+
+        <div class="grid">
+          <div>
+            <label>Fecha</label>
+            <input id="propDate" type="date" />
+          </div>
+          <div>
+            <label>Dirección</label>
+            <input id="propAddress" placeholder="Ej: Av. Santa Fe 1234" />
+          </div>
+          <div>
+            <label>Ciudad / Zona</label>
+            <input id="propCity" placeholder="Ej: Palermo" />
+          </div>
+          <div>
+            <label>Valor estimado USD</label>
+            <input id="propValue" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Cargada por</label>
+            <select id="propLoadedBy">${investorOptions(currentUserIndex)}</select>
+          </div>
+          <div>
+            <label>Estado</label>
+            <select id="propStatus">
+              <option value="En análisis">En análisis</option>
+              <option value="Comprada">Comprada</option>
+              <option value="Descartada">Descartada</option>
+              <option value="Vendida">Vendida</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Descripción / Observaciones</label>
+        <textarea id="propNotes"></textarea>
+
+        <button id="btnAddProperty">Agregar propiedad</button>
+      </div>
+
+      <div class="card">
+        <h3>Listado de propiedades</h3>
+        ${propertiesTable()}
+      </div>
+    `;
+
+    document.getElementById("btnAddProperty").addEventListener("click", addProperty);
+  }
+
+  function propertiesTable() {
+    if (state.properties.length === 0) return `<p>No hay propiedades cargadas.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Propiedad</th>
+            <th>Valor estimado</th>
+            <th>Estado</th>
+            <th>Cargada por</th>
+            <th>Notas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.properties.map(p => `
+            <tr>
+              <td>${p.date || "-"}</td>
+              <td>${p.address}<br><span class="small">${p.city || ""}</span></td>
+              <td>${money(p.estimatedValue)}</td>
+              <td>${p.status}</td>
+              <td>${investorName(p.loadedBy)}</td>
+              <td>${p.notes || "-"}</td>
+              <td><button class="btn-danger" onclick="ALTAN.deleteItem('properties','${p.id}')">Eliminar</button></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addProperty() {
+    state.properties.push({
+      id: uid(),
+      date: textValue("propDate"),
+      address: textValue("propAddress"),
+      city: textValue("propCity"),
+      estimatedValue: numberValue("propValue"),
+      loadedBy: selectValue("propLoadedBy"),
+      status: selectValue("propStatus"),
+      notes: textValue("propNotes")
+    });
+
+    saveState();
+    renderApp();
+  }
+
+  function renderAnalysis(content) {
+    content.innerHTML = `
+      <div class="card">
+        <h3>📊 Análisis de rentabilidad del proyecto</h3>
+
+        <div class="grid">
+          <div>
+            <label>Propiedad</label>
+            <select id="anaProperty">${propertyOptions()}</select>
+          </div>
+          <div>
+            <label>Inversor / Equipo</label>
+            <select id="anaInvestor">${investorOptionsWithTeam("team")}</select>
+          </div>
+          <div>
+            <label>Valor estimado de compra USD</label>
+            <input id="anaBuy" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Refacción estimada USD</label>
+            <input id="anaRenovation" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Costos estimados USD</label>
+            <input id="anaCosts" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Valor estimado de venta USD</label>
+            <input id="anaSale" type="number" step="0.01" />
+          </div>
+        </div>
+
+        <label>Notas</label>
+        <textarea id="anaNotes"></textarea>
+
+        <button id="btnAddAnalysis">Guardar análisis</button>
+      </div>
+
+      <div class="card">
+        <h3>Análisis cargados</h3>
+        ${analysisTable()}
+      </div>
+    `;
+
+    document.getElementById("btnAddAnalysis").addEventListener("click", addAnalysis);
+  }
+
+  function analysisTable() {
+    if (state.analysis.length === 0) return `<p>No hay análisis cargados.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Inversor</th>
+            <th>Compra</th>
+            <th>Refacción</th>
+            <th>Costos</th>
+            <th>Venta</th>
+            <th>Resultado estimado</th>
+            <th>ROI</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.analysis.map(a => {
+            const investment = Number(a.buy) + Number(a.renovation) + Number(a.costs);
+            const result = Number(a.sale) - investment;
+            const roi = investment > 0 ? result / investment * 100 : 0;
+
+            return `
+              <tr>
+                <td>${propertyName(a.propertyId)}</td>
+                <td>${investorName(a.investor)}</td>
+                <td>${money(a.buy)}</td>
+                <td>${money(a.renovation)}</td>
+                <td>${money(a.costs)}</td>
+                <td>${money(a.sale)}</td>
+                <td class="${result >= 0 ? "success" : "danger"}">${money(result)}</td>
+                <td>${roi.toFixed(2)}%</td>
+                <td><button class="btn-danger" onclick="ALTAN.deleteItem('analysis','${a.id}')">Eliminar</button></td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addAnalysis() {
+    state.analysis.push({
+      id: uid(),
+      propertyId: selectValue("anaProperty"),
+      investor: selectValue("anaInvestor"),
+      buy: numberValue("anaBuy"),
+      renovation: numberValue("anaRenovation"),
+      costs: numberValue("anaCosts"),
+      sale: numberValue("anaSale"),
+      notes: textValue("anaNotes")
+    });
+
+    saveState();
+    renderApp();
+  }
+
+  function renderPurchases(content) {
+    content.innerHTML = `
+      <div class="card">
+        <h3>🧾 Compra de propiedades</h3>
+        <p class="small">
+          Moneda: USD. En modalidad boleto, la inversión efectiva será solo el porcentaje abonado más costos.
+        </p>
+
+        <div class="grid">
+          <div>
+            <label>Fecha</label>
+            <input id="buyDate" type="date" />
+          </div>
+          <div>
+            <label>Propiedad</label>
+            <select id="buyProperty">${propertyOptions()}</select>
+          </div>
+          <div>
+            <label>Modalidad</label>
+            <select id="buyMode">
+              <option value="Boleto">Boleto</option>
+              <option value="Escritura">Escritura</option>
+            </select>
+          </div>
+          <div>
+            <label>Valor propiedad USD</label>
+            <input id="buyValue" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>% abonado</label>
+            <input id="buyPercent" type="number" step="0.01" value="100" />
+          </div>
+          <div>
+            <label>Aportante</label>
+            <select id="buyInvestor">${investorOptionsWithTeam("team")}</select>
+          </div>
+          <div>
+            <label>Comisión USD</label>
+            <input id="buyCommission" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Escrituración USD</label>
+            <input id="buyDeed" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Varios USD</label>
+            <input id="buyMisc" type="number" step="0.01" />
+          </div>
+        </div>
+
+        <button id="btnAddPurchase">Guardar compra</button>
+      </div>
+
+      <div class="card">
+        <h3>Compras cargadas</h3>
+        ${purchasesTable()}
+      </div>
+    `;
+
+    document.getElementById("buyMode").addEventListener("change", function () {
+      if (this.value === "Escritura") {
+        document.getElementById("buyPercent").value = 100;
+      }
+    });
+
+    document.getElementById("btnAddPurchase").addEventListener("click", addPurchase);
+  }
+
+  function purchasesTable() {
+    if (state.purchases.length === 0) return `<p>No hay compras cargadas.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Propiedad</th>
+            <th>Modalidad</th>
+            <th>Valor</th>
+            <th>% abonado</th>
+            <th>Inversión efectiva</th>
+            <th>Saldo boleto</th>
+            <th>Costos</th>
+            <th>Aportante</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.purchases.map(c => {
+            const paid = Number(c.value) * Number(c.percent) / 100;
+            const costs = Number(c.commission) + Number(c.deed) + Number(c.misc);
+            const effective = paid + costs;
+            const pending = c.mode === "Boleto" ? Number(c.value) - paid : 0;
+
+            return `
+              <tr>
+                <td>${c.date || "-"}</td>
+                <td>${propertyName(c.propertyId)}</td>
+                <td>${c.mode}</td>
+                <td>${money(c.value)}</td>
+                <td>${Number(c.percent).toFixed(2)}%</td>
+                <td>${money(effective)}</td>
+                <td class="${pending > 0 ? "warning" : ""}">${money(pending)}</td>
+                <td>${money(costs)}</td>
+                <td>${investorName(c.investor)}</td>
+                <td><button class="btn-danger" onclick="ALTAN.deleteItem('purchases','${c.id}')">Eliminar</button></td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addPurchase() {
+    const mode = selectValue("buyMode");
+    let percent = numberValue("buyPercent");
+
+    if (mode === "Escritura") percent = 100;
+
+    state.purchases.push({
+      id: uid(),
+      date: textValue("buyDate"),
+      propertyId: selectValue("buyProperty"),
+      mode: mode,
+      value: numberValue("buyValue"),
+      percent: percent,
+      commission: numberValue("buyCommission"),
+      deed: numberValue("buyDeed"),
+      misc: numberValue("buyMisc"),
+      investor: selectValue("buyInvestor")
+    });
+
+    saveState();
+    renderApp();
+  }
+
+  function renderRenovations(content) {
+    content.innerHTML = `
+      <div class="card">
+        <h3>🛠️ Refacciones</h3>
+        <p class="small">
+          Las refacciones pueden cargarse en USD o ARS. Para ARS se convierte a USD usando el tipo de cambio informado.
+        </p>
+
+        <div class="grid">
+          <div>
+            <label>Fecha</label>
+            <input id="refDate" type="date" />
+          </div>
+          <div>
+            <label>Propiedad</label>
+            <select id="refProperty">${propertyOptions()}</select>
+          </div>
+          <div>
+            <label>Concepto</label>
+            <input id="refConcept" placeholder="Ej: Pintura, cocina, baño" />
+          </div>
+          <div>
+            <label>Moneda</label>
+            <select id="refCurrency">
+              <option value="USD">USD</option>
+              <option value="ARS">ARS</option>
+            </select>
+          </div>
+          <div>
+            <label>Importe</label>
+            <input id="refAmount" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Tipo de cambio ARS/USD</label>
+            <input id="refRate" type="number" step="0.01" value="1000" />
+          </div>
+          <div>
+            <label>Aportante</label>
+            <select id="refInvestor">${investorOptionsWithTeam("team")}</select>
+          </div>
+        </div>
+
+        <label>Notas</label>
+        <textarea id="refNotes"></textarea>
+
+        <button id="btnAddRenovation">Guardar refacción</button>
+      </div>
+
+      <div class="card">
+        <h3>Refacciones cargadas</h3>
+        ${renovationsTable()}
+      </div>
+    `;
+
+    document.getElementById("btnAddRenovation").addEventListener("click", addRenovation);
+  }
+
+  function renovationUSD(r) {
+    if (r.currency === "ARS") {
+      const rate = Number(r.rate || 1);
+      return rate > 0 ? Number(r.amount) / rate : 0;
+    }
+
+    return Number(r.amount || 0);
+  }
+
+  function renovationsTable() {
+    if (state.renovations.length === 0) return `<p>No hay refacciones cargadas.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Propiedad</th>
+            <th>Concepto</th>
+            <th>Importe original</th>
+            <th>Equivalente USD</th>
+            <th>Aportante</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.renovations.map(r => `
+            <tr>
+              <td>${r.date || "-"}</td>
+              <td>${propertyName(r.propertyId)}</td>
+              <td>${r.concept || "-"}</td>
+              <td>${r.currency === "ARS" ? moneyARS(r.amount) : money(r.amount)}</td>
+              <td>${money(renovationUSD(r))}</td>
+              <td>${investorName(r.investor)}</td>
+              <td><button class="btn-danger" onclick="ALTAN.deleteItem('renovations','${r.id}')">Eliminar</button></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addRenovation() {
+    state.renovations.push({
+      id: uid(),
+      date: textValue("refDate"),
+      propertyId: selectValue("refProperty"),
+      concept: textValue("refConcept"),
+      currency: selectValue("refCurrency"),
+      amount: numberValue("refAmount"),
+      rate: numberValue("refRate"),
+      investor: selectValue("refInvestor"),
+      notes: textValue("refNotes")
+    });
+
+    saveState();
+    renderApp();
+  }
+
+  function renderSales(content) {
+    content.innerHTML = `
+      <div class="card">
+        <h3>💰 Venta de propiedades</h3>
+        <p class="small">
+          Moneda: USD. El saldo pendiente de boleto se informa acá pero no forma parte de la inversión efectiva.
+        </p>
+
+        <div class="grid">
+          <div>
+            <label>Fecha</label>
+            <input id="saleDate" type="date" />
+          </div>
+          <div>
+            <label>Propiedad</label>
+            <select id="saleProperty">${propertyOptions()}</select>
+          </div>
+          <div>
+            <label>Precio de venta USD</label>
+            <input id="salePrice" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Saldo boleto a cancelar USD</label>
+            <input id="salePending" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Comisión venta USD</label>
+            <input id="saleCommission" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Escrituración venta USD</label>
+            <input id="saleDeed" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Varios venta USD</label>
+            <input id="saleMisc" type="number" step="0.01" />
+          </div>
+          <div>
+            <label>Aportante costos / responsable</label>
+            <select id="saleInvestor">${investorOptionsWithTeam("team")}</select>
+          </div>
+        </div>
+
+        <button id="btnAddSale">Guardar venta</button>
+      </div>
+
+      <div class="card">
+        <h3>Ventas cargadas</h3>
+        ${salesTable()}
+      </div>
+    `;
+
+    document.getElementById("saleProperty").addEventListener("change", function () {
+      document.getElementById("salePending").value = pendingTicketBalance(this.value).toFixed(2);
+    });
+
+    const saleProperty = document.getElementById("saleProperty");
+    if (saleProperty && saleProperty.value) {
+      document.getElementById("salePending").value = pendingTicketBalance(saleProperty.value).toFixed(2);
+    }
+
+    document.getElementById("btnAddSale").addEventListener("click", addSale);
+  }
+
+  function salesTable() {
+    if (state.sales.length === 0) return `<p>No hay ventas cargadas.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Propiedad</th>
+            <th>Precio venta</th>
+            <th>Saldo boleto</th>
+            <th>Costos venta</th>
+            <th>Neto antes inversión</th>
+            <th>Responsable</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.sales.map(s => {
+            const costs = Number(s.commission) + Number(s.deed) + Number(s.misc);
+            const net = Number(s.price) - Number(s.pending) - costs;
+
+            return `
+              <tr>
+                <td>${s.date || "-"}</td>
+                <td>${propertyName(s.propertyId)}</td>
+                <td>${money(s.price)}</td>
+                <td>${money(s.pending)}</td>
+                <td>${money(costs)}</td>
+                <td>${money(net)}</td>
+                <td>${investorName(s.investor)}</td>
+                <td><button class="btn-danger" onclick="ALTAN.deleteItem('sales','${s.id}')">Eliminar</button></td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addSale() {
+    state.sales.push({
+      id: uid(),
+      date: textValue("saleDate"),
+      propertyId: selectValue("saleProperty"),
+      price: numberValue("salePrice"),
+      pending: numberValue("salePending"),
+      commission: numberValue("saleCommission"),
+      deed: numberValue("saleDeed"),
+      misc: numberValue("saleMisc"),
+      investor: selectValue("saleInvestor")
+    });
+
+    saveState();
+    renderApp();
+  }
+
+  function pendingTicketBalance(propertyId) {
+    return state.purchases
+      .filter(p => p.propertyId === propertyId && p.mode === "Boleto")
+      .reduce((acc, p) => {
+        const paid = Number(p.value) * Number(p.percent) / 100;
+        return acc + Math.max(Number(p.value) - paid, 0);
+      }, 0);
+  }
+
+  function addAllocation(map, investor, amount) {
+    const value = Number(amount || 0);
+
+    if (investor === "team") {
+      const each = value / 3;
+      map[0] += each;
+      map[1] += each;
+      map[2] += each;
+    } else {
+      map[Number(investor)] += value;
+    }
+  }
+
+  function calculateResults() {
+    const byProperty = {};
+
+    state.properties.forEach(p => {
+      byProperty[p.id] = {
+        property: p,
+        purchasePaid: 0,
+        purchaseCosts: 0,
+        renovation: 0,
+        effectiveInvestment: 0,
+        salePrice: 0,
+        pendingTicket: 0,
+        saleCosts: 0,
+        result: 0,
+        roi: 0
+      };
+    });
+
+    state.purchases.forEach(p => {
+      if (!byProperty[p.propertyId]) return;
+
+      const paid = Number(p.value) * Number(p.percent) / 100;
+      const costs = Number(p.commission) + Number(p.deed) + Number(p.misc);
+
+      byProperty[p.propertyId].purchasePaid += paid;
+      byProperty[p.propertyId].purchaseCosts += costs;
+    });
+
+    state.renovations.forEach(r => {
+      if (!byProperty[r.propertyId]) return;
+      byProperty[r.propertyId].renovation += renovationUSD(r);
+    });
+
+    state.sales.forEach(s => {
+      if (!byProperty[s.propertyId]) return;
+
+      const costs = Number(s.commission) + Number(s.deed) + Number(s.misc);
+
+      byProperty[s.propertyId].salePrice += Number(s.price);
+      byProperty[s.propertyId].pendingTicket += Number(s.pending);
+      byProperty[s.propertyId].saleCosts += costs;
+    });
+
+    Object.values(byProperty).forEach(row => {
+      row.effectiveInvestment =
+        row.purchasePaid +
+        row.purchaseCosts +
+        row.renovation;
+
+      row.result =
+        row.salePrice -
+        row.pendingTicket -
+        row.saleCosts -
+        row.effectiveInvestment;
+
+      row.roi = row.effectiveInvestment > 0
+        ? row.result / row.effectiveInvestment * 100
+        : 0;
+    });
+
+    return byProperty;
+  }
+
+  function calculateInvestorResults() {
+    const investment = [0, 0, 0];
+    const saleCosts = [0, 0, 0];
+
+    state.purchases.forEach(p => {
+      const paid = Number(p.value) * Number(p.percent) / 100;
+      const costs = Number(p.commission) + Number(p.deed) + Number(p.misc);
+      addAllocation(investment, p.investor, paid + costs);
+    });
+
+    state.renovations.forEach(r => {
+      addAllocation(investment, r.investor, renovationUSD(r));
+    });
+
+    state.sales.forEach(s => {
+      const costs = Number(s.commission) + Number(s.deed) + Number(s.misc);
+      addAllocation(saleCosts, s.investor, costs);
+    });
+
+    return { investment, saleCosts };
+  }
+
+  function renderResults(content) {
+    const results = calculateResults();
+    const investorResults = calculateInvestorResults();
+
+    const totalInvestment = Object.values(results).reduce((a, r) => a + r.effectiveInvestment, 0);
+    const totalSales = Object.values(results).reduce((a, r) => a + r.salePrice, 0);
+    const totalPending = Object.values(results).reduce((a, r) => a + r.pendingTicket, 0);
+    const totalSaleCosts = Object.values(results).reduce((a, r) => a + r.saleCosts, 0);
+    const totalResult = Object.values(results).reduce((a, r) => a + r.result, 0);
+    const totalRoi = totalInvestment > 0 ? totalResult / totalInvestment * 100 : 0;
+
+    content.innerHTML = `
+      <div class="card">
+        <h3>📈 Resultados generales</h3>
+
+        <div class="grid">
+          <div>
+            <h4>Inversión efectiva</h4>
+            <p><strong>${money(totalInvestment)}</strong></p>
+          </div>
+          <div>
+            <h4>Ventas brutas</h4>
+            <p><strong>${money(totalSales)}</strong></p>
+          </div>
+          <div>
+            <h4>Saldo boletos</h4>
+            <p><strong>${money(totalPending)}</strong></p>
+          </div>
+          <div>
+            <h4>Costos de venta</h4>
+            <p><strong>${money(totalSaleCosts)}</strong></p>
+          </div>
+          <div>
+            <h4>Resultado</h4>
+            <p class="${totalResult >= 0 ? "success" : "danger"}">${money(totalResult)}</p>
+          </div>
+          <div>
+            <h4>ROI</h4>
+            <p class="${totalRoi >= 0 ? "success" : "danger"}">${totalRoi.toFixed(2)}%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🏠 Resultado por propiedad</h3>
+        ${resultsByPropertyTable(results)}
+      </div>
+
+      <div class="card">
+        <h3>👥 Inversión por inversor</h3>
+        ${investorResultsTable(investorResults, totalResult)}
+      </div>
+    `;
+  }
+
+  function resultsByPropertyTable(results) {
+    const rows = Object.values(results);
+
+    if (rows.length === 0) return `<p>No hay propiedades cargadas.</p>`;
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Compra abonada</th>
+            <th>Costos compra</th>
+            <th>Refacciones</th>
+            <th>Inversión efectiva</th>
+            <th>Venta</th>
+            <th>Saldo boleto</th>
+            <th>Costos venta</th>
+            <th>Resultado</th>
+            <th>ROI</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map(r => `
+            <tr>
+              <td>${propertyName(r.property.id)}</td>
+              <td>${money(r.purchasePaid)}</td>
+              <td>${money(r.purchaseCosts)}</td>
+              <td>${money(r.renovation)}</td>
+              <td>${money(r.effectiveInvestment)}</td>
+              <td>${money(r.salePrice)}</td>
+              <td>${money(r.pendingTicket)}</td>
+              <td>${money(r.saleCosts)}</td>
+              <td class="${r.result >= 0 ? "success" : "danger"}">${money(r.result)}</td>
+              <td>${r.roi.toFixed(2)}%</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function investorResultsTable(data, totalResult) {
+    const totalInvestment = data.investment.reduce((a, b) => a + b, 0);
+
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Inversor</th>
+            <th>Inversión efectiva aportada</th>
+            <th>Participación sobre inversión</th>
+            <th>Costos de venta aportados</th>
+            <th>Resultado estimado asignado</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.investors.map((inv, i) => {
+            const share = totalInvestment > 0 ? data.investment[i] / totalInvestment : 1 / 3;
+            const assignedResult = totalResult * share;
+
+            return `
+              <tr>
+                <td>${inv.name}</td>
+                <td>${money(data.investment[i])}</td>
+                <td>${(share * 100).toFixed(2)}%</td>
+                <td>${money(data.saleCosts[i])}</td>
+                <td class="${assignedResult >= 0 ? "success" : "danger"}">${money(assignedResult)}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function renderConfig(content) {
+    if (currentUserIndex !== 0) {
+      content.innerHTML = `<div class="card"><p>No autorizado.</p></div>`;
+      return;
+    }
+
+    content.innerHTML = `
+      <div class="card">
+        <h3>⚙️ Configuración general</h3>
+        <p class="small">
+          Solo el usuario principal, Gastón, puede acceder a esta sección.
+        </p>
+
+        <div class="grid">
+          <div>
+            <label>Inversor 1</label>
+            <input id="inv0" value="${state.investors[0].name}" />
+          </div>
+          <div>
+            <label>Inversor 2</label>
+            <input id="inv1" value="${state.investors[1].name}" />
+          </div>
+          <div>
+            <label>Inversor 3</label>
+            <input id="inv2" value="${state.investors[2].name}" />
+          </div>
+        </div>
+
+        <button id="btnSaveConfig">Guardar nombres</button>
+      </div>
+
+      <div class="card">
+        <h3>🔑 Reset de claves</h3>
+
+        <div class="grid">
+          <div>
+            <button class="btn-danger" id="reset0">Reset clave ${state.investors[0].name}</button>
+          </div>
+          <div>
+            <button class="btn-danger" id="reset1">Reset clave ${state.investors[1].name}</button>
+          </div>
+          <div>
+            <button class="btn-danger" id="reset2">Reset clave ${state.investors[2].name}</button>
+          </div>
+        </div>
+
+        <p class="small">
+          Al resetear una clave, el inversor deberá definir una nueva en su próximo ingreso.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🧨 Zona crítica</h3>
+        <button class="btn-danger" id="btnClearAll">Borrar todos los datos</button>
+      </div>
+    `;
+
+    document.getElementById("btnSaveConfig").addEventListener("click", function () {
+      state.investors[0].name = textValue("inv0") || "Gaston";
+      state.investors[1].name = textValue("inv1") || "Hernan";
+      state.investors[2].name = textValue("inv2") || "Santiago";
+      saveState();
+      renderApp();
+    });
+
+    [0, 1, 2].forEach(i => {
+      document.getElementById("reset" + i).addEventListener("click", function () {
+        if (confirm("¿Resetear clave de " + state.investors[i].name + "?")) {
+          state.investors[i].password = null;
+          saveState();
+          alert("Clave reseteada.");
+          renderApp();
+        }
+      });
+    });
+
+    document.getElementById("btnClearAll").addEventListener("click", function () {
+      if (confirm("¿Seguro que querés borrar TODOS los datos? Esta acción no se puede deshacer.")) {
+        localStorage.removeItem(STORAGE_KEY);
+        state = structuredClone(defaultState);
+        currentUserIndex = null;
+        currentTab = "propiedades";
+        renderLogin();
+      }
+    });
+  }
+
+  function deleteItem(collection, id) {
+    if (!confirm("¿Eliminar este registro?")) return;
+
+    state[collection] = state[collection].filter(item => item.id !== id);
+    saveState();
+    renderApp();
+  }
+
+  window.ALTAN = {
+    deleteItem
+  };
+
+  renderLogin();
+
+})();
+</script>
+
 </body>
 </html>
